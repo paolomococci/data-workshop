@@ -12,7 +12,9 @@
 	<artifactId>data-postgresql</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>data-postgresql</name>
-	<description>Demo project for Spring Boot</description>
+	<description>
+		RESTful project for accessing data to PostgreSQL databases
+	</description>
 
 	<properties>
 		<java.version>11</java.version>
