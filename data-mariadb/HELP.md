@@ -1,4 +1,4 @@
-# RESTful project for accessing data to mariadb databases
+# RESTful project for accessing data to MariaDB databases
 
 ## example of use:
 ```
