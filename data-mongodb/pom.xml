@@ -12,7 +12,9 @@
 	<artifactId>data-mongodb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>data-mongodb</name>
-	<description>Demo project for Spring Boot</description>
+	<description>
+		RESTful project for accessing data to MongoDB NoSQL databases
+	</description>
 
 	<properties>
 		<java.version>11</java.version>
