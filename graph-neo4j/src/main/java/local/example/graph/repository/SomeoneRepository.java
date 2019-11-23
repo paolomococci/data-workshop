@@ -18,16 +18,19 @@
 
 package local.example.graph.repository;
 
-import local.example.graph.model.Someone;
-import org.springframework.data.neo4j.repository.Neo4jRepository;
+import local.example.graph.node.Someone;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@RepositoryRestResource
+@RepositoryRestResource(
+        collectionResourceRel = "some",
+        path = "some"
+)
 public interface SomeoneRepository
-        extends Neo4jRepository<Someone, Long> {
+        extends PagingAndSortingRepository<Someone, Long> {
 
     List<Someone> findByCode(@Param("code") String code);
 }
