@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>graph-neo4j</name>
 	<description>
-		Demo project for Spring Boot
+		Demo project for Spring Boot and Neo4j community edition
 	</description>
 
 	<properties>
