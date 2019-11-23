@@ -16,16 +16,22 @@
  *
  */
 
-package local.example.graph.model;
+package local.example.graph.relationship;
 
-import lombok.Getter;
-import org.neo4j.ogm.annotation.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.RelationshipEntity;
 
-@RelationshipEntity(type = "THINK")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@RelationshipEntity(type = "THINK TO")
 public class Think {
 
     @Id
     @GeneratedValue
-    @Getter
-    private long id;
+    private Long id;
 }
