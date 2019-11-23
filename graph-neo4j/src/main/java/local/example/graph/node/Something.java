@@ -16,26 +16,24 @@
  *
  */
 
-package local.example.graph.model;
+package local.example.graph.node;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@NodeEntity(label = "Something")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@NodeEntity
 public class Something {
 
     @Id
     @GeneratedValue
-    @Getter
-    private long id;
+    private Long id;
 
-    @Getter
-    @Setter
-    private String code = "";
+    private String code;
 }
