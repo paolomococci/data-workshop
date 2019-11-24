@@ -19,7 +19,7 @@
 package local.example.graph.repository;
 
 import local.example.graph.node.Someone;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -30,7 +30,7 @@ import java.util.List;
         path = "some"
 )
 public interface SomeoneRepository
-        extends PagingAndSortingRepository<Someone, Long> {
+        extends Neo4jRepository<Someone, Long> {
 
     List<Someone> findByCode(@Param("code") String code);
 }
