@@ -30,8 +30,8 @@ Date: Tue, 19 Nov 2019 16:19:30 GMT
 < 
 {
   "_links" : {
-    "someones" : {
-      "href" : "http://127.0.0.1:8080/someones{?page,size,sort}",
+    "some" : {
+      "href" : "http://127.0.0.1:8080/some{?page,size,sort}",
       "templated" : true
     },
     "profile" : {
@@ -40,11 +40,11 @@ Date: Tue, 19 Nov 2019 16:19:30 GMT
   }
 * Connection #0 to host 127.0.0.1 left intact
 }
-$ curl -v -i http://127.0.0.1:8080/someones
+$ curl -v -i http://127.0.0.1:8080/some
 *   Trying 127.0.0.1:8080...
 * TCP_NODELAY set
 * Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
-> GET /someones HTTP/1.1
+> GET /some HTTP/1.1
 > Host: 127.0.0.1:8080
 > User-Agent: curl/7.66.0
 > Accept: */*
@@ -68,18 +68,18 @@ Date: Tue, 19 Nov 2019 16:21:03 GMT
 < 
 {
   "_embedded" : {
-    "someones" : [ ]
+    "some" : [ ]
   },
   "_links" : {
     "self" : {
-      "href" : "http://127.0.0.1:8080/someones{?page,size,sort}",
+      "href" : "http://127.0.0.1:8080/some{?page,size,sort}",
       "templated" : true
     },
     "profile" : {
-      "href" : "http://127.0.0.1:8080/profile/someones"
+      "href" : "http://127.0.0.1:8080/profile/some"
     },
     "search" : {
-      "href" : "http://127.0.0.1:8080/someones/search"
+      "href" : "http://127.0.0.1:8080/some/search"
     }
   },
   "page" : {
@@ -90,12 +90,12 @@ Date: Tue, 19 Nov 2019 16:21:03 GMT
   }
 * Connection #0 to host 127.0.0.1 left intact
 }
-$ curl -i -X POST -H "Content-Type:application/json" -d '{"code": "R3SF78QWCTU"}' http://localhost:8080/someones
+$ curl -i -X POST -H "Content-Type:application/json" -d '{"code": "R3SF78QWCTU"}' http://localhost:8080/some
 HTTP/1.1 201 
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Location: http://localhost:8080/someones/1
+Location: http://localhost:8080/some/1
 Content-Type: application/hal+json
 Transfer-Encoding: chunked
 Date: Tue, 19 Nov 2019 16:26:08 GMT
@@ -104,19 +104,19 @@ Date: Tue, 19 Nov 2019 16:26:08 GMT
   "code" : "R3SF78QWCTU",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/someones/1"
+      "href" : "http://localhost:8080/some/1"
     },
     "someone" : {
-      "href" : "http://localhost:8080/someones/1"
+      "href" : "http://localhost:8080/some/1"
     }
   }
 }
-$ curl -i -X POST -H "Content-Type:application/json" -d '{"code": "F4J9EF623ME"}' http://localhost:8080/someones
+$ curl -i -X POST -H "Content-Type:application/json" -d '{"code": "F4J9EF623ME"}' http://localhost:8080/some
 HTTP/1.1 201 
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Location: http://localhost:8080/someones/2
+Location: http://localhost:8080/some/2
 Content-Type: application/hal+json
 Transfer-Encoding: chunked
 Date: Tue, 19 Nov 2019 16:28:50 GMT
@@ -125,19 +125,19 @@ Date: Tue, 19 Nov 2019 16:28:50 GMT
   "code" : "F4J9EF623ME",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/someones/2"
+      "href" : "http://localhost:8080/some/2"
     },
     "someone" : {
-      "href" : "http://localhost:8080/someones/2"
+      "href" : "http://localhost:8080/some/2"
     }
   }
 }
-$ curl -i -X POST -H "Content-Type:application/json" -d '{"code": "TR9MI34XW4FE"}' http://localhost:8080/someones
+$ curl -i -X POST -H "Content-Type:application/json" -d '{"code": "TR9MI34XW4FE"}' http://localhost:8080/some
 HTTP/1.1 201 
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Location: http://localhost:8080/someones/3
+Location: http://localhost:8080/some/3
 Content-Type: application/hal+json
 Transfer-Encoding: chunked
 Date: Tue, 19 Nov 2019 16:30:14 GMT
@@ -146,19 +146,19 @@ Date: Tue, 19 Nov 2019 16:30:14 GMT
   "code" : "TR9MI34XW4FE",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/someones/3"
+      "href" : "http://localhost:8080/some/3"
     },
     "someone" : {
-      "href" : "http://localhost:8080/someones/3"
+      "href" : "http://localhost:8080/some/3"
     }
   }
 }
-$ curl -i -X POST -H "Content-Type:application/json" -d '{"code": "VE75QM8WDN98Z"}' http://localhost:8080/someones
+$ curl -i -X POST -H "Content-Type:application/json" -d '{"code": "VE75QM8WDN98Z"}' http://localhost:8080/some
 HTTP/1.1 201 
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Location: http://localhost:8080/someones/4
+Location: http://localhost:8080/some/4
 Content-Type: application/hal+json
 Transfer-Encoding: chunked
 Date: Tue, 19 Nov 2019 16:31:44 GMT
@@ -167,19 +167,19 @@ Date: Tue, 19 Nov 2019 16:31:44 GMT
   "code" : "VE75QM8WDN98Z",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/someones/4"
+      "href" : "http://localhost:8080/some/4"
     },
     "someone" : {
-      "href" : "http://localhost:8080/someones/4"
+      "href" : "http://localhost:8080/some/4"
     }
   }
 }
-$ curl -i -X POST -H "Content-Type:application/json" -d '{"code": "HT71OS2BRT23J"}' http://localhost:8080/someones
+$ curl -i -X POST -H "Content-Type:application/json" -d '{"code": "HT71OS2BRT23J"}' http://localhost:8080/some
 HTTP/1.1 201 
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Location: http://localhost:8080/someones/5
+Location: http://localhost:8080/some/5
 Content-Type: application/hal+json
 Transfer-Encoding: chunked
 Date: Tue, 19 Nov 2019 16:33:24 GMT
@@ -188,18 +188,18 @@ Date: Tue, 19 Nov 2019 16:33:24 GMT
   "code" : "HT71OS2BRT23J",
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8080/someones/5"
+      "href" : "http://localhost:8080/some/5"
     },
     "someone" : {
-      "href" : "http://localhost:8080/someones/5"
+      "href" : "http://localhost:8080/some/5"
     }
   }
 }
-$ curl -v -i http://127.0.0.1:8080/someones?sort=code
+$ curl -v -i http://127.0.0.1:8080/some?sort=code
 *   Trying 127.0.0.1:8080...
 * TCP_NODELAY set
 * Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
-> GET /someones?sort=code HTTP/1.1
+> GET /some?sort=code HTTP/1.1
 > Host: 127.0.0.1:8080
 > User-Agent: curl/7.66.0
 > Accept: */*
@@ -223,67 +223,67 @@ Date: Tue, 19 Nov 2019 16:35:41 GMT
 < 
 {
   "_embedded" : {
-    "someones" : [ {
+    "some" : [ {
       "code" : "F4J9EF623ME",
       "_links" : {
         "self" : {
-          "href" : "http://127.0.0.1:8080/someones/2"
+          "href" : "http://127.0.0.1:8080/some/2"
         },
         "someone" : {
-          "href" : "http://127.0.0.1:8080/someones/2"
+          "href" : "http://127.0.0.1:8080/some/2"
         }
       }
     }, {
       "code" : "HT71OS2BRT23J",
       "_links" : {
         "self" : {
-          "href" : "http://127.0.0.1:8080/someones/5"
+          "href" : "http://127.0.0.1:8080/some/5"
         },
         "someone" : {
-          "href" : "http://127.0.0.1:8080/someones/5"
+          "href" : "http://127.0.0.1:8080/some/5"
         }
       }
     }, {
       "code" : "R3SF78QWCTU",
       "_links" : {
         "self" : {
-          "href" : "http://127.0.0.1:8080/someones/1"
+          "href" : "http://127.0.0.1:8080/some/1"
         },
         "someone" : {
-          "href" : "http://127.0.0.1:8080/someones/1"
+          "href" : "http://127.0.0.1:8080/some/1"
         }
       }
     }, {
       "code" : "TR9MI34XW4FE",
       "_links" : {
         "self" : {
-          "href" : "http://127.0.0.1:8080/someones/3"
+          "href" : "http://127.0.0.1:8080/some/3"
         },
         "someone" : {
-          "href" : "http://127.0.0.1:8080/someones/3"
+          "href" : "http://127.0.0.1:8080/some/3"
         }
       }
     }, {
       "code" : "VE75QM8WDN98Z",
       "_links" : {
         "self" : {
-          "href" : "http://127.0.0.1:8080/someones/4"
+          "href" : "http://127.0.0.1:8080/some/4"
         },
         "someone" : {
-          "href" : "http://127.0.0.1:8080/someones/4"
+          "href" : "http://127.0.0.1:8080/some/4"
         }
       }
     } ]
   },
   "_links" : {
     "self" : {
-      "href" : "http://127.0.0.1:8080/someones"
+      "href" : "http://127.0.0.1:8080/some"
     },
     "profile" : {
-      "href" : "http://127.0.0.1:8080/profile/someones"
+      "href" : "http://127.0.0.1:8080/profile/some"
     },
     "search" : {
-      "href" : "http://127.0.0.1:8080/someones/search"
+      "href" : "http://127.0.0.1:8080/some/search"
     }
   },
   "page" : {
@@ -358,11 +358,11 @@ MariaDB [someone]> select * from someone order by code;
 
 ## again from RESTful web service perspective:
 ```
-$ curl -v -i http://127.0.0.1:8080/someones
+$ curl -v -i http://127.0.0.1:8080/some
 *   Trying 127.0.0.1:8080...
 * TCP_NODELAY set
 * Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
-> GET /someones HTTP/1.1
+> GET /some HTTP/1.1
 > Host: 127.0.0.1:8080
 > User-Agent: curl/7.66.0
 > Accept: */*
@@ -386,68 +386,68 @@ Date: Tue, 19 Nov 2019 17:15:24 GMT
 < 
 {
   "_embedded" : {
-    "someones" : [ {
+    "some" : [ {
       "code" : "R3SF78QWCTU",
       "_links" : {
         "self" : {
-          "href" : "http://127.0.0.1:8080/someones/1"
+          "href" : "http://127.0.0.1:8080/some/1"
         },
         "someone" : {
-          "href" : "http://127.0.0.1:8080/someones/1"
+          "href" : "http://127.0.0.1:8080/some/1"
         }
       }
     }, {
       "code" : "F4J9EF623ME",
       "_links" : {
         "self" : {
-          "href" : "http://127.0.0.1:8080/someones/2"
+          "href" : "http://127.0.0.1:8080/some/2"
         },
         "someone" : {
-          "href" : "http://127.0.0.1:8080/someones/2"
+          "href" : "http://127.0.0.1:8080/some/2"
         }
       }
     }, {
       "code" : "TR9MI34XW4FE",
       "_links" : {
         "self" : {
-          "href" : "http://127.0.0.1:8080/someones/3"
+          "href" : "http://127.0.0.1:8080/some/3"
         },
         "someone" : {
-          "href" : "http://127.0.0.1:8080/someones/3"
+          "href" : "http://127.0.0.1:8080/some/3"
         }
       }
     }, {
       "code" : "VE75QM8WDN98Z",
       "_links" : {
         "self" : {
-          "href" : "http://127.0.0.1:8080/someones/4"
+          "href" : "http://127.0.0.1:8080/some/4"
         },
         "someone" : {
-          "href" : "http://127.0.0.1:8080/someones/4"
+          "href" : "http://127.0.0.1:8080/some/4"
         }
       }
     }, {
       "code" : "HT71OS2BRT23J",
       "_links" : {
         "self" : {
-          "href" : "http://127.0.0.1:8080/someones/5"
+          "href" : "http://127.0.0.1:8080/some/5"
         },
         "someone" : {
-          "href" : "http://127.0.0.1:8080/someones/5"
+          "href" : "http://127.0.0.1:8080/some/5"
         }
       }
     } ]
   },
   "_links" : {
     "self" : {
-      "href" : "http://127.0.0.1:8080/someones{?page,size,sort}",
+      "href" : "http://127.0.0.1:8080/some{?page,size,sort}",
       "templated" : true
     },
     "profile" : {
-      "href" : "http://127.0.0.1:8080/profile/someones"
+      "href" : "http://127.0.0.1:8080/profile/some"
     },
     "search" : {
-      "href" : "http://127.0.0.1:8080/someones/search"
+      "href" : "http://127.0.0.1:8080/some/search"
     }
   },
   "page" : {
