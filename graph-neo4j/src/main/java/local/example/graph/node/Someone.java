@@ -24,6 +24,10 @@ import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -34,6 +38,9 @@ public class Someone {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Relationship(type = "THINK TO")
+    private List<Something> everything = new ArrayList<>();
 
     private String code;
 }
