@@ -25,7 +25,10 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@RepositoryRestResource
+@RepositoryRestResource(
+        collectionResourceRel = "some",
+        path = "some"
+)
 public interface SomeoneRepository
         extends MongoRepository<Someone, String> {
 
