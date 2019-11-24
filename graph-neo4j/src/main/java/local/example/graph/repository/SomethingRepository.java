@@ -19,10 +19,12 @@
 package local.example.graph.repository;
 
 import local.example.graph.node.Something;
+import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import java.util.Collection;
 import java.util.List;
 
 @RepositoryRestResource(
@@ -32,5 +34,9 @@ import java.util.List;
 public interface SomethingRepository
         extends PagingAndSortingRepository<Something, Long> {
 
+    @Query("match (e:Something)<-[t:THINK TO]-(s:Someone) return e,t,s, limit {limit}")
+    Collection<Something> showGraph(@Param("limit") int limit);
+
     List<Something> findByCode(@Param("code") String code);
+    Collection<Something> findByCodeLike(@Param("code") String code);
 }
