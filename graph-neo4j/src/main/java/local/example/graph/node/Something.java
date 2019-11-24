@@ -18,12 +18,17 @@
 
 package local.example.graph.node;
 
+import local.example.graph.relationship.Think;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -35,5 +40,16 @@ public class Something {
     @GeneratedValue
     private Long id;
 
+    @Relationship(
+            type = "THINK TO",
+            direction = Relationship.INCOMING
+    )
+    private List<Think> thinks;
+
     private String code;
+
+    public void addThink(Think think) {
+        if (this.thinks == null) this.thinks = new ArrayList<>();
+        this.thinks.add(think);
+    }
 }
