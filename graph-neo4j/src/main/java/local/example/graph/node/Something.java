@@ -20,8 +20,9 @@ package local.example.graph.node;
 
 import local.example.graph.relationship.Think;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -30,7 +31,6 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @NodeEntity
@@ -38,14 +38,18 @@ public class Something {
 
     @Id
     @GeneratedValue
+    @Getter
     private Long id;
 
+    @Getter
     @Relationship(
             type = "THINK TO",
             direction = Relationship.INCOMING
     )
     private List<Think> thinks;
 
+    @Getter
+    @Setter
     private String code;
 
     public void addThink(Think think) {
