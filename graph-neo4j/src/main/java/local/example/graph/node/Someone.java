@@ -19,8 +19,9 @@
 package local.example.graph.node;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -29,7 +30,6 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @NodeEntity
@@ -37,10 +37,14 @@ public class Someone {
 
     @Id
     @GeneratedValue
+    @Getter
     private Long id;
 
+    @Getter
     @Relationship(type = "THINK TO")
     private List<Something> everything = new ArrayList<>();
 
+    @Getter
+    @Setter
     private String code;
 }
