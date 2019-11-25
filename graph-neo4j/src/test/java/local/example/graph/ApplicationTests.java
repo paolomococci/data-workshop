@@ -34,7 +34,7 @@ class ApplicationTests {
 	@Autowired
 	private MockMvc mockMvc;
 
-	/*  */
+	/* it's not necessary that Neo4j community edition is in operation */
 	@Test
 	void someTest()
 			throws Exception {
