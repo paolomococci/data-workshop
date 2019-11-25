@@ -21,14 +21,14 @@ package local.example.graph.relationship;
 import local.example.graph.node.Someone;
 import local.example.graph.node.Something;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.neo4j.ogm.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @RelationshipEntity(type = "THINK TO")
@@ -36,14 +36,21 @@ public class Think {
 
     @Id
     @GeneratedValue
+    @Getter
     private Long id;
 
+    @Getter
+    @Setter
     @StartNode
     private Someone someone;
 
+    @Getter
+    @Setter
     @EndNode
     private Something something;
 
+    @Getter
+    @Setter
     private List<String> thinks;
 
     public void addThink(String think) {
