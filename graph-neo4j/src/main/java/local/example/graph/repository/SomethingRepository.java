@@ -34,7 +34,7 @@ import java.util.List;
 public interface SomethingRepository
         extends Neo4jRepository<Something, Long> {
 
-    @Query("match (e:Something)<-[t:THINK TO]-(s:Someone) return e,t,s, limit {limit}")
+    @Query("match (e:Something)<-[t:THINK_TO]-(s:Someone) return e,t,s limit {limit}")
     Collection<Something> showGraph(@Param("limit") int limit);
 
     List<Something> findByCode(@Param("code") String code);
