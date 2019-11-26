@@ -31,7 +31,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@RelationshipEntity(type = "THINK TO")
+@RelationshipEntity(type = "THINK_TO")
 public class Think {
 
     @Id
