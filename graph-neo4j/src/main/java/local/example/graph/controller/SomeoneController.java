@@ -18,10 +18,28 @@
 
 package local.example.graph.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import local.example.graph.service.SomeoneService;
+import local.example.graph.service.SomethingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
 public class SomeoneController {
+
+    @Autowired
+    private SomeoneService someoneService;
+
+    @Autowired
+    private SomethingService somethingService;
+
+    @PostMapping("/create/relationship/some/{someoneId}")
+    public void createRelationship(
+            @PathVariable("someoneId") Long someoneId,
+            @RequestBody Long somethingId
+    ) {
+        if (someoneService.someoneExistById(someoneId) && somethingService.somethingExistById(somethingId)) {
+
+        }
+    }
 }
