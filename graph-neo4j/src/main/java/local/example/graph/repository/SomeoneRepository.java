@@ -19,6 +19,7 @@
 package local.example.graph.repository;
 
 import local.example.graph.node.Someone;
+import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -31,6 +32,15 @@ import java.util.List;
 )
 public interface SomeoneRepository
         extends Neo4jRepository<Someone, Long> {
+
+    @Query("match (s:Someone),(e:Something) where s.id = {someoneId} and e.id = {SomethingId} create (s)-[THINK_TO]->(e)")
+    void createRelationship(@Param("someoneId") long someoneId, @Param("somethingId") long somethingId);
+
+    @Query("match (s:Someone),(e:Something) where s.id = {someoneId} and e.id = {SomethingId} create (s)-[THINK_TO {code:s.code+'-'+e.code}]->(e)")
+    void createRelationshipWithCode(@Param("someoneId") long someoneId, @Param("somethingId") long somethingId);
+
+    @Query("match (s {id: {someoneId}})-[r:THINK_TO]->(e {id: {somethingId}}) delete r")
+    void deleteRelationship(@Param("someoneId") long someoneId, @Param("somethingId") long somethingId);
 
     List<Someone> findByCode(@Param("code") String code);
 }
