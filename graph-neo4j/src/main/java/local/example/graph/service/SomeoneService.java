@@ -33,7 +33,7 @@ public class SomeoneService {
     private SomeoneRepository someoneRepository;
 
     @Transactional(readOnly = true)
-    public boolean someoneVerifyExistenceById(Long id) {
+    public boolean verifyExistenceById(Long id) {
         Optional<Someone> optionalSomeone = someoneRepository.findById(id);
         return optionalSomeone.isPresent();
     }
