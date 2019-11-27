@@ -32,14 +32,4 @@ public class SomeoneController {
 
     @Autowired
     private SomethingService somethingService;
-
-    @PostMapping("/create/relationship/some/{someoneId}")
-    public void createRelationship(
-            @PathVariable("someoneId") Long someoneId,
-            @RequestBody Long somethingId
-    ) {
-        if (someoneService.verifyExistenceById(someoneId) && somethingService.verifyExistenceById(somethingId)) {
-
-        }
-    }
 }
