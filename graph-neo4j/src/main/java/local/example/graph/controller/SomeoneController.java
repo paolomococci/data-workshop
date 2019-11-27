@@ -38,7 +38,7 @@ public class SomeoneController {
             @PathVariable("someoneId") Long someoneId,
             @RequestBody Long somethingId
     ) {
-        if (someoneService.someoneExistById(someoneId) && somethingService.somethingExistById(somethingId)) {
+        if (someoneService.someoneVerifyExistenceById(someoneId) && somethingService.somethingVerifyExistenceById(somethingId)) {
 
         }
     }
