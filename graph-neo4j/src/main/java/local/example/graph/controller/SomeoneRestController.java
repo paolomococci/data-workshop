@@ -21,17 +21,32 @@ package local.example.graph.controller;
 import local.example.graph.service.SomeoneService;
 import local.example.graph.service.SomethingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-public class SomeoneController {
+public class SomeoneRestController {
 
     @Autowired
     private SomeoneService someoneService;
 
     @Autowired
     private SomethingService somethingService;
-    
-    // TODO
+
+    @GetMapping("/create/relationship/some/{someoneId}")
+    public HttpEntity<String> createRelationship(
+            @PathVariable("someoneId") String someoneId,
+            @RequestParam(value = "somethingId", defaultValue = "1") String somethingId) {
+        try {
+            if (someoneService.verifyExistenceById(Long.parseLong(someoneId))
+                    && somethingService.verifyExistenceById(Long.parseLong(somethingId))) {
+                // TODO
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new HttpEntity<>("sorry, an error has occurred\n");
+        }
+        return new HttpEntity<>("relationship created\n");
+    }
 }
