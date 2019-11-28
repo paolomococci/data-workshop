@@ -29,7 +29,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-public class SomethingController {
+public class SomethingRestController {
 
     @Autowired
     private SomethingService somethingService;
