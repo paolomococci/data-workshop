@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SomeoneControllerMockMvcTests {
+class SomeoneRestControllerMockMvcTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -37,7 +37,8 @@ public class SomeoneControllerMockMvcTests {
     @Test
     void sampleTest()
             throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/create/relationship/some/0"))
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/api/create/relationship/some/0?somethingId=22"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
