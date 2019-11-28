@@ -33,13 +33,23 @@ import java.util.List;
 public interface SomeoneRepository
         extends Neo4jRepository<Someone, Long> {
 
-    @Query("match (s:Someone),(e:Something) where s.id = {someoneId} and e.id = {SomethingId} create (s)-[THINK_TO]->(e)")
+    String CREATE_RELATIONSHIP = "match (s:Someone),(e:Something) " +
+            "where s.id = {someoneId} " +
+            "and e.id = {SomethingId} " +
+            "create (s)-[THINK_TO]->(e)";
+    String CREATE_RELATIONSHIP_WITH_CODE = "match (s:Someone),(e:Something) " +
+            "where s.id = {someoneId} " +
+            "and e.id = {SomethingId} " +
+            "create (s)-[THINK_TO {code:s.code+'-'+e.code}]->(e)";
+    String DELETE_RELATIONSHIP = "match (s {id: {someoneId}})-[r:THINK_TO]->(e {id: {somethingId}}) delete r";
+
+    @Query(value = CREATE_RELATIONSHIP)
     void createRelationship(@Param("someoneId") long someoneId, @Param("somethingId") long somethingId);
 
-    @Query("match (s:Someone),(e:Something) where s.id = {someoneId} and e.id = {SomethingId} create (s)-[THINK_TO {code:s.code+'-'+e.code}]->(e)")
+    @Query(value = CREATE_RELATIONSHIP_WITH_CODE)
     void createRelationshipWithCode(@Param("someoneId") long someoneId, @Param("somethingId") long somethingId);
 
-    @Query("match (s {id: {someoneId}})-[r:THINK_TO]->(e {id: {somethingId}}) delete r")
+    @Query(value = DELETE_RELATIONSHIP)
     void deleteRelationship(@Param("someoneId") long someoneId, @Param("somethingId") long somethingId);
 
     List<Someone> findByCode(@Param("code") String code);
