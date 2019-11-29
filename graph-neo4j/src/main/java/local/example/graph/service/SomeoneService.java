@@ -19,7 +19,9 @@
 package local.example.graph.service;
 
 import local.example.graph.node.Someone;
+import local.example.graph.node.Something;
 import local.example.graph.repository.SomeoneRepository;
+import local.example.graph.repository.SomethingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,9 +34,21 @@ public class SomeoneService {
     @Autowired
     private SomeoneRepository someoneRepository;
 
+    @Autowired
+    private SomethingRepository somethingRepository;
+
     @Transactional(readOnly = true)
     public boolean verifyExistenceById(Long id) {
         Optional<Someone> optionalSomeone = someoneRepository.findById(id);
         return optionalSomeone.isPresent();
+    }
+
+    @Transactional
+    public void createRelationship(Long someoneId, Long somethingId) {
+        Optional<Someone> optionalSomeone = someoneRepository.findById(someoneId);
+        Optional<Something> optionalSomething = somethingRepository.findById(somethingId);
+        someoneRepository.createRelationshipWithCode(
+                optionalSomeone.get().getCode(),
+                optionalSomething.get().getCode());
     }
 }
