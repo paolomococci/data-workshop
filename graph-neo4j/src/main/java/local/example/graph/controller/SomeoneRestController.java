@@ -37,11 +37,15 @@ public class SomeoneRestController {
     @GetMapping("/create/relationship/some/{someoneId}")
     public HttpEntity<String> createRelationship(
             @PathVariable("someoneId") String someoneId,
-            @RequestParam(value = "somethingId", defaultValue = "1") String somethingId) {
+            @RequestParam(value = "somethingId") String somethingId) {
         try {
             if (someoneService.verifyExistenceById(Long.parseLong(someoneId))
                     && somethingService.verifyExistenceById(Long.parseLong(somethingId))) {
-                // TODO
+                someoneService.createRelationship(
+                        // TODO
+                        Long.parseLong(someoneId),
+                        Long.parseLong(somethingId)
+                );
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
