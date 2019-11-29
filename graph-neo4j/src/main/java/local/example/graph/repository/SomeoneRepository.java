@@ -34,23 +34,27 @@ public interface SomeoneRepository
         extends Neo4jRepository<Someone, Long> {
 
     String CREATE_RELATIONSHIP = "match (s:Someone),(e:Something) " +
-            "where s.id = {someoneId} " +
-            "and e.id = {SomethingId} " +
-            "create (s)-[THINK_TO]->(e)";
+            "where s.code = {someoneCode} " +
+            "and e.code = {SomethingCode} " +
+            "create (s)-[r:THINK_TO]->(e)";
     String CREATE_RELATIONSHIP_WITH_CODE = "match (s:Someone),(e:Something) " +
-            "where s.id = {someoneId} " +
-            "and e.id = {SomethingId} " +
-            "create (s)-[THINK_TO {code:s.code+'-'+e.code}]->(e)";
-    String DELETE_RELATIONSHIP = "match (s {id: {someoneId}})-[r:THINK_TO]->(e {id: {somethingId}}) delete r";
+            "where s.code = {someoneCode} " +
+            "and e.code = {SomethingCode} " +
+            "create (s)-[r:THINK_TO {code:s.code+'-'+e.code}]->(e)";
+    String DELETE_RELATIONSHIP = "match (s {code: {someoneCode}})-[r:THINK_TO]->(e {code: {somethingCode}}) delete r";
+    String RETRIEVE_CODE_OF_ALL_RELATIONSHIP = "match (Someone)-[r:THINK_TO]->(Something) return r.code";
 
     @Query(value = CREATE_RELATIONSHIP)
-    void createRelationship(@Param("someoneId") long someoneId, @Param("somethingId") long somethingId);
+    void createRelationship(@Param("someoneCode") String someoneCode, @Param("somethingCode") String somethingCode);
 
     @Query(value = CREATE_RELATIONSHIP_WITH_CODE)
-    void createRelationshipWithCode(@Param("someoneId") long someoneId, @Param("somethingId") long somethingId);
+    void createRelationshipWithCode(@Param("someoneCode") String someoneCode, @Param("somethingCode") String somethingCode);
 
     @Query(value = DELETE_RELATIONSHIP)
-    void deleteRelationship(@Param("someoneId") long someoneId, @Param("somethingId") long somethingId);
+    void deleteRelationship(@Param("someoneCode") String someoneCode, @Param("somethingCode") String somethingCode);
+
+    @Query(RETRIEVE_CODE_OF_ALL_RELATIONSHIP)
+    List<String> retrieveCodeOfAllRelationships();
 
     List<Someone> findByCode(@Param("code") String code);
 }
