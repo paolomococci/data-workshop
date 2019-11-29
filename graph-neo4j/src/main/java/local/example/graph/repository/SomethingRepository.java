@@ -33,9 +33,9 @@ import java.util.List;
 )
 public interface SomethingRepository
         extends Neo4jRepository<Something, Long> {
-    
-    String SHOW_GRAPH = "match (e:Something)<-[t:THINK_TO]-(s:Someone) " + 
-            "return e,t,s " + 
+
+    String SHOW_GRAPH = "match (e:Something)<-[t:THINK_TO]-(s:Someone) " +
+            "return e,t,s " +
             "limit {limit}";
 
     @Query(SHOW_GRAPH)
