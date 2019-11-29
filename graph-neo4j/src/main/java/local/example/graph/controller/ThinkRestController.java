@@ -18,11 +18,24 @@
 
 package local.example.graph.controller;
 
+import local.example.graph.service.ThinkService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class ThinkRestController {
-  // TODO
+
+    @Autowired
+    private ThinkService thinkService;
+
+    @GetMapping("/retrieve/code/relationship")
+    public HttpEntity<List<String>> retrieveCodeOfAllRelationships() {
+        return new HttpEntity<>(thinkService.retrieveCodeOfAllRelationships());
+    }
 }
