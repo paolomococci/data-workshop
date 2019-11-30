@@ -51,6 +51,6 @@ public class SomeoneRestController {
             System.out.println(e.getMessage());
             return new HttpEntity<>("sorry, an error has occurred\n");
         }
-        return new HttpEntity<>("relationship created\n");
+        return new HttpEntity(HttpEntity.EMPTY);
     }
 }
