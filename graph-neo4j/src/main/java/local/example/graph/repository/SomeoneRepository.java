@@ -19,6 +19,7 @@
 package local.example.graph.repository;
 
 import local.example.graph.node.Someone;
+import local.example.graph.relationship.Think;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
@@ -33,25 +34,21 @@ import java.util.List;
 public interface SomeoneRepository
         extends Neo4jRepository<Someone, Long> {
 
-    String CREATE_RELATIONSHIP = "match (s:Someone),(e:Something) " +
-            "where s.code = {someoneCode} " +
-            "and e.code = {SomethingCode} " +
-            "create (s)-[r:THINK_TO]->(e)";
-    String CREATE_RELATIONSHIP_WITH_CODE = "match (s:Someone),(e:Something) " +
-            "where s.code = {someoneCode} " +
-            "and e.code = {SomethingCode} " +
-            "create (s)-[r:THINK_TO {code:s.code+'-'+e.code}]->(e)";
-    String DELETE_RELATIONSHIP = "match (s {code: {someoneCode}})-[r:THINK_TO]->(e {code: {somethingCode}}) delete r";
+    String RETRIEVE_ALL_RELATIONSHIP = "match (Someone)-[r:THINK_TO]->(Something) return r";
+
     String RETRIEVE_CODE_OF_ALL_RELATIONSHIP = "match (Someone)-[r:THINK_TO]->(Something) return r.code";
 
-    @Query(value = CREATE_RELATIONSHIP)
+    @Query("match (s:Someone),(e:Something) where s.code = {someoneCode} and e.code = {SomethingCode} create (s)-[r:THINK_TO]->(e)")
     void createRelationship(@Param("someoneCode") String someoneCode, @Param("somethingCode") String somethingCode);
 
-    @Query(value = CREATE_RELATIONSHIP_WITH_CODE)
+    @Query("match (s:Someone),(e:Something) where s.code = {someoneCode} and e.code = {SomethingCode} create (s)-[r:THINK_TO {code:s.code+'-'+e.code}]->(e)")
     void createRelationshipWithCode(@Param("someoneCode") String someoneCode, @Param("somethingCode") String somethingCode);
 
-    @Query(value = DELETE_RELATIONSHIP)
+    @Query("match (s {code: {someoneCode}})-[r:THINK_TO]->(e {code: {somethingCode}}) delete r")
     void deleteRelationship(@Param("someoneCode") String someoneCode, @Param("somethingCode") String somethingCode);
+
+    @Query(RETRIEVE_ALL_RELATIONSHIP)
+    List<Think> retrieveAllRelationship();
 
     @Query(RETRIEVE_CODE_OF_ALL_RELATIONSHIP)
     List<String> retrieveCodeOfAllRelationships();
