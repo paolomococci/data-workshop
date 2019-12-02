@@ -18,9 +18,10 @@
 
 package local.example.graph.controller;
 
+import local.example.graph.relationship.Think;
 import local.example.graph.service.ThinkService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,8 +35,15 @@ public class ThinkRestController {
     @Autowired
     private ThinkService thinkService;
 
-    @GetMapping("/retrieve/code/relationship")
-    public HttpEntity<List<String>> retrieveCodeOfAllRelationships() {
-        return new HttpEntity<>(thinkService.retrieveCodeOfAllRelationships());
+    @GetMapping("/relationship")
+    public ResponseEntity<List<Think>> retrieveAll() {
+        List<Think> relationships = thinkService.retrieveAllThinks();
+        return ResponseEntity.ok(relationships);
+    }
+
+    @GetMapping("/relationship/code")
+    public ResponseEntity<List<String>> retrieveAllCode() {
+        List<String> relationshipCodes = thinkService.retrieveCodeOfAllRelationships();
+        return ResponseEntity.ok(relationshipCodes);
     }
 }
