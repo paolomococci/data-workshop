@@ -21,7 +21,8 @@ package local.example.graph.controller;
 import local.example.graph.service.SomeoneService;
 import local.example.graph.service.SomethingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,23 +35,20 @@ public class SomeoneRestController {
     @Autowired
     private SomethingService somethingService;
 
-    @GetMapping("/create/relationship/some/{someoneId}")
-    public HttpEntity<String> createRelationship(
+    @GetMapping("/some/create/relationship/{someoneId}")
+    public ResponseEntity<String> createRelationship(
             @PathVariable("someoneId") String someoneId,
             @RequestParam(value = "somethingId") String somethingId) {
-        try {
-            if (someoneService.verifyExistenceById(Long.parseLong(someoneId))
-                    && somethingService.verifyExistenceById(Long.parseLong(somethingId))) {
-                someoneService.createRelationship(
-                        // TODO
-                        Long.parseLong(someoneId),
-                        Long.parseLong(somethingId)
-                );
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new HttpEntity<>("sorry, an error has occurred\n");
+        if (someoneService.verifyExistenceById(Long.parseLong(someoneId))
+                && somethingService.verifyExistenceById(Long.parseLong(somethingId))) {
+            someoneService.createRelationship(
+                    // TODO
+                    Long.parseLong(someoneId),
+                    Long.parseLong(somethingId)
+            );
+        } else {
+            return new ResponseEntity<>("an error has occurred", HttpStatus.NO_CONTENT);
         }
-        return new HttpEntity(HttpEntity.EMPTY);
+        return ResponseEntity.ok().body("correlation created correctly");
     }
 }
