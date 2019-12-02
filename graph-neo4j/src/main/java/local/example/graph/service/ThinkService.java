@@ -18,19 +18,24 @@
 
 package local.example.graph.service;
 
+import local.example.graph.relationship.Think;
 import local.example.graph.repository.SomeoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ThinkService {
 
     @Autowired
     private SomeoneRepository someoneRepository;
+
+    @Transactional(readOnly = true)
+    public List<Think> retrieveAllThinks() {
+        return someoneRepository.retrieveAllRelationship();
+    }
 
     @Transactional(readOnly = true)
     public List<String> retrieveCodeOfAllRelationships() {
