@@ -18,5 +18,11 @@
 
 package local.example.data.repository;
 
-public interface AuthorRepository {
+import local.example.data.model.Author;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+@RepositoryRestResource
+public interface AuthorRepository
+        extends PagingAndSortingRepository<Author, Long> {
 }
