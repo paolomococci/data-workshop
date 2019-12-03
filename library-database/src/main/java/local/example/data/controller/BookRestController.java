@@ -18,5 +18,10 @@
 
 package local.example.data.controller;
 
+import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RepositoryRestController
+@RequestMapping("/api/books")
 public class BookRestController {
 }
