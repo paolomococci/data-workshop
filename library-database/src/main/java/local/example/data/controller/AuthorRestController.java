@@ -19,8 +19,6 @@
 package local.example.data.controller;
 
 import local.example.data.model.Author;
-import local.example.data.repository.AuthorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +30,6 @@ import java.util.List;
 @RepositoryRestController
 @RequestMapping("/api/authors")
 public class AuthorRestController {
-
-    @Autowired
-    private AuthorRepository authorRepository;
 
     @GetMapping("/{lastName}")
     public ResponseEntity<List<Author>> selectAuthorWhereLastName(@PathVariable("lastName") String lastName) {
