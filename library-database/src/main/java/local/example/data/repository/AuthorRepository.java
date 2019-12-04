@@ -19,10 +19,20 @@
 package local.example.data.repository;
 
 import local.example.data.model.Author;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import java.util.Collection;
 
 @RepositoryRestResource
 public interface AuthorRepository
         extends PagingAndSortingRepository<Author, Long> {
+
+    @Query(value = "SELECT * FROM author", nativeQuery = true)
+    Collection<Author> selectAll();
+
+    @Query(value = "SELECT * FROM author a WHERE a.last_name = ?", nativeQuery = true)
+    Collection<Author> selectByLastName(@Param("lastName") String lastName);
 }
