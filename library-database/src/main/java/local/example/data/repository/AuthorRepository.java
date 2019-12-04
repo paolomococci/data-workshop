@@ -25,6 +25,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RepositoryRestResource
 public interface AuthorRepository
@@ -32,6 +33,9 @@ public interface AuthorRepository
 
     @Query(value = "SELECT * FROM author", nativeQuery = true)
     Collection<Author> selectAll();
+
+    @Query(value = "SELECT * FROM author a WHERE a.id = :id", nativeQuery = true)
+    Optional<Author> selectById(@Param("id") Long id);
 
     @Query(value = "SELECT * FROM author a WHERE a.last_name = :lastName", nativeQuery = true)
     Collection<Author> selectByLastName(@Param("lastName") String lastName);
