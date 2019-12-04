@@ -19,20 +19,30 @@
 package local.example.data.controller;
 
 import local.example.data.model.Author;
+import local.example.data.repository.AuthorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import java.util.Collection;
 
 @RepositoryRestController
 @RequestMapping("/api/authors")
 public class AuthorRestController {
 
+    @Autowired
+    private AuthorRepository authorRepository;
+
+    @GetMapping
+    public ResponseEntity<Collection<Author>> selectAll() {
+        return ResponseEntity.ok(authorRepository.selectAll());
+    }
+
     @GetMapping("/{lastName}")
-    public ResponseEntity<List<Author>> selectAuthorWhereLastName(@PathVariable("lastName") String lastName) {
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Collection<Author>> selectAuthorWhereLastName(@PathVariable("lastName") String lastName) {
+        return ResponseEntity.ok(authorRepository.selectByLastName(lastName));
     }
 }
