@@ -21,12 +21,10 @@ package local.example.data.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "author")
 public class Author {
 
     @Id
@@ -36,9 +34,11 @@ public class Author {
 
     @Getter
     @Setter
+    @Column(name = "first_name")
     private String firstName;
 
     @Getter
     @Setter
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 }
