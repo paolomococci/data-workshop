@@ -33,6 +33,6 @@ public interface AuthorRepository
     @Query(value = "SELECT * FROM author", nativeQuery = true)
     Collection<Author> selectAll();
 
-    @Query(value = "SELECT * FROM author a WHERE a.last_name = ?", nativeQuery = true)
+    @Query(value = "SELECT * FROM author a WHERE a.last_name = :lastName", nativeQuery = true)
     Collection<Author> selectByLastName(@Param("lastName") String lastName);
 }
