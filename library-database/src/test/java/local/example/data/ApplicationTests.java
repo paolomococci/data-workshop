@@ -41,4 +41,18 @@ class ApplicationTests {
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("_links").exists());
 	}
+
+	@Test
+	void authorOkTest() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors"))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+	@Test
+	void authorLastNameOkTest() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors/smith"))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
 }
