@@ -62,4 +62,18 @@ class ApplicationTests {
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
+
+    @Test
+    void bookOkTest() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/books"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void bookIdBadRequestTest() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/books/identification/1"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 }
