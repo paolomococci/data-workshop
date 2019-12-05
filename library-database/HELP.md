@@ -322,11 +322,11 @@ Date: Thu, 05 Dec 2019 17:22:18 GMT
   "lastName" : "Do"
 * Connection #0 to host localhost left intact
 } ]
-$ curl --verbose --include http://localhost:8080/api/authors/identification/id?id=1
+$ curl --verbose --include http://localhost:8080/api/authors/identification/1
 *   Trying ::1:8080...
 * TCP_NODELAY set
 * Connected to localhost (::1) port 8080 (#0)
-> GET /api/authors/identification/id?id=1 HTTP/1.1
+> GET /api/authors/identification/1 HTTP/1.1
 > Host: localhost:8080
 > User-Agent: curl/7.66.0
 > Accept: */*
@@ -338,8 +338,8 @@ HTTP/1.1 200
 Content-Type: application/json
 < Transfer-Encoding: chunked
 Transfer-Encoding: chunked
-< Date: Thu, 05 Dec 2019 17:27:59 GMT
-Date: Thu, 05 Dec 2019 17:27:59 GMT
+< Date: Thu, 05 Dec 2019 21:18:46 GMT
+Date: Thu, 05 Dec 2019 21:18:46 GMT
 
 < 
 {
@@ -348,11 +348,11 @@ Date: Thu, 05 Dec 2019 17:27:59 GMT
   "lastName" : "Do"
 * Connection #0 to host localhost left intact
 }
-$ curl --verbose --include http://localhost:8080/api/authors/surname/Do
+$ curl --verbose --include http://localhost:8080/api/authors/surname?lastName="Do"
 *   Trying ::1:8080...
 * TCP_NODELAY set
 * Connected to localhost (::1) port 8080 (#0)
-> GET /api/authors/surname/Do HTTP/1.1
+> GET /api/authors/surname?lastName=Do HTTP/1.1
 > Host: localhost:8080
 > User-Agent: curl/7.66.0
 > Accept: */*
@@ -364,8 +364,8 @@ HTTP/1.1 200
 Content-Type: application/json
 < Transfer-Encoding: chunked
 Transfer-Encoding: chunked
-< Date: Thu, 05 Dec 2019 17:34:52 GMT
-Date: Thu, 05 Dec 2019 17:34:52 GMT
+< Date: Thu, 05 Dec 2019 21:20:16 GMT
+Date: Thu, 05 Dec 2019 21:20:16 GMT
 
 < 
 [ {
@@ -374,11 +374,11 @@ Date: Thu, 05 Dec 2019 17:34:52 GMT
   "lastName" : "Do"
 * Connection #0 to host localhost left intact
 } ]
-$ curl --verbose --include http://localhost:8080/api/authors/surname/"Do"
+$ curl --verbose --include http://localhost:8080/api/authors/name?firstName="Paul"
 *   Trying ::1:8080...
 * TCP_NODELAY set
 * Connected to localhost (::1) port 8080 (#0)
-> GET /api/authors/surname/Do HTTP/1.1
+> GET /api/authors/name?firstName=Paul HTTP/1.1
 > Host: localhost:8080
 > User-Agent: curl/7.66.0
 > Accept: */*
@@ -390,8 +390,8 @@ HTTP/1.1 200
 Content-Type: application/json
 < Transfer-Encoding: chunked
 Transfer-Encoding: chunked
-< Date: Thu, 05 Dec 2019 17:36:32 GMT
-Date: Thu, 05 Dec 2019 17:36:32 GMT
+< Date: Thu, 05 Dec 2019 21:21:37 GMT
+Date: Thu, 05 Dec 2019 21:21:37 GMT
 
 < 
 [ {
