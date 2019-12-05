@@ -50,10 +50,10 @@ class ApplicationTests {
 	}
 
     @Test
-    void authorIdBadRequestTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors/identification/1"))
+    void authorIdOkTest() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors/identification/id?id=3458"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 	@Test
