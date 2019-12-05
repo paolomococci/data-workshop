@@ -18,10 +18,32 @@
 
 package local.example.data.controller;
 
+import local.example.data.model.Book;
+import local.example.data.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Collection;
+import java.util.Optional;
 
 @RepositoryRestController
 @RequestMapping("/api/books")
 public class BookRestController {
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @GetMapping
+    public ResponseEntity<Collection<Book>> selectAll() {
+        return ResponseEntity.ok(bookRepository.selectAll());
+    }
+
+    @GetMapping("/identification/{id}")
+    public ResponseEntity<Optional<Book>> selectBookWhereId(@RequestParam(value = "id") Long id) {
+        return ResponseEntity.ok(bookRepository.selectById(id));
+    }
 }
