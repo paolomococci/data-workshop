@@ -51,14 +51,21 @@ class ApplicationTests {
 
     @Test
     void authorIdOkTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors/identification/id?id=3458"))
+        mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors/identification/3458"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 	@Test
+	void authorFirstNameOkTest() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors/name?firstName='John'"))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+	@Test
 	void authorLastNameOkTest() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors/surname/smith"))
+		mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors/surname?lastName='Do'"))
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
@@ -71,9 +78,9 @@ class ApplicationTests {
     }
 
     @Test
-    void bookIdBadRequestTest() throws Exception {
+    void bookIdOkTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/books/identification/1"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
