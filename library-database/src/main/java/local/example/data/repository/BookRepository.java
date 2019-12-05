@@ -19,10 +19,27 @@
 package local.example.data.repository;
 
 import local.example.data.model.Book;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import java.util.Collection;
+import java.util.Optional;
 
 @RepositoryRestResource
 public interface BookRepository
         extends PagingAndSortingRepository<Book, Long> {
+
+    @Query(value = "SELECT * FROM book", nativeQuery = true)
+    Collection<Book> selectAll();
+
+    @Query(value = "SELECT * FROM book b WHERE b.id = :id", nativeQuery = true)
+    Optional<Book> selectById(@Param("id") Long id);
+
+    @Query(value = "SELECT * FROM book b WHERE b.title LIKE :title", nativeQuery = true)
+    Collection<Book> selectLikeTitle(@Param("title") String title);
+
+    @Query(value = "SELECT * FROM book b WHERE b.title = :title", nativeQuery = true)
+    Collection<Book> selectByTitle(@Param("title") String title);
 }
