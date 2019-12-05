@@ -44,17 +44,17 @@ public class AuthorRestController {
     }
 
     @GetMapping("/identification/{id}")
-    public ResponseEntity<Optional<Author>> selectAuthorWhereId(@RequestParam(value = "id") Long id) {
+    public ResponseEntity<Optional<Author>> selectAuthorWhereId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(authorRepository.selectById(id));
     }
 
-    @GetMapping("/name/{firstName}")
-    public ResponseEntity<Collection<Author>> selectAuthorLikeFirstName(@PathVariable("firstName") String firstName) {
+    @GetMapping("/name{firstName}")
+    public ResponseEntity<Collection<Author>> selectAuthorLikeFirstName(@RequestParam("firstName") String firstName) {
         return ResponseEntity.ok(authorRepository.selectLikeFirstName(firstName));
     }
 
-    @GetMapping("/surname/{lastName}")
-    public ResponseEntity<Collection<Author>> selectAuthorWhereLastName(@PathVariable("lastName") String lastName) {
+    @GetMapping("/surname{lastName}")
+    public ResponseEntity<Collection<Author>> selectAuthorWhereLastName(@RequestParam("lastName") String lastName) {
         return ResponseEntity.ok(authorRepository.selectByLastName(lastName));
     }
 }
