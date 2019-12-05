@@ -48,6 +48,11 @@ public class AuthorRestController {
         return ResponseEntity.ok(authorRepository.selectById(id));
     }
 
+    @GetMapping("/name/{firstName}")
+    public ResponseEntity<Collection<Author>> selectAuthorLikeFirstName(@PathVariable("firstName") String firstName) {
+        return ResponseEntity.ok(authorRepository.selectLikeFirstName(firstName));
+    }
+
     @GetMapping("/surname/{lastName}")
     public ResponseEntity<Collection<Author>> selectAuthorWhereLastName(@PathVariable("lastName") String lastName) {
         return ResponseEntity.ok(authorRepository.selectByLastName(lastName));
