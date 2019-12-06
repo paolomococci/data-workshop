@@ -37,9 +37,9 @@ public interface BookRepository
     @Query(value = "SELECT * FROM book b WHERE b.id = :id", nativeQuery = true)
     Optional<Book> selectById(@Param("id") Long id);
 
-    @Query(value = "SELECT * FROM book b WHERE b.title LIKE :title", nativeQuery = true)
+    @Query(value = "SELECT * FROM book b WHERE b.title LIKE %:title%", nativeQuery = true)
     Collection<Book> selectLikeTitle(@Param("title") String title);
 
     @Query(value = "SELECT * FROM book b WHERE b.title = :title", nativeQuery = true)
-    Collection<Book> selectByTitle(@Param("title") String title);
+    Collection<Book> selectWhereTitle(@Param("title") String title);
 }
