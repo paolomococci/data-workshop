@@ -51,7 +51,7 @@ class ApplicationTests {
 
     @Test
     void authorIdOkTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors/identification/3458"))
+        mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/authors/3458"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -79,7 +79,7 @@ class ApplicationTests {
 
     @Test
     void bookIdOkTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/books/identification/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("http://127.0.0.1:8080/api/books/1"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
