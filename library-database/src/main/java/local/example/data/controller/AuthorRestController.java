@@ -43,7 +43,7 @@ public class AuthorRestController {
         return ResponseEntity.ok(authorRepository.selectAll());
     }
 
-    @GetMapping("/identification/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Author>> selectAuthorWhereId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(authorRepository.selectById(id));
     }
