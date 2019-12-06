@@ -26,6 +26,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -42,8 +43,18 @@ public class BookRestController {
         return ResponseEntity.ok(bookRepository.selectAll());
     }
 
-    @GetMapping("/identification/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Book>> selectBookWhereId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(bookRepository.selectById(id));
+    }
+
+    @GetMapping("/like{title}")
+    public ResponseEntity<Collection<Book>> selectBookLikeTitle(@RequestParam(value = "title") String title) {
+        return ResponseEntity.ok(bookRepository.selectLikeTitle(title));
+    }
+
+    @GetMapping("/where{title}")
+    public ResponseEntity<Collection<Book>> selectBookWhereTitle(@RequestParam(value = "title") String title) {
+        return ResponseEntity.ok(bookRepository.selectWhereTitle(title));
     }
 }
