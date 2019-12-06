@@ -37,6 +37,9 @@ public interface AuthorRepository
     @Query(value = "SELECT * FROM author a WHERE a.id = :id", nativeQuery = true)
     Optional<Author> selectById(@Param("id") Long id);
 
+    @Query(value = "SELECT * FROM author a WHERE a.first_name LIKE %:firstName%", nativeQuery = true)
+    Collection<Author> selectLikeFirstName(@Param("firstName") String fistName);
+
     @Query(value = "SELECT * FROM author a WHERE a.last_name = :lastName", nativeQuery = true)
     Collection<Author> selectByLastName(@Param("lastName") String lastName);
 }
