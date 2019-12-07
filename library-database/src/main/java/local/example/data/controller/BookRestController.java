@@ -43,6 +43,11 @@ public class BookRestController {
         return ResponseEntity.ok(bookRepository.selectAll());
     }
 
+    @GetMapping("/order/by/title")
+    public ResponseEntity<Collection<Book>> selectAllOrderByTitle() {
+        return ResponseEntity.ok(bookRepository.selectAllOrderByTitle());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Book>> selectBookWhereId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(bookRepository.selectById(id));
