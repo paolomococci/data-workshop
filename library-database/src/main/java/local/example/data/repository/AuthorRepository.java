@@ -34,6 +34,9 @@ public interface AuthorRepository
     @Query(value = "SELECT * FROM author", nativeQuery = true)
     Collection<Author> selectAll();
 
+    @Query(value = "SELECT * FROM author a ORDER BY a.last_name", nativeQuery = true)
+    Collection<Author> selectAllOrderByLastName();
+
     @Query(value = "SELECT * FROM author a WHERE a.id = :id", nativeQuery = true)
     Optional<Author> selectById(@Param("id") Long id);
 
