@@ -43,6 +43,11 @@ public class AuthorRestController {
         return ResponseEntity.ok(authorRepository.selectAll());
     }
 
+    @GetMapping("/order/by/lastName")
+    public ResponseEntity<Collection<Author>> selectAllOrderByLastName() {
+        return ResponseEntity.ok(authorRepository.selectAllOrderByLastName());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Author>> selectAuthorWhereId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(authorRepository.selectById(id));
