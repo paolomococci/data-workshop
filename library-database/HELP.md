@@ -834,3 +834,44 @@ Date: Fri, 06 Dec 2019 08:51:31 GMT
 * Connection #0 to host localhost left intact
 } ]
 ```
+
+## TODO
+```
+$ curl --verbose --include http://localhost:8080/api/books/order/by/title
+*   Trying ::1:8080...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> GET /api/books/order/by/title HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.66.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Content-Type: application/json
+Content-Type: application/json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Sat, 07 Dec 2019 19:03:09 GMT
+Date: Sat, 07 Dec 2019 19:03:09 GMT
+
+< 
+[ {
+  "id" : 2,
+  "title" : "John the smith"
+}, {
+  "id" : 6,
+  "title" : "Only for example"
+}, {
+  "id" : 3,
+  "title" : "Secret march of caterpillars"
+}, {
+  "id" : 4,
+  "title" : "Sheila walk over water"
+}, {
+  "id" : 5,
+  "title" : "The math of monkeys"
+* Connection #0 to host localhost left intact
+} ]
+```
