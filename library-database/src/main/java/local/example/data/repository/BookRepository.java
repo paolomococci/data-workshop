@@ -34,6 +34,9 @@ public interface BookRepository
     @Query(value = "SELECT * FROM book", nativeQuery = true)
     Collection<Book> selectAll();
 
+    @Query(value = "SELECT * FROM book b ORDER BY b.title", nativeQuery = true)
+    Collection<Book> selectAllOrderByTitle();
+
     @Query(value = "SELECT * FROM book b WHERE b.id = :id", nativeQuery = true)
     Optional<Book> selectById(@Param("id") Long id);
 
