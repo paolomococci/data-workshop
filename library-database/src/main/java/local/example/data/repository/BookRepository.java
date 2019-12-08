@@ -19,6 +19,7 @@
 package local.example.data.repository;
 
 import local.example.data.model.Book;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -43,6 +44,13 @@ public interface BookRepository
     @Query(value = "SELECT * FROM book b WHERE b.title LIKE %:title%", nativeQuery = true)
     Collection<Book> selectLikeTitle(@Param("title") String title);
 
+    @Query(value = "SELECT * FROM book b WHERE LOWER(b.title) LIKE %:title%", nativeQuery = true)
+    Collection<Book> selectLikeTitleIgnoreCase(String title);
+
     @Query(value = "SELECT * FROM book b WHERE b.title = :title", nativeQuery = true)
     Collection<Book> selectWhereTitle(@Param("title") String title);
+
+    @Modifying(flushAutomatically = true, clearAutomatically = true)
+    @Query(value = "UPDATE book SET title = :title WHERE id = :id", nativeQuery = true)
+    int updateTitleWhereId(@Param("title") String title, @Param("id") Long id);
 }
