@@ -20,13 +20,11 @@ package local.example.data.controller;
 
 import local.example.data.model.Book;
 import local.example.data.repository.BookRepository;
+import local.example.data.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -37,6 +35,9 @@ public class BookRestController {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private BookService bookService;
 
     @GetMapping
     public ResponseEntity<Collection<Book>> selectAll() {
@@ -58,8 +59,20 @@ public class BookRestController {
         return ResponseEntity.ok(bookRepository.selectLikeTitle(title));
     }
 
+    @GetMapping("/like/ignore/case{title}")
+    public ResponseEntity<Collection<Book>> selectBookLikeTitleIgnoreCase(@RequestParam(value = "title") String title) {
+        return ResponseEntity.ok(bookRepository.selectLikeTitleIgnoreCase(title.toLowerCase()));
+    }
+
     @GetMapping("/where{title}")
     public ResponseEntity<Collection<Book>> selectBookWhereTitle(@RequestParam(value = "title") String title) {
         return ResponseEntity.ok(bookRepository.selectWhereTitle(title));
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<String> updateTitleWhereId(
+            @PathVariable("id") Long id,
+            @RequestBody Book book) {
+        return ResponseEntity.ok("updated: " + bookService.updateTitleWhereId(book, id));
     }
 }
