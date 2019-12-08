@@ -874,4 +874,158 @@ Date: Sat, 07 Dec 2019 19:03:09 GMT
   "title" : "The math of monkeys"
 * Connection #0 to host localhost left intact
 } ]
+$ curl --verbose --include http://localhost:8080/api/books/like/ignore/case?title="secret%20MaRch"
+*   Trying ::1:8080...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> GET /api/books/like/ignore/case?title=secret%20MaRch HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.66.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Content-Type: application/json
+Content-Type: application/json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Sat, 07 Dec 2019 19:58:29 GMT
+Date: Sat, 07 Dec 2019 19:58:29 GMT
+
+< 
+[ {
+  "id" : 3,
+  "title" : "Secret march of caterpillars"
+* Connection #0 to host localhost left intact
+} ]
+```
+
+```
+$ curl --verbose --include --request POST http://localhost:8080/api/books/6 --header "Content-Type:application/json" --data-ascii '{"title":"This is only for example"}'
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying ::1:8080...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> POST /api/books/6 HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.66.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 36
+> 
+* upload completely sent off: 36 out of 36 bytes
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Content-Type: application/json
+Content-Type: application/json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Sun, 08 Dec 2019 07:46:52 GMT
+Date: Sun, 08 Dec 2019 07:46:52 GMT
+
+< 
+* Connection #0 to host localhost left intact
+"updated: 1"
+$ curl --verbose --include http://localhost:8080/api/books/order/by/title
+*   Trying ::1:8080...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> GET /api/books/order/by/title HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.66.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Content-Type: application/json
+Content-Type: application/json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Sun, 08 Dec 2019 07:47:31 GMT
+Date: Sun, 08 Dec 2019 07:47:31 GMT
+
+< 
+[ {
+  "id" : 2,
+  "title" : "John the smith"
+}, {
+  "id" : 3,
+  "title" : "Secret march of caterpillars"
+}, {
+  "id" : 4,
+  "title" : "Sheila walk over water"
+}, {
+  "id" : 5,
+  "title" : "The math of monkeys"
+}, {
+  "id" : 6,
+  "title" : "This is only for example"
+* Connection #0 to host localhost left intact
+} ]
+$ curl --verbose --include --request POST http://localhost:8080/api/books/6 --header "Content-Type:application/json" --data-ascii '{"title":"This is only for your data"}'
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying ::1:8080...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> POST /api/books/6 HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.66.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 38
+> 
+* upload completely sent off: 38 out of 38 bytes
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Content-Type: application/json
+Content-Type: application/json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Sun, 08 Dec 2019 07:49:23 GMT
+Date: Sun, 08 Dec 2019 07:49:23 GMT
+
+< 
+* Connection #0 to host localhost left intact
+"updated: 1"
+$ curl --verbose --include http://localhost:8080/api/books/order/by/title
+*   Trying ::1:8080...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> GET /api/books/order/by/title HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.66.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Content-Type: application/json
+Content-Type: application/json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Sun, 08 Dec 2019 07:49:55 GMT
+Date: Sun, 08 Dec 2019 07:49:55 GMT
+
+< 
+[ {
+  "id" : 2,
+  "title" : "John the smith"
+}, {
+  "id" : 3,
+  "title" : "Secret march of caterpillars"
+}, {
+  "id" : 4,
+  "title" : "Sheila walk over water"
+}, {
+  "id" : 5,
+  "title" : "The math of monkeys"
+}, {
+  "id" : 6,
+  "title" : "This is only for your data"
+* Connection #0 to host localhost left intact
+} ]
 ```
