@@ -26,6 +26,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RepositoryRestController
@@ -36,8 +38,9 @@ public class BookRestController {
     private BookService bookService;
 
     @GetMapping("/row/counter")
-    public ResponseEntity<String> rowCounter() {
-        String response = String.format("{rows : %d}", bookService.rowCounter());
+    public ResponseEntity<Map<String, Long>> rowCounter() {
+        Map<String, Long> response = new HashMap<>();
+        response.put("rows", bookService.rowCounter());
         return ResponseEntity.ok(response);
     }
 
