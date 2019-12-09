@@ -19,6 +19,7 @@
 package local.example.data.repository;
 
 import local.example.data.model.Author;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -30,6 +31,9 @@ import java.util.Optional;
 @RepositoryRestResource
 public interface AuthorRepository
         extends PagingAndSortingRepository<Author, Long> {
+
+    @Query(value = "SELECT COUNT(*) FROM author", nativeQuery = true)
+    long rowCounter();
 
     @Query(value = "SELECT * FROM author", nativeQuery = true)
     Collection<Author> selectAll();
@@ -45,4 +49,12 @@ public interface AuthorRepository
 
     @Query(value = "SELECT * FROM author a WHERE a.last_name = :lastName", nativeQuery = true)
     Collection<Author> selectWhereLastName(@Param("lastName") String lastName);
+
+    @Modifying(flushAutomatically = true, clearAutomatically = true)
+    @Query(value = "UPDATE author SET first_name = :firstName WHERE id = :id", nativeQuery = true)
+    int updateFirstNameWhereId(@Param("firstName") String firstName, @Param("id") Long id);
+
+    @Modifying(flushAutomatically = true, clearAutomatically = true)
+    @Query(value = "UPDATE author SET last_name = :lastName WHERE id = :id", nativeQuery = true)
+    int updateLastNameWhereId(@Param("lastName") String lastName, @Param("id") Long id);
 }
