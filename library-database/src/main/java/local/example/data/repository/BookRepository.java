@@ -32,6 +32,9 @@ import java.util.Optional;
 public interface BookRepository
         extends PagingAndSortingRepository<Book, Long> {
 
+    @Query(value = "SELECT COUNT(*) FROM book", nativeQuery = true)
+    long rowCounter();
+
     @Query(value = "SELECT * FROM book", nativeQuery = true)
     Collection<Book> selectAll();
 
