@@ -19,7 +19,6 @@
 package local.example.data.controller;
 
 import local.example.data.model.Book;
-import local.example.data.repository.BookRepository;
 import local.example.data.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
@@ -34,42 +33,39 @@ import java.util.Optional;
 public class BookRestController {
 
     @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
     private BookService bookService;
 
     @GetMapping
     public ResponseEntity<Collection<Book>> selectAll() {
-        return ResponseEntity.ok(bookRepository.selectAll());
+        return ResponseEntity.ok(bookService.selectAll());
     }
 
     @GetMapping("/order/by/title")
     public ResponseEntity<Collection<Book>> selectAllOrderByTitle() {
-        return ResponseEntity.ok(bookRepository.selectAllOrderByTitle());
+        return ResponseEntity.ok(bookService.selectAllOrderByTitle());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Book>> selectBookWhereId(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(bookRepository.selectById(id));
+    public ResponseEntity<Optional<Book>> selectWhereId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(bookService.selectWhereId(id));
     }
 
     @GetMapping("/like{title}")
-    public ResponseEntity<Collection<Book>> selectBookLikeTitle(@RequestParam(value = "title") String title) {
-        return ResponseEntity.ok(bookRepository.selectLikeTitle(title));
+    public ResponseEntity<Collection<Book>> selectLikeTitle(@RequestParam(value = "title") String title) {
+        return ResponseEntity.ok(bookService.selectLikeTitle(title));
     }
 
     @GetMapping("/like/ignore/case{title}")
-    public ResponseEntity<Collection<Book>> selectBookLikeTitleIgnoreCase(@RequestParam(value = "title") String title) {
-        return ResponseEntity.ok(bookRepository.selectLikeTitleIgnoreCase(title.toLowerCase()));
+    public ResponseEntity<Collection<Book>> selectLikeTitleIgnoreCase(@RequestParam(value = "title") String title) {
+        return ResponseEntity.ok(bookService.selectLikeTitleIgnoreCase(title.toLowerCase()));
     }
 
     @GetMapping("/where{title}")
-    public ResponseEntity<Collection<Book>> selectBookWhereTitle(@RequestParam(value = "title") String title) {
-        return ResponseEntity.ok(bookRepository.selectWhereTitle(title));
+    public ResponseEntity<Collection<Book>> selectWhereTitle(@RequestParam(value = "title") String title) {
+        return ResponseEntity.ok(bookService.selectWhereTitle(title));
     }
 
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<String> updateTitleWhereId(
             @PathVariable("id") Long id,
             @RequestBody Book book) {
