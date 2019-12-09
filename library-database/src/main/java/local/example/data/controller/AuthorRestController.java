@@ -23,10 +23,7 @@ import local.example.data.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -37,6 +34,11 @@ public class AuthorRestController {
 
     @Autowired
     private AuthorService authorService;
+
+    @GetMapping("/row/counter")
+    public ResponseEntity<String> rowCounter() {
+        return ResponseEntity.ok("{rows: " + authorService.rowCounter() + "}");
+    }
 
     @GetMapping
     public ResponseEntity<Collection<Author>> selectAll() {
@@ -61,5 +63,19 @@ public class AuthorRestController {
     @GetMapping("/surname{lastName}")
     public ResponseEntity<Collection<Author>> selectWhereLastName(@RequestParam("lastName") String lastName) {
         return ResponseEntity.ok(authorService.selectWhereLastName(lastName));
+    }
+
+    @PatchMapping("/name/{id}")
+    public ResponseEntity<String> updateFirstNameWhereId(
+            @PathVariable("id") Long id,
+            @RequestBody Author author) {
+        return ResponseEntity.ok("{updated: " + authorService.updateFirstNameWhereId(author, id) + "}");
+    }
+
+    @PatchMapping("/surname/{id}")
+    public ResponseEntity<String> updateLastNameWhereId(
+            @PathVariable("id") Long id,
+            @RequestBody Author author) {
+        return ResponseEntity.ok("{updated: " + authorService.updateLastNameWhereId(author, id) + "}");
     }
 }
