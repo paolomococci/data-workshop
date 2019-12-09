@@ -37,7 +37,8 @@ public class BookRestController {
 
     @GetMapping("/row/counter")
     public ResponseEntity<String> rowCounter() {
-        return ResponseEntity.ok("{rows: " + bookService.rowCounter() + "}");
+        String response = String.format("{rows : %d}", bookService.rowCounter());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
