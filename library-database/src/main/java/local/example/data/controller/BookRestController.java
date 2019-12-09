@@ -35,6 +35,11 @@ public class BookRestController {
     @Autowired
     private BookService bookService;
 
+    @GetMapping("/row/counter")
+    public ResponseEntity<String> rowCounter() {
+        return ResponseEntity.ok("{rows: " + bookService.rowCounter() + "}");
+    }
+
     @GetMapping
     public ResponseEntity<Collection<Book>> selectAll() {
         return ResponseEntity.ok(bookService.selectAll());
@@ -69,6 +74,6 @@ public class BookRestController {
     public ResponseEntity<String> updateTitleWhereId(
             @PathVariable("id") Long id,
             @RequestBody Book book) {
-        return ResponseEntity.ok("updated: " + bookService.updateTitleWhereId(book, id));
+        return ResponseEntity.ok("{updated: " + bookService.updateTitleWhereId(book, id) + "}");
     }
 }
