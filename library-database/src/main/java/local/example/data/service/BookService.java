@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -33,6 +32,10 @@ public class BookService {
 
     @Autowired
     private BookRepository bookRepository;
+
+    public long rowCounter() {
+        return bookRepository.rowCounter();
+    }
 
     public Collection<Book> selectAll() {
         return bookRepository.selectAll();
@@ -59,7 +62,7 @@ public class BookService {
     }
 
     @Transactional
-    public int updateTitleWhereId(@NotNull Book book, Long id) {
+    public int updateTitleWhereId(Book book, Long id) {
         return bookRepository.updateTitleWhereId(book.getTitle(), id);
     }
 }
