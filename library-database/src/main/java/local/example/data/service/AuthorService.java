@@ -22,8 +22,8 @@ import local.example.data.model.Author;
 import local.example.data.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -32,6 +32,10 @@ public class AuthorService {
 
     @Autowired
     private AuthorRepository authorRepository;
+
+    public long rowCounter() {
+        return authorRepository.rowCounter();
+    }
 
     public Collection<Author> selectAll() {
         return authorRepository.selectAll();
@@ -49,7 +53,17 @@ public class AuthorService {
         return authorRepository.selectLikeFirstName(firstName);
     }
 
-    public Collection<Author> selectWhereLastName(@NotNull String lastName) {
+    public Collection<Author> selectWhereLastName(String lastName) {
         return authorRepository.selectWhereLastName(lastName);
+    }
+
+    @Transactional
+    public int updateFirstNameWhereId(Author author, Long id) {
+        return authorRepository.updateFirstNameWhereId(author.getFirstName(), id);
+    }
+
+    @Transactional
+    public int updateLastNameWhereId(Author author, Long id) {
+        return authorRepository.updateLastNameWhereId(author.getLastName(), id);
     }
 }
