@@ -19,7 +19,7 @@
 package local.example.data.controller;
 
 import local.example.data.model.Author;
-import local.example.data.repository.AuthorRepository;
+import local.example.data.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
@@ -36,30 +36,30 @@ import java.util.Optional;
 public class AuthorRestController {
 
     @Autowired
-    private AuthorRepository authorRepository;
+    private AuthorService authorService;
 
     @GetMapping
     public ResponseEntity<Collection<Author>> selectAll() {
-        return ResponseEntity.ok(authorRepository.selectAll());
+        return ResponseEntity.ok(authorService.selectAll());
     }
 
     @GetMapping("/order/by/lastName")
     public ResponseEntity<Collection<Author>> selectAllOrderByLastName() {
-        return ResponseEntity.ok(authorRepository.selectAllOrderByLastName());
+        return ResponseEntity.ok(authorService.selectAllOrderByLastName());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Author>> selectAuthorWhereId(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(authorRepository.selectById(id));
+    public ResponseEntity<Optional<Author>> selectWhereId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(authorService.selectWhereId(id));
     }
 
     @GetMapping("/name{firstName}")
-    public ResponseEntity<Collection<Author>> selectAuthorLikeFirstName(@RequestParam("firstName") String firstName) {
-        return ResponseEntity.ok(authorRepository.selectLikeFirstName(firstName));
+    public ResponseEntity<Collection<Author>> selectLikeFirstName(@RequestParam("firstName") String firstName) {
+        return ResponseEntity.ok(authorService.selectLikeFirstName(firstName));
     }
 
     @GetMapping("/surname{lastName}")
-    public ResponseEntity<Collection<Author>> selectAuthorWhereLastName(@RequestParam("lastName") String lastName) {
-        return ResponseEntity.ok(authorRepository.selectByLastName(lastName));
+    public ResponseEntity<Collection<Author>> selectWhereLastName(@RequestParam("lastName") String lastName) {
+        return ResponseEntity.ok(authorService.selectWhereLastName(lastName));
     }
 }
