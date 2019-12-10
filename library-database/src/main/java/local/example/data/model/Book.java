@@ -34,6 +34,6 @@ public class Book {
 
     @Getter
     @Setter
-    @Column(nullable = false)
+    @Column(length = 100, nullable = false)
     private String title;
 }
