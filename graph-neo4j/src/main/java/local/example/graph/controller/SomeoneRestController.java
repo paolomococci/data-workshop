@@ -18,6 +18,7 @@
 
 package local.example.graph.controller;
 
+import local.example.graph.node.Something;
 import local.example.graph.service.SomeoneService;
 import local.example.graph.service.SomethingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,17 +36,13 @@ public class SomeoneRestController {
     @Autowired
     private SomethingService somethingService;
 
-    @GetMapping("/some/create/relationship/{someoneId}")
+    @PatchMapping("/some/create/relationship/{id}")
     public ResponseEntity<String> createRelationship(
-            @PathVariable("someoneId") String someoneId,
-            @RequestParam(value = "somethingId") String somethingId) {
-        if (someoneService.verifyExistenceById(Long.parseLong(someoneId))
-                && somethingService.verifyExistenceById(Long.parseLong(somethingId))) {
-            someoneService.createRelationship(
-                    // TODO
-                    Long.parseLong(someoneId),
-                    Long.parseLong(somethingId)
-            );
+            @PathVariable("id") Long id,
+            @RequestBody Something something) {
+        if (someoneService.verifyExistenceById(id)
+                && somethingService.verifyExistenceById(something.getId())) {
+            someoneService.createRelationship(id, something.getId());
         } else {
             return new ResponseEntity<>("an error has occurred", HttpStatus.NO_CONTENT);
         }
