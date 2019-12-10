@@ -22,6 +22,7 @@ import local.example.data.model.Book;
 import local.example.data.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,6 +79,10 @@ public class BookRestController {
     public ResponseEntity<String> updateTitleWhereId(
             @PathVariable("id") Long id,
             @RequestBody Book book) {
-        return ResponseEntity.ok("{updated: " + bookService.updateTitleWhereId(book, id) + "}");
+        return new ResponseEntity<>(
+                String.format(
+                        "{updated : %d}",
+                        bookService.updateTitleWhereId(book, id)),
+                HttpStatus.OK);
     }
 }
