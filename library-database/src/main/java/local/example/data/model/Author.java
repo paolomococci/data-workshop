@@ -34,11 +34,11 @@ public class Author {
 
     @Getter
     @Setter
-    @Column(name = "first_name")
+    @Column(name = "first_name", length = 50)
     private String firstName;
 
     @Getter
     @Setter
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name", length = 50, nullable = false)
     private String lastName;
 }
