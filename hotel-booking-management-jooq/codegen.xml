@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+	<jdbc>
+		<driver>org.postgresql.Driver</driver>
+		<url>jdbc:postgresql://127.0.0.1:5432/hotel</url>
+		<user>username</user>
+		<password>password</password>
+	</jdbc>
+	<generator>
+		<database>
+			<name>org.jooq.meta.postgres.PostgresDatabase</name>
+			<includes>.*</includes>
+			<excludes></excludes>
+			<inputSchema></inputSchema>
+		</database>
+		<generate></generate>
+		<target>
+			<packageName>local.example.data.scheme</packageName>
+			<directory>source/codegen/jooq</directory>
+		</target>
+	</generator>
+</configuration>
