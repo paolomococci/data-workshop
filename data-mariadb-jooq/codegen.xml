@@ -3,8 +3,8 @@
 	<jdbc>
 		<driver>org.mariadb.jdbc.Driver</driver>
 		<url>jdbc:mysql://127.0.0.1:3306/someone</url>
-		<user>paolo</user>
-		<password>dr1wnge8</password>
+		<user>username</user>
+		<password>password</password>
 	</jdbc>
 	<generator>
 		<database>
