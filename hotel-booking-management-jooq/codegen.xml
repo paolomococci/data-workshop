@@ -10,8 +10,8 @@
 		<database>
 			<name>org.jooq.meta.postgres.PostgresDatabase</name>
 			<includes>.*</includes>
-			<excludes></excludes>
-			<inputSchema></inputSchema>
+			<excludes>UNUSED_TABLE|PREFIX_.*|SECRET_SCHEMA\.SECRET_TABLE|SECRET_ROUTINE</excludes>
+			<inputSchema>hotel</inputSchema>
 		</database>
 		<generate></generate>
 		<target>
