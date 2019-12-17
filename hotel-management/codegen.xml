@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+  <jdbc>
+    <driver>org.mariadb.jdbc.Driver</driver>
+    <url>jdbc:mysql://127.0.0.1:3306/hotel</url>
+    <user>paolo</user>
+    <password>Th5g19Fd3Scb</password>
+  </jdbc>
+  <generator>
+    <database>
+      <name>org.jooq.meta.mariadb.MariaDBDatabase</name>
+      <includes>.*</includes>
+      <excludes>UNUSED_TABLE|PREFIX_.*|SECRET_SCHEMA\.SECRET_TABLE|SECRET_ROUTINE</excludes>
+      <inputSchema>hotel</inputSchema>
+    </database>
+    <generate></generate>
+    <target>
+      <packageName>local.example.data.scheme</packageName>
+      <directory>source/jooq/codegen</directory>
+    </target>    
+  </generator>
+</configuration>
