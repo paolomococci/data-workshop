@@ -43,7 +43,8 @@ import local.example.data.scheme.IndexScheme;
 import local.example.data.scheme.KeyScheme;
 import local.example.data.scheme.dao.record.BookingRecord;
 
-public class BookingDao extends TableImpl<BookingRecord> {
+public class BookingDao 
+	extends TableImpl<BookingRecord> {
 
 	private static final long serialVersionUID = -3929196395630491855L;
 	public static final BookingDao BOOKING_DAO = new BookingDao();
