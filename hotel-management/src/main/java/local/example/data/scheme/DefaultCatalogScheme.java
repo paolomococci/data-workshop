@@ -29,7 +29,7 @@ public class DefaultCatalogScheme
 	
 	private static final long serialVersionUID = -8716412792020461409L;
 	public static final DefaultCatalogScheme DEFAULT_CATALOG_SCHEME = new DefaultCatalogScheme();
-	public final HotelScheme HOTEL = HotelScheme.HOTEL_SCHEME;
+	public final HotelScheme HOTEL_SCHEME = HotelScheme.HOTEL_SCHEME;
 	
 
 	public DefaultCatalogScheme() {
