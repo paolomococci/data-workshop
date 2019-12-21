@@ -161,7 +161,7 @@ public class BookingDao extends TableImpl<BookingRecord> {
 	}
 
 	/**
-	 * Rename
+	 * Rename from String
 	 */
 	@Override
 	public BookingDao rename(String name) {
@@ -169,7 +169,7 @@ public class BookingDao extends TableImpl<BookingRecord> {
 	}
 
 	/**
-	 * Rename
+	 * Rename from Name class
 	 */
 	@Override
 	public BookingDao rename(Name name) {
