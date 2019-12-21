@@ -18,6 +18,26 @@
 
 package local.example.data.scheme;
 
-public class DefaultCatalogScheme {
+import java.util.Arrays;
+import java.util.List;
 
+import org.jooq.Schema;
+import org.jooq.impl.CatalogImpl;
+
+public class DefaultCatalogScheme 
+	extends CatalogImpl {
+	
+	private static final long serialVersionUID = -8716412792020461409L;
+	public static final DefaultCatalogScheme DEFAULT_CATALOG_SCHEME = new DefaultCatalogScheme();
+	public final HotelScheme HOTEL = HotelScheme.HOTEL_SCHEME;
+	
+
+	public DefaultCatalogScheme() {
+		super("");
+	}
+
+	@Override
+	public List<Schema> getSchemas() {
+		return Arrays.<Schema>asList(HotelScheme.HOTEL_SCHEME);
+	}
 }
