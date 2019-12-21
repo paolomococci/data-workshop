@@ -18,6 +18,13 @@
 
 package local.example.data.scheme;
 
+import local.example.data.scheme.dao.BookingDao;
+import local.example.data.scheme.dao.CustomerDao;
+import local.example.data.scheme.dao.RoomDao;
+
 public class TableScheme {
 
+	public static final CustomerDao CUSTOMER_DAO = CustomerDao.CUSTOMER_DAO;
+	public static final RoomDao ROOM_DAO = RoomDao.ROOM_DAO;
+	public static final BookingDao BOOKING_DAO = BookingDao.BOOKING_DAO;
 }
