@@ -18,6 +18,13 @@
 
 package local.example.data.scheme;
 
+import org.jooq.Index;
+
+import local.example.data.scheme.wrapper.IndexWrapper;
+
 public class IndexScheme {
 
+	public static final Index CUSTOMER_PRIMARY = IndexWrapper.CUSTOMER_PRIMARY;
+	public static final Index ROOM_PRIMARY = IndexWrapper.ROOM_PRIMARY;
+	public static final Index BOOKING_PRIMARY = IndexWrapper.BOOKING_PRIMARY;
 }
