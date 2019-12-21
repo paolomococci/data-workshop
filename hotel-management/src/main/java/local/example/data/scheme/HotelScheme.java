@@ -18,6 +18,40 @@
 
 package local.example.data.scheme;
 
-public class HotelScheme {
+import java.util.Arrays;
+import java.util.List;
 
+import org.jooq.Catalog;
+import org.jooq.Table;
+import org.jooq.impl.SchemaImpl;
+
+import local.example.data.scheme.dao.BookingDao;
+import local.example.data.scheme.dao.CustomerDao;
+import local.example.data.scheme.dao.RoomDao;
+
+public class HotelScheme 
+	extends SchemaImpl {
+	
+	private static final long serialVersionUID = -3078312259752048937L;
+	public static final HotelScheme HOTEL_SCHEME = new HotelScheme();
+	public final CustomerDao CUSTOMER_DAO = CustomerDao.CUSTOMER_DAO;
+	public final RoomDao ROOM_DAO = RoomDao.ROOM_DAO;
+	public final BookingDao BOOKING_DAO = BookingDao.BOOKING_DAO;
+
+	public HotelScheme() {
+		super("hotel", null);
+	}
+
+	@Override
+	public Catalog getCatalog() {
+		return DefaultCatalogScheme.DEFAULT_CATALOG_SCHEME;
+	}
+
+	@Override
+	public List<Table<?>> getTables() {
+		return Arrays.<Table<?>>asList(
+				CustomerDao.CUSTOMER_DAO,
+				RoomDao.ROOM_DAO,
+				BookingDao.BOOKING_DAO);
+	}
 }
