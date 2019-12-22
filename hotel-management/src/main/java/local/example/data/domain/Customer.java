@@ -18,13 +18,18 @@
 
 package local.example.data.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@SuppressWarnings("unused")
-public class Customer {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Customer implements Serializable {
+	private static final long serialVersionUID = -2190575107570013018L;
 	private Long id;
 	private String firstName;
 	private String lastName;
