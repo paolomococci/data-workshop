@@ -18,10 +18,15 @@
 
 package local.example.data.service;
 
+//import static local.example.data.scheme.dao.BookingDao.BOOKING_DAO;
+
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import local.example.data.domain.Booking;
+import local.example.data.scheme.dao.record.BookingRecord;
 
 @Service
 @Transactional
@@ -29,4 +34,11 @@ public class BookingService {
 
 	@Autowired
 	private DSLContext dslContext;
+	
+	public BookingRecord CreateBooking(Booking booking) {
+		String queries = "";
+		@SuppressWarnings("unused")
+		BookingRecord bookingRecord = (BookingRecord) dslContext.batch(queries);
+		return null;
+	}
 }
