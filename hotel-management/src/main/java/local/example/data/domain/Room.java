@@ -18,13 +18,17 @@
 
 package local.example.data.domain;
 
+import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Data
-@SuppressWarnings("unused")
-public class Room {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Room implements Serializable {
+	private static final long serialVersionUID = -388793165355572996L;
 	private Long id;
 	private Integer beds;
 	private Float basePrice;
