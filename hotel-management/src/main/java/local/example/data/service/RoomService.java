@@ -18,10 +18,16 @@
 
 package local.example.data.service;
 
+//import static local.example.data.scheme.dao.RoomDao.ROOM_DAO;
+
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import local.example.data.domain.Room;
+import local.example.data.scheme.dao.RoomDao;
+import local.example.data.scheme.dao.record.RoomRecord;
 
 @Service
 @Transactional
@@ -29,4 +35,11 @@ public class RoomService {
 
 	@Autowired
 	private DSLContext dslContext;
+	
+	public RoomDao createRoom(Room room) {
+		String queries = "";
+		@SuppressWarnings("unused")
+		RoomRecord roomRecord = (RoomRecord) dslContext.batch(queries);
+		return null;
+	}
 }
