@@ -27,6 +27,8 @@ import org.jooq.Table;
 import org.jooq.impl.UpdatableRecordImpl;
 import org.jooq.types.ULong;
 
+import local.example.data.scheme.dao.CustomerDao;
+
 public class CustomerRecord 
 	extends UpdatableRecordImpl<CustomerRecord> 
 	implements Record6<ULong, String, String, Date, String, String> {
@@ -38,52 +40,46 @@ public class CustomerRecord
 		// TODO
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Row6<ULong, String, String, Date, String, String> fieldsRow() {
-		// TODO
-		return null;
+		return (Row6) super.fieldsRow();
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Row6<ULong, String, String, Date, String, String> valuesRow() {
-		// TODO
-		return null;
+		return (Row6) super.valuesRow();
 	}
 
 	@Override
 	public Field<ULong> field1() {
-		// TODO
-		return null;
+		return CustomerDao.CUSTOMER_DAO.ID;
 	}
 
 	@Override
 	public Field<String> field2() {
-		// TODO
-		return null;
+		return CustomerDao.CUSTOMER_DAO.FIRST_NAME;
 	}
 
 	@Override
 	public Field<String> field3() {
-		// TODO
-		return null;
+		return CustomerDao.CUSTOMER_DAO.LAST_NAME;
 	}
 
 	@Override
 	public Field<Date> field4() {
-		// TODO
-		return null;
+		return CustomerDao.CUSTOMER_DAO.BIRTHDAY;
 	}
 
 	@Override
 	public Field<String> field5() {
-		// TODO
-		return null;
+		return CustomerDao.CUSTOMER_DAO.GENDER;
 	}
 
 	@Override
 	public Field<String> field6() {
-		// TODO
-		return null;
+		return CustomerDao.CUSTOMER_DAO.EMAIL;
 	}
 
 	@Override
