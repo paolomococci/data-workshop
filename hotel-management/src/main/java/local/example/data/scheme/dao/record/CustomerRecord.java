@@ -21,6 +21,7 @@ package local.example.data.scheme.dao.record;
 import java.sql.Date;
 
 import org.jooq.Field;
+import org.jooq.Record1;
 import org.jooq.Record6;
 import org.jooq.Row6;
 import org.jooq.Table;
@@ -34,10 +35,143 @@ public class CustomerRecord
 	implements Record6<ULong, String, String, Date, String, String> {
 
 	private static final long serialVersionUID = -1215824472402887483L;
+	
+	/* constructors */
+	
+	public CustomerRecord() {
+		super(CustomerDao.CUSTOMER_DAO);
+	}
+	
+	public CustomerRecord(String lastName, String email) {
+		super(CustomerDao.CUSTOMER_DAO);
+		super.set(2, lastName);
+		super.set(6, email);
+	}
+	
+	public CustomerRecord(String firstName, String lastName, String email) {
+		super(CustomerDao.CUSTOMER_DAO);
+		super.set(1, firstName);
+		super.set(2, lastName);
+		super.set(6, email);
+	}
+	
+	public CustomerRecord(String firstName, String lastName, Date birthday, String email) {
+		super(CustomerDao.CUSTOMER_DAO);
+		super.set(1, firstName);
+		super.set(2, lastName);
+		super.set(3, birthday);
+		super.set(6, email);
+	}
+	
+	public CustomerRecord(String firstName, String lastName, Date birthday, String gender, String email) {
+		super(CustomerDao.CUSTOMER_DAO);
+		super.set(1, firstName);
+		super.set(2, lastName);
+		super.set(3, birthday);
+		super.set(4, gender);
+		super.set(6, email);
+	}
 
 	public CustomerRecord(Table<CustomerRecord> table) {
 		super(table);
 		// TODO
+	}
+	
+	/* getter */
+	
+	public ULong getId() {
+		return (ULong) get(0);
+	}
+	
+	public String getFirstName() {
+		return (String) get(1);
+	}
+	
+	public String getLastName() {
+		return (String) get(2);
+	}
+	
+	public Date getBirthday() {
+		return (Date) get(3);
+	}
+	
+	public String getGender() {
+		return (String) get(4);
+	}
+	
+	public String getEmail() {
+		return (String) get(5);
+	}
+	
+	/* setter */
+	
+	public void setFirstName(String firstName) {
+		set(1, firstName);
+	}
+	
+	public void setLastName(String lastName) {
+		set(2, lastName);
+	}
+	
+	public void setBirthday(Date birthday) {
+		set(3, birthday);
+	}
+	
+	public void setGender(String gender) {
+		set(4, gender);
+	}
+	
+	public void setEmail(String email) {
+		set(5, email);
+	}
+	
+	/* update */
+	
+	public CustomerRecord updateFirstName(String firstName) {
+		this.setFirstName(firstName);
+		return this;
+	}
+	
+	public CustomerRecord updateLastName(String lastName) {
+		this.setLastName(lastName);
+		return this;
+	}
+	
+	public CustomerRecord updateBirthday(Date birthday) {
+		this.setBirthday(birthday);
+		return this;
+	}
+	
+	public CustomerRecord updateGender(String gender) {
+		this.setGender(gender);
+		return this;
+	}
+	
+	public CustomerRecord updateEmail(String email) {
+		this.setEmail(email);
+		return this;
+	}
+	
+	public CustomerRecord update(
+			String firstName,
+			String lastName,
+			Date birthday,
+			String gender,
+			String email) {
+		this.updateFirstName(firstName);
+		this.updateLastName(lastName);
+		this.updateBirthday(birthday);
+		this.updateGender(gender);
+		this.updateEmail(email);
+		return this;
+	}
+	
+	/* overrides */
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public Record1<ULong> key() {
+		return (Record1) super.key();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -51,6 +185,8 @@ public class CustomerRecord
 	public Row6<ULong, String, String, Date, String, String> valuesRow() {
 		return (Row6) super.valuesRow();
 	}
+	
+	/* override fields */
 
 	@Override
 	public Field<ULong> field1() {
@@ -81,119 +217,122 @@ public class CustomerRecord
 	public Field<String> field6() {
 		return CustomerDao.CUSTOMER_DAO.EMAIL;
 	}
+	
+	/* override values */
 
 	@Override
 	public ULong value1() {
-		// TODO
-		return null;
+		return this.getId();
 	}
 
 	@Override
 	public String value2() {
-		// TODO
-		return null;
+		return this.getFirstName();
 	}
 
 	@Override
 	public String value3() {
-		// TODO
-		return null;
+		return this.getLastName();
 	}
 
 	@Override
 	public Date value4() {
-		// TODO
-		return null;
+		return this.getBirthday();
 	}
 
 	@Override
 	public String value5() {
-		// TODO
-		return null;
+		return this.getGender();
 	}
 
 	@Override
 	public String value6() {
-		// TODO
-		return null;
+		return this.getEmail();
 	}
-
-	@Override
-	public Record6<ULong, String, String, Date, String, String> value1(ULong value) {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Record6<ULong, String, String, Date, String, String> value2(String value) {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Record6<ULong, String, String, Date, String, String> value3(String value) {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Record6<ULong, String, String, Date, String, String> value4(Date value) {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Record6<ULong, String, String, Date, String, String> value5(String value) {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Record6<ULong, String, String, Date, String, String> value6(String value) {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Record6<ULong, String, String, Date, String, String> values(ULong t1, String t2, String t3, Date t4,
-			String t5, String t6) {
-		// TODO
-		return null;
-	}
+	
+	/* override components */
 
 	@Override
 	public ULong component1() {
-		// TODO
-		return null;
+		return this.getId();
 	}
 
 	@Override
 	public String component2() {
-		// TODO
-		return null;
+		return this.getFirstName();
 	}
 
 	@Override
 	public String component3() {
-		// TODO
-		return null;
+		return this.getLastName();
 	}
 
 	@Override
 	public Date component4() {
-		// TODO
-		return null;
+		return this.getBirthday();
 	}
 
 	@Override
 	public String component5() {
-		// TODO
-		return null;
+		return this.getGender();
 	}
 
 	@Override
 	public String component6() {
-		// TODO
+		return this.getEmail();
+	}
+	
+	/* other overrides */
+
+	@Override
+	public Record6<ULong, String, String, Date, String, String> value1(ULong id) {
+		return this;
+	}
+
+	@Override
+	public Record6<ULong, String, String, Date, String, String> value2(String firstName) {
+		this.setFirstName(firstName);
 		return null;
+	}
+
+	@Override
+	public Record6<ULong, String, String, Date, String, String> value3(String lastName) {
+		this.setLastName(lastName);
+		return this;
+	}
+
+	@Override
+	public Record6<ULong, String, String, Date, String, String> value4(Date birthday) {
+		this.setBirthday(birthday);
+		return this;
+	}
+
+	@Override
+	public Record6<ULong, String, String, Date, String, String> value5(String gender) {
+		this.setGender(gender);
+		return this;
+	}
+
+	@Override
+	public Record6<ULong, String, String, Date, String, String> value6(String email) {
+		this.setEmail(email);
+		return this;
+	}
+
+	@Override
+	public Record6<ULong, String, String, Date, String, String> values(
+			ULong id, 
+			String firstName, 
+			String lastName, 
+			Date birthday,
+			String gender, 
+			String email) {
+		this.value1(id);
+		this.value2(firstName);
+		this.value3(lastName);
+		this.value4(birthday);
+		this.value5(gender);
+		this.value6(email);
+		return this;
 	}
 }
