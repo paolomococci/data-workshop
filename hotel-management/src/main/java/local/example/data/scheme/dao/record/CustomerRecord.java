@@ -24,7 +24,6 @@ import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record6;
 import org.jooq.Row6;
-import org.jooq.Table;
 import org.jooq.impl.UpdatableRecordImpl;
 import org.jooq.types.ULong;
 
@@ -70,11 +69,6 @@ public class CustomerRecord
 		super.set(3, birthday);
 		super.set(4, gender);
 		super.set(6, email);
-	}
-
-	public CustomerRecord(Table<CustomerRecord> table) {
-		super(table);
-		// TODO
 	}
 	
 	/* getter */
