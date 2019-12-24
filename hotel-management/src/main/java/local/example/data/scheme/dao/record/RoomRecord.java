@@ -19,11 +19,13 @@
 package local.example.data.scheme.dao.record;
 
 import org.jooq.Field;
+import org.jooq.Record1;
 import org.jooq.Record13;
 import org.jooq.Row13;
-import org.jooq.Table;
 import org.jooq.impl.UpdatableRecordImpl;
 import org.jooq.types.ULong;
+
+import local.example.data.scheme.dao.RoomDao;
 
 public class RoomRecord 
 	extends UpdatableRecordImpl<RoomRecord> 
@@ -32,190 +34,297 @@ public class RoomRecord
 	private static final long serialVersionUID = -9142412866049967992L;
 	
 	/* constructors */
-
-	public RoomRecord(Table<RoomRecord> table) {
-		super(table);
-		// TODO
+	
+	public RoomRecord() {
+		super(RoomDao.ROOM_DAO);
+	}
+	
+	public RoomRecord(
+			Integer beds, 
+			Double basePrice, 
+			Double bathroom, 
+			Double frigobar, 
+			Double coolingFan, 
+			Double airConditioning, 
+			Double laundry, 
+			Double shoemaker, 
+			Double catering, 
+			Double wifi, 
+			Double gigabitEthernet, 
+			Double privateBalcony) {
+		super(RoomDao.ROOM_DAO);
+		super.set(1, beds);
+		super.set(2, basePrice);
+		super.set(3, bathroom);
+		super.set(4, frigobar);
+		super.set(5, coolingFan);
+		super.set(6, airConditioning);
+		super.set(7, laundry);
+		super.set(8, shoemaker);
+		super.set(9, catering);
+		super.set(10, wifi);
+		super.set(11, gigabitEthernet);
+		super.set(12, privateBalcony);
 	}
 	
 	/* getter */
 	
+	public ULong getId() {
+		return (ULong) super.get(0);
+	}
+	
+	public Integer getBeds() {
+		return (Integer) super.get(1);
+	}
+	
+	public Double getBasePrice() {
+		return (Double) super.get(2);
+	}
+	
+	public Double getBathroom() {
+		return (Double) super.get(3);
+	}
+	
+	public Double getFrigobar() {
+		return (Double) super.get(4);
+	}
+	
+	public Double getCoolingFan() {
+		return (Double) super.get(5);
+	}
+	
+	public Double getAirConditioning() {
+		return (Double) super.get(6);
+	}
+	
+	public Double getLaundry() {
+		return (Double) super.get(7);
+	}
+	
+	public Double getShoemaker() {
+		return (Double) super.get(8);
+	}
+	
+	public Double getCatering() {
+		return (Double) super.get(9);
+	}
+	
+	public Double getWifi() {
+		return (Double) super.get(10);
+	}
+	
+	public Double getGigabitEthernet() {
+		return (Double) super.get(11);
+	}
+	
+	public Double getPrivateBalcony() {
+		return (Double) super.get(12);
+	}
+	
 	/* setter */
+	
+	public void setBeds(Integer beds) {
+		super.set(1, beds);
+	}
+	
+	public void setBasePrice(Double basePrice) {
+		super.set(2, basePrice);
+	}
+	
+	public void setBathroom(Double bathroom) {
+		super.set(3, bathroom);
+	}
+	
+	public void setFrigobar(Double frigobar) {
+		super.set(4, frigobar);
+	}
+	
+	public void setCoolingFan(Double coolingFan) {
+		super.set(5, coolingFan);
+	}
+	
+	public void setAirConditioning(Double airConditioning) {
+		super.set(6, airConditioning);
+	}
+	
+	public void setLaundry(Double laundry) {
+		super.set(7, laundry);
+	}
+	
+	public void setShoemaker(Double shoemaker) {
+		super.set(8, shoemaker);
+	}
+	
+	public void setCatering(Double catering) {
+		super.set(9, catering);
+	}
+	
+	public void setWifi(Double wifi) {
+		super.set(10, wifi);
+	}
+	
+	public void setGigabitEthernet(Double gigabitEthernet) {
+		super.set(11, gigabitEthernet);
+	}
+	
+	public void setPrivateBalcony(Double privateBalcony) {
+		super.set(12, privateBalcony);
+	}
 	
 	/* update */
 	
 	/* overrides */
-
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public Row13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> fieldsRow() {
-		// TODO
-		return null;
+	public Record1<ULong> key() {
+		return (Record1) super.key();
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public Row13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> fieldsRow() {
+		return (Row13) super.fieldsRow();
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Row13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> valuesRow() {
-		// TODO
-		return null;
+		return (Row13) super.valuesRow();
 	}
 	
 	/* override fields */
 
 	@Override
 	public Field<ULong> field1() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.ID;
 	}
 
 	@Override
 	public Field<Integer> field2() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.BEDS;
 	}
 
 	@Override
 	public Field<Double> field3() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.BASE_PRICE;
 	}
 
 	@Override
 	public Field<Double> field4() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.BATHROOM;
 	}
 
 	@Override
 	public Field<Double> field5() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.FRIGOBAR;
 	}
 
 	@Override
 	public Field<Double> field6() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.COOLING_FAN;
 	}
 
 	@Override
 	public Field<Double> field7() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.AIR_CONDITIONING;
 	}
 
 	@Override
 	public Field<Double> field8() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.LAUNDRY;
 	}
 
 	@Override
 	public Field<Double> field9() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.SHOEMAKER;
 	}
 
 	@Override
 	public Field<Double> field10() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.CATERING;
 	}
 
 	@Override
 	public Field<Double> field11() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.WIFI;
 	}
 
 	@Override
 	public Field<Double> field12() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.GIGABIT_ETHERNET;
 	}
 
 	@Override
 	public Field<Double> field13() {
-		// TODO
-		return null;
+		return RoomDao.ROOM_DAO.PRIVATE_BALCONY;
 	}
 	
 	/* override values */
 
 	@Override
 	public ULong value1() {
-		// TODO
-		return null;
+		return this.getId();
 	}
 
 	@Override
 	public Integer value2() {
-		// TODO
-		return null;
+		return this.getBeds();
 	}
 
 	@Override
 	public Double value3() {
-		// TODO
-		return null;
+		return this.getBasePrice();
 	}
 
 	@Override
 	public Double value4() {
-		// TODO
-		return null;
+		return this.getBathroom();
 	}
 
 	@Override
 	public Double value5() {
-		// TODO
-		return null;
+		return this.getFrigobar();
 	}
 
 	@Override
 	public Double value6() {
-		// TODO
-		return null;
+		return this.getCoolingFan();
 	}
 
 	@Override
 	public Double value7() {
-		// TODO
-		return null;
+		return this.getAirConditioning();
 	}
 
 	@Override
 	public Double value8() {
-		// TODO
-		return null;
+		return this.getLaundry();
 	}
 
 	@Override
 	public Double value9() {
-		// TODO
-		return null;
+		return this.getShoemaker();
 	}
 
 	@Override
 	public Double value10() {
-		// TODO
-		return null;
+		return this.getCatering();
 	}
 
 	@Override
 	public Double value11() {
-		// TODO
-		return null;
+		return this.getWifi();
 	}
 
 	@Override
 	public Double value12() {
-		// TODO
-		return null;
+		return this.getGigabitEthernet();
 	}
 
 	@Override
 	public Double value13() {
-		// TODO
-		return null;
+		return this.getPrivateBalcony();
 	}
 	
 	/* override components */
