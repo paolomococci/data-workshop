@@ -30,11 +30,21 @@ public class RoomRecord
 	implements Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> {
 
 	private static final long serialVersionUID = -9142412866049967992L;
+	
+	/* constructors */
 
 	public RoomRecord(Table<RoomRecord> table) {
 		super(table);
 		// TODO
 	}
+	
+	/* getter */
+	
+	/* setter */
+	
+	/* update */
+	
+	/* overrides */
 
 	@Override
 	public Row13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> fieldsRow() {
@@ -47,6 +57,8 @@ public class RoomRecord
 		// TODO
 		return null;
 	}
+	
+	/* override fields */
 
 	@Override
 	public Field<ULong> field1() {
@@ -125,6 +137,8 @@ public class RoomRecord
 		// TODO
 		return null;
 	}
+	
+	/* override values */
 
 	@Override
 	public ULong value1() {
@@ -203,6 +217,88 @@ public class RoomRecord
 		// TODO
 		return null;
 	}
+	
+	/* override components */
+
+	@Override
+	public ULong component1() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Integer component2() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component3() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component4() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component5() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component6() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component7() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component8() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component9() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component10() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component11() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component12() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Double component13() {
+		// TODO
+		return null;
+	}
+	
+	/* other overrides */
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value1(
@@ -299,84 +395,6 @@ public class RoomRecord
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> values(
 			ULong t1, Integer t2, Double t3, Double t4, Double t5, Double t6, Double t7, Double t8, Double t9,
 			Double t10, Double t11, Double t12, Double t13) {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public ULong component1() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Integer component2() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component3() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component4() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component5() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component6() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component7() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component8() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component9() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component10() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component11() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component12() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Double component13() {
 		// TODO
 		return null;
 	}
