@@ -32,11 +32,21 @@ public class BookingRecord
 	implements Record4<ULong, String, Date, Date> {
 
 	private static final long serialVersionUID = -5016972913785784538L;
+	
+	/* constructors */
 
 	public BookingRecord(Table<BookingRecord> table) {
 		super(table);
 		// TODO
 	}
+	
+	/* getter */
+	
+	/* setter */
+	
+	/* update */
+	
+	/* overrides */
 
 	@Override
 	public Row4<ULong, String, Date, Date> fieldsRow() {
@@ -49,6 +59,8 @@ public class BookingRecord
 		// TODO
 		return null;
 	}
+	
+	/* override fields */
 
 	@Override
 	public Field<ULong> field1() {
@@ -73,6 +85,8 @@ public class BookingRecord
 		// TODO
 		return null;
 	}
+	
+	/* override values */
 
 	@Override
 	public ULong value1() {
@@ -97,6 +111,34 @@ public class BookingRecord
 		// TODO
 		return null;
 	}
+	
+	/* override components */
+
+	@Override
+	public ULong component1() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public String component2() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Date component3() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Date component4() {
+		// TODO
+		return null;
+	}
+	
+	/* other overrides */
 
 	@Override
 	public Record4<ULong, String, Date, Date> value1(ULong value) {
@@ -124,30 +166,6 @@ public class BookingRecord
 
 	@Override
 	public Record4<ULong, String, Date, Date> values(ULong t1, String t2, Date t3, Date t4) {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public ULong component1() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public String component2() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Date component3() {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public Date component4() {
 		// TODO
 		return null;
 	}
