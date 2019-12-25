@@ -172,6 +172,106 @@ public class RoomRecord
 	}
 	
 	/* update */
+
+	public RoomRecord updateBeds(
+			Integer beds) {
+		this.setBeds(beds);
+		return this;
+	}
+
+	public RoomRecord updateBasePrice(
+			Double basePrice) {
+		this.setBasePrice(basePrice);
+		return this;
+	}
+
+	public RoomRecord updateBathroom(
+			Double bathroom) {
+		this.setBathroom(bathroom);
+		return this;
+	}
+
+	public RoomRecord updateFrigobar(
+			Double frigobar) {
+		this.setFrigobar(frigobar);
+		return this;
+	}
+
+	public RoomRecord updateCoolingFan(
+			Double coolingFan) {
+		this.setCoolingFan(coolingFan);
+		return this;
+	}
+
+	public RoomRecord updateAirConditioning(
+			Double airConditioning) {
+		this.setAirConditioning(airConditioning);
+		return this;
+	}
+
+	public RoomRecord updateLaundry(
+			Double laundry) {
+		this.setLaundry(laundry);
+		return this;
+	}
+
+	public RoomRecord updateShoemaker(
+			Double shoemaker) {
+		this.setShoemaker(shoemaker);
+		return this;
+	}
+
+	public RoomRecord updateCatering(
+			Double catering) {
+		this.setCatering(catering);
+		return this;
+	}
+
+	public RoomRecord updateWifi(
+			Double wifi) {
+		this.setWifi(wifi);
+		return this;
+	}
+
+	public RoomRecord updateGigabitEthernet(
+			Double gigabitEthernet) {
+		this.setGigabitEthernet(gigabitEthernet);
+		return this;
+	}
+
+	public RoomRecord updatePrivateBalcony(
+			Double privateBalcony) {
+		this.setPrivateBalcony(privateBalcony);
+		return this;
+	}
+
+	public RoomRecord update(
+			Integer beds, 
+			Double basePrice, 
+			Double bathroom, 
+			Double frigobar, 
+			Double coolingFan, 
+			Double airConditioning, 
+			Double laundry, 
+			Double shoemaker,
+			Double catering, 
+			Double wifi, 
+			Double gigabitEthernet, 
+			Double privateBalcony) {
+		this.value2(beds);
+		this.value3(basePrice);
+		this.value4(bathroom);
+		this.value5(frigobar);
+		this.value6(coolingFan);
+		this.value7(airConditioning);
+		this.value8(laundry);
+		this.value9(shoemaker);
+		this.value10(catering);
+		this.value11(wifi);
+		this.value12(gigabitEthernet);
+		this.value13(privateBalcony);
+		return this;
+	}
 	
 	/* overrides */
 	
@@ -331,180 +431,189 @@ public class RoomRecord
 
 	@Override
 	public ULong component1() {
-		// TODO
-		return null;
+		return this.getId();
 	}
 
 	@Override
 	public Integer component2() {
-		// TODO
-		return null;
+		return this.getBeds();
 	}
 
 	@Override
 	public Double component3() {
-		// TODO
-		return null;
+		return this.getBasePrice();
 	}
 
 	@Override
 	public Double component4() {
-		// TODO
-		return null;
+		return this.getBathroom();
 	}
 
 	@Override
 	public Double component5() {
-		// TODO
-		return null;
+		return this.getFrigobar();
 	}
 
 	@Override
 	public Double component6() {
-		// TODO
-		return null;
+		return this.getCoolingFan();
 	}
 
 	@Override
 	public Double component7() {
-		// TODO
-		return null;
+		return this.getAirConditioning();
 	}
 
 	@Override
 	public Double component8() {
-		// TODO
-		return null;
+		return this.getLaundry();
 	}
 
 	@Override
 	public Double component9() {
-		// TODO
-		return null;
+		return this.getShoemaker();
 	}
 
 	@Override
 	public Double component10() {
-		// TODO
-		return null;
+		return this.getCatering();
 	}
 
 	@Override
 	public Double component11() {
-		// TODO
-		return null;
+		return this.getWifi();
 	}
 
 	@Override
 	public Double component12() {
-		// TODO
-		return null;
+		return this.getGigabitEthernet();
 	}
 
 	@Override
 	public Double component13() {
-		// TODO
-		return null;
+		return this.getPrivateBalcony();
 	}
 	
 	/* other overrides */
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value1(
-			ULong value) {
-		// TODO
-		return null;
+			ULong id) {
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value2(
-			Integer value) {
-		// TODO
-		return null;
+			Integer beds) {
+		this.setBeds(beds);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value3(
-			Double value) {
-		// TODO
-		return null;
+			Double basePrice) {
+		this.setBasePrice(basePrice);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value4(
-			Double value) {
-		// TODO
-		return null;
+			Double bathroom) {
+		this.setBathroom(bathroom);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value5(
-			Double value) {
-		// TODO
-		return null;
+			Double frigobar) {
+		this.setFrigobar(frigobar);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value6(
-			Double value) {
-		// TODO
-		return null;
+			Double coolingFan) {
+		this.setCoolingFan(coolingFan);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value7(
-			Double value) {
-		// TODO
-		return null;
+			Double airConditioning) {
+		this.setAirConditioning(airConditioning);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value8(
-			Double value) {
-		// TODO
-		return null;
+			Double laundry) {
+		this.setLaundry(laundry);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value9(
-			Double value) {
-		// TODO
-		return null;
+			Double shoemaker) {
+		this.setShoemaker(shoemaker);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value10(
-			Double value) {
-		// TODO
-		return null;
+			Double catering) {
+		this.setCatering(catering);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value11(
-			Double value) {
-		// TODO
-		return null;
+			Double wifi) {
+		this.setWifi(wifi);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value12(
-			Double value) {
-		// TODO
-		return null;
+			Double gigabitEthernet) {
+		this.setGigabitEthernet(gigabitEthernet);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> value13(
-			Double value) {
-		// TODO
-		return null;
+			Double privateBalcony) {
+		this.setPrivateBalcony(privateBalcony);
+		return this;
 	}
 
 	@Override
 	public Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> values(
-			ULong t1, Integer t2, Double t3, Double t4, Double t5, Double t6, Double t7, Double t8, Double t9,
-			Double t10, Double t11, Double t12, Double t13) {
-		// TODO
-		return null;
+			ULong id, 
+			Integer beds, 
+			Double basePrice, 
+			Double bathroom, 
+			Double frigobar, 
+			Double coolingFan, 
+			Double airConditioning, 
+			Double laundry, 
+			Double shoemaker,
+			Double catering, 
+			Double wifi, 
+			Double gigabitEthernet, 
+			Double privateBalcony) {
+		this.value1(id);
+		this.value2(beds);
+		this.value3(basePrice);
+		this.value4(bathroom);
+		this.value5(frigobar);
+		this.value6(coolingFan);
+		this.value7(airConditioning);
+		this.value8(laundry);
+		this.value9(shoemaker);
+		this.value10(catering);
+		this.value11(wifi);
+		this.value12(gigabitEthernet);
+		this.value13(privateBalcony);
+		return this;
 	}
 }
