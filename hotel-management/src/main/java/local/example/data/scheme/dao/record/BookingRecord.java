@@ -81,6 +81,29 @@ public class BookingRecord
 	}
 	
 	/* update */
+
+	public BookingRecord updateVacancy(String vacancy) {
+		this.setVacancy(vacancy);
+		return this;
+	}
+
+	public BookingRecord updateCheckIn(Date checkIn) {
+		this.setCheckIn(checkIn);
+		return this;
+	}
+
+	public BookingRecord updateCheckOut(Date checkOut) {
+		this.setCheckOut(checkOut);
+		return this;
+	}
+
+	public BookingRecord update(ULong id, String vacancy, Date checkIn, Date checkOut) {
+		this.value1(id);
+		this.value2(vacancy);
+		this.value3(checkIn);
+		this.value4(checkOut);
+		return this;
+	}
 	
 	/* overrides */
 	
@@ -171,32 +194,34 @@ public class BookingRecord
 	/* other overrides */
 
 	@Override
-	public Record4<ULong, String, Date, Date> value1(ULong value) {
-		// TODO
-		return null;
+	public Record4<ULong, String, Date, Date> value1(ULong id) {
+		return this;
 	}
 
 	@Override
-	public Record4<ULong, String, Date, Date> value2(String value) {
-		// TODO
-		return null;
+	public Record4<ULong, String, Date, Date> value2(String vacancy) {
+		this.setVacancy(vacancy);
+		return this;
 	}
 
 	@Override
-	public Record4<ULong, String, Date, Date> value3(Date value) {
-		// TODO
-		return null;
+	public Record4<ULong, String, Date, Date> value3(Date checkIn) {
+		this.setCheckIn(checkIn);
+		return this;
 	}
 
 	@Override
-	public Record4<ULong, String, Date, Date> value4(Date value) {
-		// TODO
-		return null;
+	public Record4<ULong, String, Date, Date> value4(Date checkOut) {
+		this.setCheckOut(checkOut);
+		return this;
 	}
 
 	@Override
-	public Record4<ULong, String, Date, Date> values(ULong t1, String t2, Date t3, Date t4) {
-		// TODO
-		return null;
+	public Record4<ULong, String, Date, Date> values(ULong id, String vacancy, Date checkIn, Date checkOut) {
+		this.value1(id);
+		this.value2(vacancy);
+		this.value3(checkIn);
+		this.value4(checkOut);
+		return this;
 	}
 }
