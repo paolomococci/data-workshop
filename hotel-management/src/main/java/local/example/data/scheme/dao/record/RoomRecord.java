@@ -28,8 +28,8 @@ import org.jooq.types.ULong;
 import local.example.data.scheme.dao.RoomDao;
 
 public class RoomRecord 
-	extends UpdatableRecordImpl<RoomRecord> 
-	implements Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> {
+		extends UpdatableRecordImpl<RoomRecord> 
+		implements Record13<ULong, Integer, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double> {
 
 	private static final long serialVersionUID = -9142412866049967992L;
 	
@@ -69,105 +69,105 @@ public class RoomRecord
 	
 	/* getter */
 	
-	public ULong getId() {
+	private ULong getId() {
 		return (ULong) super.get(0);
 	}
 	
-	public Integer getBeds() {
+	private Integer getBeds() {
 		return (Integer) super.get(1);
 	}
 	
-	public Double getBasePrice() {
+	private Double getBasePrice() {
 		return (Double) super.get(2);
 	}
 	
-	public Double getBathroom() {
+	private Double getBathroom() {
 		return (Double) super.get(3);
 	}
 	
-	public Double getFrigobar() {
+	private Double getFrigobar() {
 		return (Double) super.get(4);
 	}
 	
-	public Double getCoolingFan() {
+	private Double getCoolingFan() {
 		return (Double) super.get(5);
 	}
 	
-	public Double getAirConditioning() {
+	private Double getAirConditioning() {
 		return (Double) super.get(6);
 	}
 	
-	public Double getLaundry() {
+	private Double getLaundry() {
 		return (Double) super.get(7);
 	}
 	
-	public Double getShoemaker() {
+	private Double getShoemaker() {
 		return (Double) super.get(8);
 	}
 	
-	public Double getCatering() {
+	private Double getCatering() {
 		return (Double) super.get(9);
 	}
 	
-	public Double getWifi() {
+	private Double getWifi() {
 		return (Double) super.get(10);
 	}
 	
-	public Double getGigabitEthernet() {
+	private Double getGigabitEthernet() {
 		return (Double) super.get(11);
 	}
 	
-	public Double getPrivateBalcony() {
+	private Double getPrivateBalcony() {
 		return (Double) super.get(12);
 	}
 	
 	/* setter */
 	
-	public void setBeds(Integer beds) {
+	private void setBeds(Integer beds) {
 		super.set(1, beds);
 	}
 	
-	public void setBasePrice(Double basePrice) {
+	private void setBasePrice(Double basePrice) {
 		super.set(2, basePrice);
 	}
 	
-	public void setBathroom(Double bathroom) {
+	private void setBathroom(Double bathroom) {
 		super.set(3, bathroom);
 	}
 	
-	public void setFrigobar(Double frigobar) {
+	private void setFrigobar(Double frigobar) {
 		super.set(4, frigobar);
 	}
 	
-	public void setCoolingFan(Double coolingFan) {
+	private void setCoolingFan(Double coolingFan) {
 		super.set(5, coolingFan);
 	}
 	
-	public void setAirConditioning(Double airConditioning) {
+	private void setAirConditioning(Double airConditioning) {
 		super.set(6, airConditioning);
 	}
 	
-	public void setLaundry(Double laundry) {
+	private void setLaundry(Double laundry) {
 		super.set(7, laundry);
 	}
 	
-	public void setShoemaker(Double shoemaker) {
+	private void setShoemaker(Double shoemaker) {
 		super.set(8, shoemaker);
 	}
 	
-	public void setCatering(Double catering) {
+	private void setCatering(Double catering) {
 		super.set(9, catering);
 	}
 	
-	public void setWifi(Double wifi) {
+	private void setWifi(Double wifi) {
 		super.set(10, wifi);
 	}
 	
-	public void setGigabitEthernet(Double gigabitEthernet) {
+	private void setGigabitEthernet(Double gigabitEthernet) {
 		super.set(11, gigabitEthernet);
 	}
 	
-	public void setPrivateBalcony(Double privateBalcony) {
+	private void setPrivateBalcony(Double privateBalcony) {
 		super.set(12, privateBalcony);
 	}
 	
