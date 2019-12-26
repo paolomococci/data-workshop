@@ -30,8 +30,8 @@ import org.jooq.types.ULong;
 import local.example.data.scheme.dao.CustomerDao;
 
 public class CustomerRecord 
-	extends UpdatableRecordImpl<CustomerRecord> 
-	implements Record6<ULong, String, String, Date, String, String> {
+		extends UpdatableRecordImpl<CustomerRecord> 
+		implements Record6<ULong, String, String, Date, String, String> {
 
 	private static final long serialVersionUID = -1215824472402887483L;
 	
@@ -73,49 +73,49 @@ public class CustomerRecord
 	
 	/* getter */
 	
-	public ULong getId() {
+	private ULong getId() {
 		return (ULong) get(0);
 	}
 	
-	public String getFirstName() {
+	private String getFirstName() {
 		return (String) get(1);
 	}
 	
-	public String getLastName() {
+	private String getLastName() {
 		return (String) get(2);
 	}
 	
-	public Date getBirthday() {
+	private Date getBirthday() {
 		return (Date) get(3);
 	}
 	
-	public String getGender() {
+	private String getGender() {
 		return (String) get(4);
 	}
 	
-	public String getEmail() {
+	private String getEmail() {
 		return (String) get(5);
 	}
 	
 	/* setter */
 	
-	public void setFirstName(String firstName) {
+	private void setFirstName(String firstName) {
 		set(1, firstName);
 	}
 	
-	public void setLastName(String lastName) {
+	private void setLastName(String lastName) {
 		set(2, lastName);
 	}
 	
-	public void setBirthday(Date birthday) {
+	private void setBirthday(Date birthday) {
 		set(3, birthday);
 	}
 	
-	public void setGender(String gender) {
+	private void setGender(String gender) {
 		set(4, gender);
 	}
 	
-	public void setEmail(String email) {
+	private void setEmail(String email) {
 		set(5, email);
 	}
 	
