@@ -18,7 +18,7 @@
 
 package local.example.data.service;
 
-//import static local.example.data.scheme.dao.BookingDao.BOOKING_DAO;
+import static local.example.data.scheme.dao.BookingDao.BOOKING_DAO;
 
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +35,13 @@ public class BookingService {
 	@Autowired
 	private DSLContext dslContext;
 	
-	public BookingRecord CreateBooking(Booking booking) {
-		String queries = "";
-		@SuppressWarnings("unused")
-		BookingRecord bookingRecord = (BookingRecord) dslContext.batch(queries);
-		return null;
+	public Booking createBooking(Booking booking) {
+		BookingRecord bookingRecord = (BookingRecord) dslContext
+				.insertInto(BOOKING_DAO)
+				.set(BOOKING_DAO.VACANCY, booking.getVacancy())
+				.set(BOOKING_DAO.CHECK_IN, booking.getCheckIn())
+				.set(BOOKING_DAO.CHECK_OUT, booking.getCheckOut());
+		booking.setId(bookingRecord.component1());
+		return booking;
 	}
 }
