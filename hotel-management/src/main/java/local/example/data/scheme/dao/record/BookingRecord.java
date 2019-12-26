@@ -30,8 +30,8 @@ import org.jooq.types.ULong;
 import local.example.data.scheme.dao.BookingDao;
 
 public class BookingRecord 
-	extends UpdatableRecordImpl<BookingRecord> 
-	implements Record4<ULong, String, Date, Date> {
+		extends UpdatableRecordImpl<BookingRecord> 
+		implements Record4<ULong, String, Date, Date> {
 
 	private static final long serialVersionUID = -5016972913785784538L;
 	
@@ -50,33 +50,33 @@ public class BookingRecord
 	
 	/* getter */
 	
-	public ULong getId() {
+	private ULong getId() {
 		return (ULong) super.get(0);
 	}
 	
-	public String getVacancy() {
+	private String getVacancy() {
 		return (String) super.get(1);
 	}
 	
-	public Date getCheckIn() {
+	private Date getCheckIn() {
 		return (Date) super.get(2);
 	}
 	
-	public Date getCheckOut() {
+	private Date getCheckOut() {
 		return (Date) super.get(3);
 	}
 	
 	/* setter */
 	
-	public void setVacancy(String vacancy) {
+	private void setVacancy(String vacancy) {
 		super.set(1, vacancy);
 	}
 	
-	public void setCheckIn(Date checkIn) {
+	private void setCheckIn(Date checkIn) {
 		super.set(2, checkIn);
 	}
 	
-	public void setCheckOut(Date checkOut) {
+	private void setCheckOut(Date checkOut) {
 		super.set(3, checkOut);
 	}
 	
