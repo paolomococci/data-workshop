@@ -43,7 +43,7 @@ public class CustomerService {
 				.set(CUSTOMER_DAO.BIRTHDAY, customer.getBirthday())
 				.set(CUSTOMER_DAO.GENDER, customer.getGender())
 				.set(CUSTOMER_DAO.EMAIL, customer.getEmail());
-		customer.setId(customerRecord.getId());
+		customer.setId(customerRecord.component1());
 		return customer;
 	}
 }
