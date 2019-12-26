@@ -20,6 +20,8 @@ package local.example.data.domain;
 
 import java.io.Serializable;
 
+import org.jooq.types.ULong;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,19 +29,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Room implements Serializable {
+public class Room 
+		implements Serializable {
+	
 	private static final long serialVersionUID = -388793165355572996L;
-	private Long id;
+	private ULong id;
 	private Integer beds;
-	private Float basePrice;
-	private Float bathroom;
-	private Float frigobar;
-	private Float coolingFan;
-	private Float AirConditioning;
-	private Float laundry;
-	private Float shoemaker;
-	private Float catering;
-	private Float wifi;
-	private Float gigabitEthernet;
-	private Float privateBalcony;
+	private Double basePrice;
+	private Double bathroom;
+	private Double frigobar;
+	private Double coolingFan;
+	private Double AirConditioning;
+	private Double laundry;
+	private Double shoemaker;
+	private Double catering;
+	private Double wifi;
+	private Double gigabitEthernet;
+	private Double privateBalcony;
 }
