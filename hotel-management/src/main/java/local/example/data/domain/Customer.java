@@ -21,6 +21,8 @@ package local.example.data.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
+import org.jooq.types.ULong;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,12 +30,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer implements Serializable {
+public class Customer 
+		implements Serializable {
+	
 	private static final long serialVersionUID = -2190575107570013018L;
-	private Long id;
+	private ULong id;
 	private String firstName;
 	private String lastName;
 	private Date birthday;
-	private char gender;
+	private String gender;
 	private String email;
 }
