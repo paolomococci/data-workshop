@@ -21,6 +21,8 @@ package local.example.data.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
+import org.jooq.types.ULong;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,10 +30,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Booking implements Serializable {
+public class Booking 
+		implements Serializable {
+	
 	private static final long serialVersionUID = 3517837708049441864L;
-	private Long id;
-	private char vacancy;
+	private ULong id;
+	private String vacancy;
 	private Date checkIn;
 	private Date checkOut;
 }
