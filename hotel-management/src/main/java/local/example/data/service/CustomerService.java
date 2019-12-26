@@ -18,7 +18,7 @@
 
 package local.example.data.service;
 
-//import static local.example.data.scheme.dao.CustomerDao.CUSTOMER_DAO;
+import static local.example.data.scheme.dao.CustomerDao.CUSTOMER_DAO;
 
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import local.example.data.domain.Customer;
-import local.example.data.scheme.dao.CustomerDao;
 import local.example.data.scheme.dao.record.CustomerRecord;
 
 @Service
@@ -36,11 +35,15 @@ public class CustomerService {
 	@Autowired
 	private DSLContext dslContext;
 
-	public CustomerDao createCustomer(Customer customer) {
-		String queries = "";
-		@SuppressWarnings("unused")
-		CustomerRecord customerRecord = (CustomerRecord) dslContext.batch(queries);
-		return null;
+	public Customer createCustomer(Customer customer) {
+		CustomerRecord customerRecord = (CustomerRecord) dslContext
+				.insertInto(CUSTOMER_DAO)
+				.set(CUSTOMER_DAO.FIRST_NAME, customer.getFirstName())
+				.set(CUSTOMER_DAO.LAST_NAME, customer.getLastName())
+				.set(CUSTOMER_DAO.BIRTHDAY, customer.getBirthday())
+				.set(CUSTOMER_DAO.GENDER, customer.getGender())
+				.set(CUSTOMER_DAO.EMAIL, customer.getEmail());
+		customer.setId(customerRecord.getId());
+		return customer;
 	}
-
 }
