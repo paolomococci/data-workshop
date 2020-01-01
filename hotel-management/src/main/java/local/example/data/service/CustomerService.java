@@ -20,7 +20,10 @@ package local.example.data.service;
 
 import static local.example.data.scheme.dao.CustomerDao.CUSTOMER_DAO;
 
+import java.util.List;
+
 import org.jooq.DSLContext;
+import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,5 +48,24 @@ public class CustomerService {
 				.set(CUSTOMER_DAO.EMAIL, customer.getEmail());
 		customer.setId(customerRecord.component1());
 		return customer;
+	}
+	
+	public Customer readCustomer(ULong id) {
+		// TODO
+		return null;
+	}
+	
+	public List<Customer> readAllCustomers() {
+		// TODO
+		return null;
+	}
+	
+	public Customer updateCustomer(ULong id, Customer customer) {
+		// TODO
+		return null;
+	}
+	
+	public void deleteCustomer(ULong id) {
+		// TODO
 	}
 }
