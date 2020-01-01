@@ -20,7 +20,10 @@ package local.example.data.service;
 
 import static local.example.data.scheme.dao.BookingDao.BOOKING_DAO;
 
+import java.util.List;
+
 import org.jooq.DSLContext;
+import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,5 +46,24 @@ public class BookingService {
 				.set(BOOKING_DAO.CHECK_OUT, booking.getCheckOut());
 		booking.setId(bookingRecord.component1());
 		return booking;
+	}
+	
+	public Booking readBooking(ULong id) {
+		// TODO
+		return null;
+	}
+	
+	public List<Booking> readAllCurrentBookings() {
+		// TODO
+		return null;
+	}
+	
+	public Booking updateBooking(ULong id, Booking booking) {
+		// TODO
+		return null;
+	}
+	
+	public void deleteBooking(ULong id) {
+		// TODO
 	}
 }
