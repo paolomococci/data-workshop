@@ -20,7 +20,10 @@ package local.example.data.service;
 
 import static local.example.data.scheme.dao.RoomDao.ROOM_DAO;
 
+import java.util.List;
+
 import org.jooq.DSLContext;
+import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,5 +55,24 @@ public class RoomService {
 				.set(ROOM_DAO.PRIVATE_BALCONY, room.getPrivateBalcony());
 		room.setId(roomRecord.component1());
 		return room;
+	}
+	
+	public Room readRoom(ULong id) {
+		// TODO
+		return null;
+	}
+	
+	public List<Room> readAllRooms() {
+		// TODO
+		return null;
+	}
+	
+	public Room updateRoom(ULong id, Room room) {
+		// TODO
+		return null;
+	}
+	
+	public void deleteRoom(ULong id) {
+		// TODO
 	}
 }
