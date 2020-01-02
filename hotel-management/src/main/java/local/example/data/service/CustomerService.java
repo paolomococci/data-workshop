@@ -20,9 +20,11 @@ package local.example.data.service;
 
 import static local.example.data.scheme.dao.CustomerDao.CUSTOMER_DAO;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.jooq.DSLContext;
+import org.jooq.Record;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +53,13 @@ public class CustomerService {
 	}
 	
 	public Customer readCustomer(ULong id) {
-		// TODO
+		Record record = dslContext.select()
+				.from(CUSTOMER_DAO)
+				.where(CUSTOMER_DAO.ID.eq(id))
+				.fetchOne();
+		if (record != null) {
+			return this.getEntity(record);
+		}
 		return null;
 	}
 	
@@ -67,5 +75,15 @@ public class CustomerService {
 	
 	public void deleteCustomer(ULong id) {
 		// TODO
+	}
+	
+	private Customer getEntity(Record record) {
+		ULong id = record.getValue(CUSTOMER_DAO.ID, ULong.class);
+		String firstName = record.getValue(CUSTOMER_DAO.FIRST_NAME, String.class);
+		String lastName = record.getValue(CUSTOMER_DAO.LAST_NAME, String.class);
+		Date birthday = record.getValue(CUSTOMER_DAO.BIRTHDAY, Date.class);
+		String gender = record.getValue(CUSTOMER_DAO.GENDER, String.class);
+		String email = record.getValue(CUSTOMER_DAO.EMAIL, String.class);
+		return new Customer(id, firstName, lastName, birthday, gender, email);
 	}
 }
