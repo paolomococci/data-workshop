@@ -23,6 +23,7 @@ import static local.example.data.scheme.dao.RoomDao.ROOM_DAO;
 import java.util.List;
 
 import org.jooq.DSLContext;
+import org.jooq.Record;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,5 +75,35 @@ public class RoomService {
 	
 	public void deleteRoom(ULong id) {
 		// TODO
+	}
+	
+	private Room getEntity(Record record) {
+		ULong id = record.getValue(ROOM_DAO.ID, ULong.class);
+		Integer beds = record.getValue(ROOM_DAO.BEDS, Integer.class);
+		Double basePrice = record.getValue(ROOM_DAO.BASE_PRICE, Double.class);
+		Double bathroom = record.getValue(ROOM_DAO.BATHROOM, Double.class);
+		Double frigobar = record.getValue(ROOM_DAO.FRIGOBAR, Double.class);
+		Double coolingFan = record.getValue(ROOM_DAO.COOLING_FAN, Double.class);
+		Double airConditioning = record.getValue(ROOM_DAO.AIR_CONDITIONING, Double.class);
+		Double laundry = record.getValue(ROOM_DAO.LAUNDRY, Double.class);
+		Double shoemaker = record.getValue(ROOM_DAO.SHOEMAKER, Double.class);
+		Double catering = record.getValue(ROOM_DAO.CATERING, Double.class);
+		Double wifi = record.getValue(ROOM_DAO.WIFI, Double.class);
+		Double gigabitEthernet = record.getValue(ROOM_DAO.GIGABIT_ETHERNET, Double.class);
+		Double privateBalcony = record.getValue(ROOM_DAO.PRIVATE_BALCONY, Double.class);
+		return new Room(
+				id, 
+				beds, 
+				basePrice, 
+				bathroom, 
+				frigobar, 
+				coolingFan, 
+				airConditioning, 
+				laundry, 
+				shoemaker, 
+				catering, 
+				wifi, 
+				gigabitEthernet, 
+				privateBalcony);		
 	}
 }
