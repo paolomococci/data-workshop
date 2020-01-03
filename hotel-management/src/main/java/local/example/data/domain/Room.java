@@ -39,7 +39,7 @@ public class Room
 	private Double bathroom;
 	private Double frigobar;
 	private Double coolingFan;
-	private Double AirConditioning;
+	private Double airConditioning;
 	private Double laundry;
 	private Double shoemaker;
 	private Double catering;
