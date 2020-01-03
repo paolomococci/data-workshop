@@ -21,10 +21,12 @@ package local.example.data.service;
 import static local.example.data.scheme.dao.CustomerDao.CUSTOMER_DAO;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jooq.DSLContext;
 import org.jooq.Record;
+import org.jooq.Result;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,8 +66,12 @@ public class CustomerService {
 	}
 	
 	public List<Customer> readAllCustomers() {
-		// TODO
-		return null;
+		List<Customer> customers = new ArrayList<Customer>();
+		Result<Record> records = dslContext.select().from(CUSTOMER_DAO).fetch();
+		for (Record record : records) {
+			customers.add(this.getEntity(record));
+		}
+		return customers;
 	}
 	
 	public Customer updateCustomer(ULong id, Customer customer) {
@@ -74,7 +80,10 @@ public class CustomerService {
 	}
 	
 	public void deleteCustomer(ULong id) {
-		// TODO
+		dslContext
+			.deleteFrom(CUSTOMER_DAO)
+			.where(CUSTOMER_DAO.ID.equal(id))
+			.execute();
 	}
 	
 	private Customer getEntity(Record record) {
@@ -84,6 +93,12 @@ public class CustomerService {
 		Date birthday = record.getValue(CUSTOMER_DAO.BIRTHDAY, Date.class);
 		String gender = record.getValue(CUSTOMER_DAO.GENDER, String.class);
 		String email = record.getValue(CUSTOMER_DAO.EMAIL, String.class);
-		return new Customer(id, firstName, lastName, birthday, gender, email);
+		return new Customer(
+				id, 
+				firstName, 
+				lastName, 
+				birthday, 
+				gender, 
+				email);
 	}
 }
