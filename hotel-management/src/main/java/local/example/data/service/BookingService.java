@@ -20,9 +20,11 @@ package local.example.data.service;
 
 import static local.example.data.scheme.dao.BookingDao.BOOKING_DAO;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.jooq.DSLContext;
+import org.jooq.Record;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,5 +67,17 @@ public class BookingService {
 	
 	public void deleteBooking(ULong id) {
 		// TODO
+	}
+	
+	private Booking getEntity(Record record) {
+		ULong id = record.getValue(BOOKING_DAO.ID, ULong.class);
+		String vacancy = record.getValue(BOOKING_DAO.VACANCY, String.class);
+		Date checkIn = record.getValue(BOOKING_DAO.CHECK_IN, Date.class);
+		Date checkOut = record.getValue(BOOKING_DAO.CHECK_OUT, Date.class);
+		return new Booking(
+				id, 
+				vacancy, 
+				checkIn, 
+				checkOut);
 	}
 }
