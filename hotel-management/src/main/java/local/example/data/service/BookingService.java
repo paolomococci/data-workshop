@@ -71,7 +71,10 @@ public class BookingService {
 	}
 	
 	public void deleteBooking(ULong id) {
-		// TODO
+		dslContext
+		.deleteFrom(BOOKING_DAO)
+		.where(BOOKING_DAO.ID.equal(id))
+		.execute();
 	}
 	
 	private Booking getEntity(Record record) {
