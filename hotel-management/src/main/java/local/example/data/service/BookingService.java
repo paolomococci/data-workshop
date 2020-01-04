@@ -19,11 +19,14 @@
 package local.example.data.service;
 
 import static local.example.data.scheme.dao.BookingDao.BOOKING_DAO;
+
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jooq.DSLContext;
 import org.jooq.Record;
+import org.jooq.Result;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,9 +63,16 @@ public class BookingService {
 		return null;
 	}
 	
-	public List<Booking> readAllCurrentBookings() {
-		// TODO
-		return null;
+	public List<Booking> readAllReservations() {
+		List<Booking> reservations = new ArrayList<Booking>();
+		Result<Record> records = dslContext
+				.select()
+				.from(BOOKING_DAO)
+				.fetch();
+		for (Record record : records) {
+			reservations.add(this.getEntity(record));
+		}
+		return reservations;
 	}
 	
 	public Booking updateBooking(ULong id, Booking booking) {
