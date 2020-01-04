@@ -20,10 +20,12 @@ package local.example.data.service;
 
 import static local.example.data.scheme.dao.RoomDao.ROOM_DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jooq.DSLContext;
 import org.jooq.Record;
+import org.jooq.Result;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,8 +72,15 @@ public class RoomService {
 	}
 	
 	public List<Room> readAllRooms() {
-		// TODO
-		return null;
+		List<Room> rooms = new ArrayList<Room>();
+		Result<Record> records = dslContext
+				.select()
+				.from(ROOM_DAO)
+				.fetch();
+		for (Record record : records) {
+			rooms.add(this.getEntity(record));
+		}
+		return rooms;
 	}
 	
 	public Room updateRoom(ULong id, Room room) {
