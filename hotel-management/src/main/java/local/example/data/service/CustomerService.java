@@ -67,7 +67,10 @@ public class CustomerService {
 	
 	public List<Customer> readAllCustomers() {
 		List<Customer> customers = new ArrayList<Customer>();
-		Result<Record> records = dslContext.select().from(CUSTOMER_DAO).fetch();
+		Result<Record> records = dslContext
+				.select()
+				.from(CUSTOMER_DAO)
+				.fetch();
 		for (Record record : records) {
 			customers.add(this.getEntity(record));
 		}
