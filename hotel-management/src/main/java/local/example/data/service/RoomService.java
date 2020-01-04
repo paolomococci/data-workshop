@@ -80,7 +80,10 @@ public class RoomService {
 	}
 	
 	public void deleteRoom(ULong id) {
-		// TODO
+		dslContext
+		.deleteFrom(ROOM_DAO)
+		.where(ROOM_DAO.ID.equal(id))
+		.execute();
 	}
 	
 	private Room getEntity(Record record) {
