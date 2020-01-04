@@ -59,7 +59,13 @@ public class RoomService {
 	}
 	
 	public Room readRoom(ULong id) {
-		// TODO
+		Record record = dslContext.select()
+				.from(ROOM_DAO)
+				.where(ROOM_DAO.ID.eq(id))
+				.fetchOne();
+		if (record != null) {
+			return this.getEntity(record);
+		}
 		return null;
 	}
 	
