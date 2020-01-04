@@ -19,7 +19,6 @@
 package local.example.data.service;
 
 import static local.example.data.scheme.dao.BookingDao.BOOKING_DAO;
-
 import java.sql.Date;
 import java.util.List;
 
@@ -51,7 +50,13 @@ public class BookingService {
 	}
 	
 	public Booking readBooking(ULong id) {
-		// TODO
+		Record record = dslContext.select()
+				.from(BOOKING_DAO)
+				.where(BOOKING_DAO.ID.eq(id))
+				.fetchOne();
+		if (record != null) {
+			return this.getEntity(record);
+		}
 		return null;
 	}
 	
