@@ -75,16 +75,19 @@ public class BookingService {
 		return reservations;
 	}
 	
-	public Booking updateBooking(ULong id, Booking booking) {
-		// TODO
-		return null;
+	public void updateBooking(ULong id, Booking booking) {
+		dslContext.update(BOOKING_DAO)
+				.set(BOOKING_DAO.VACANCY, booking.getVacancy())
+				.set(BOOKING_DAO.CHECK_IN, booking.getCheckIn())
+				.set(BOOKING_DAO.CHECK_OUT, booking.getCheckOut())
+				.where(BOOKING_DAO.ID.equal(id))
+				.execute();
 	}
 	
 	public void deleteBooking(ULong id) {
-		dslContext
-		.deleteFrom(BOOKING_DAO)
-		.where(BOOKING_DAO.ID.equal(id))
-		.execute();
+		dslContext.deleteFrom(BOOKING_DAO)
+				.where(BOOKING_DAO.ID.equal(id))
+				.execute();
 	}
 	
 	private Booking getEntity(Record record) {
