@@ -83,16 +83,28 @@ public class RoomService {
 		return rooms;
 	}
 	
-	public Room updateRoom(ULong id, Room room) {
-		// TODO
-		return null;
+	public void updateRoom(ULong id, Room room) {
+		dslContext.update(ROOM_DAO)
+				.set(ROOM_DAO.BEDS, room.getBeds())
+				.set(ROOM_DAO.BASE_PRICE, room.getBasePrice())
+				.set(ROOM_DAO.BATHROOM, room.getBathroom())
+				.set(ROOM_DAO.FRIGOBAR, room.getFrigobar())
+				.set(ROOM_DAO.COOLING_FAN, room.getCoolingFan())
+				.set(ROOM_DAO.AIR_CONDITIONING, room.getAirConditioning())
+				.set(ROOM_DAO.LAUNDRY, room.getLaundry())
+				.set(ROOM_DAO.SHOEMAKER, room.getShoemaker())
+				.set(ROOM_DAO.CATERING, room.getCatering())
+				.set(ROOM_DAO.WIFI, room.getWifi())
+				.set(ROOM_DAO.GIGABIT_ETHERNET, room.getGigabitEthernet())
+				.set(ROOM_DAO.PRIVATE_BALCONY, room.getPrivateBalcony())
+				.where(ROOM_DAO.ID.equal(id))
+				.execute();
 	}
 	
 	public void deleteRoom(ULong id) {
-		dslContext
-		.deleteFrom(ROOM_DAO)
-		.where(ROOM_DAO.ID.equal(id))
-		.execute();
+		dslContext.deleteFrom(ROOM_DAO)
+				.where(ROOM_DAO.ID.equal(id))
+				.execute();
 	}
 	
 	private Room getEntity(Record record) {
