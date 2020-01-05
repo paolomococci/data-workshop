@@ -77,16 +77,21 @@ public class CustomerService {
 		return customers;
 	}
 	
-	public Customer updateCustomer(ULong id, Customer customer) {
-		// TODO
-		return null;
+	public void updateCustomer(ULong id, Customer customer) {
+		dslContext.update(CUSTOMER_DAO)
+				.set(CUSTOMER_DAO.FIRST_NAME, customer.getFirstName())
+				.set(CUSTOMER_DAO.LAST_NAME, customer.getLastName())
+				.set(CUSTOMER_DAO.BIRTHDAY, customer.getBirthday())
+				.set(CUSTOMER_DAO.GENDER, customer.getGender())
+				.set(CUSTOMER_DAO.EMAIL, customer.getEmail())
+				.where(CUSTOMER_DAO.ID.eq(id))
+				.execute();
 	}
 	
 	public void deleteCustomer(ULong id) {
-		dslContext
-			.deleteFrom(CUSTOMER_DAO)
-			.where(CUSTOMER_DAO.ID.equal(id))
-			.execute();
+		dslContext.deleteFrom(CUSTOMER_DAO)
+				.where(CUSTOMER_DAO.ID.equal(id))
+				.execute();
 	}
 	
 	private Customer getEntity(Record record) {
