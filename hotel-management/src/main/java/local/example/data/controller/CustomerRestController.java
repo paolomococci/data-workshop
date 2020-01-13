@@ -19,8 +19,38 @@
 package local.example.data.controller;
 
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RepositoryRestController
+@RequestMapping("/api/customers")
 public class CustomerRestController {
 
+	@PostMapping
+	public void create() {
+		
+	}
+	
+	@GetMapping("/{id}")
+	public void read() {
+		
+	}
+	
+	@GetMapping
+	public void readAll() {
+		
+	}
+	
+	@PutMapping("/{id}")
+	public void update() {
+		
+	}
+	
+	@DeleteMapping("/{id}")
+	public void delete() {
+		
+	}
 }
