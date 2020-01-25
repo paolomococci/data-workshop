@@ -18,6 +18,17 @@
 
 package local.example.data.repository;
 
-public interface ItemRestRepository {
+import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import local.example.data.model.Item;
+
+@RepositoryRestResource
+public interface ItemRestRepository 
+extends CrudRepository<Item, Long> {
+
+	List<Item> findByCode(@Param("code") String code);
 }
