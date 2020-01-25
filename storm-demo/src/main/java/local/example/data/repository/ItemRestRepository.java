@@ -18,6 +18,6 @@
 
 package local.example.data.repository;
 
-public interface SampleRestRepository {
+public interface ItemRestRepository {
 
 }
