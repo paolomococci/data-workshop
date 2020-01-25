@@ -16,7 +16,7 @@
  *
  */
 
-package local.example.demo;
+package local.example.data;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
