@@ -18,6 +18,6 @@
 
 package local.example.data.model;
 
-public class Sample {
+public class Item {
 
 }
