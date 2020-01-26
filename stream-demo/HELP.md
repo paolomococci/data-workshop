@@ -1,1 +1,1 @@
-# real-time stream data processing demo application
+# demo application for processing stream of data in real-time
