@@ -18,6 +18,8 @@
 
 package local.example.data.map;
 
-public class SampleMap {
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class SampleMap extends Mapper {
 
 }
