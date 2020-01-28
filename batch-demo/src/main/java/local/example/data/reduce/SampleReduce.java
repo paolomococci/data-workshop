@@ -18,6 +18,8 @@
 
 package local.example.data.reduce;
 
-public class SampleReduce {
+import org.apache.hadoop.mapreduce.Reducer;
+
+public class SampleReduce extends Reducer {
 
 }
