@@ -18,8 +18,32 @@
 
 package local.example.data.map;
 
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class SampleMap extends Mapper {
-
+@SuppressWarnings("rawtypes")
+public class SampleMap 
+	extends Mapper {
+	
+	private final static IntWritable intWritable = new IntWritable(1);
+	private Text textWord = new Text();
+	
+	@SuppressWarnings("unchecked")
+	public void map(
+			LongWritable longWritableKey, 
+			Text textValue, 
+			Context context
+			) throws IOException, InterruptedException {
+		String phrase = textValue.toString();
+		StringTokenizer stringTokenizer = new StringTokenizer(phrase);
+		while (stringTokenizer.hasMoreTokens()) {
+			textWord.set(stringTokenizer.nextToken());
+			context.write(textWord, intWritable);
+		}
+	}
 }
