@@ -26,14 +26,13 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-@SuppressWarnings("rawtypes")
 public class SampleMap 
-	extends Mapper {
+	extends Mapper<LongWritable, Text, Text, IntWritable> {
 	
 	private final static IntWritable intWritable = new IntWritable(1);
 	private Text textWord = new Text();
 	
-	@SuppressWarnings("unchecked")
+	@Override
 	public void map(
 			LongWritable longWritableKey, 
 			Text textValue, 
