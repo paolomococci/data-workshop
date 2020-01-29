@@ -18,8 +18,27 @@
 
 package local.example.data.reduce;
 
+import java.io.IOException;
+import java.util.Iterator;
+
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class SampleReduce extends Reducer {
+public class SampleReduce 
+	extends Reducer<LongWritable, Text, Text, IntWritable> {
 
+	public void reduce(
+			Text text, 
+			Iterable<?> iterable, 
+			Context context
+			) throws IOException, InterruptedException {
+		int sum = 0;
+		Iterator<?> iterator = iterable.iterator();
+		while (iterator.hasNext()) {
+			sum++;
+		}
+		context.write(text, new IntWritable(sum));
+	}
 }
