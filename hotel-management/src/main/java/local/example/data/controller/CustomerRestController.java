@@ -19,6 +19,7 @@
 package local.example.data.controller;
 
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,26 +33,26 @@ public class CustomerRestController {
 
 	@PostMapping
 	public ResponseEntity<?> create() {
-		return null;		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read() {
-		return null;		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 	
 	@GetMapping
 	public ResponseEntity<?> readAll() {
-		return null;		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 	
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update() {
-		return null;		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 	
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<?> delete() {
-		return null;		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 }
