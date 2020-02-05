@@ -19,6 +19,7 @@
 package local.example.data.controller;
 
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,27 +31,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CustomerRestController {
 
 	@PostMapping
-	public void create() {
-		
+	public ResponseEntity<?> create() {
+		return null;		
 	}
 	
-	@GetMapping("/{id}")
-	public void read() {
-		
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<?> read() {
+		return null;		
 	}
 	
 	@GetMapping
-	public void readAll() {
-		
+	public ResponseEntity<?> readAll() {
+		return null;		
 	}
 	
-	@PutMapping("/{id}")
-	public void update() {
-		
+	@PutMapping(path = "/{id}")
+	public ResponseEntity<?> update() {
+		return null;		
 	}
 	
-	@DeleteMapping("/{id}")
-	public void delete() {
-		
+	@DeleteMapping(path = "/{id}")
+	public ResponseEntity<?> delete() {
+		return null;		
 	}
 }
