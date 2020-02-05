@@ -18,6 +18,8 @@
 
 package local.example.data.controller;
 
+import java.net.URISyntaxException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
@@ -38,7 +40,8 @@ public class CustomerRestController {
 	CustomerService customerService;
 
 	@PostMapping
-	public ResponseEntity<?> create() {
+	public ResponseEntity<?> create() 
+			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 	
@@ -53,12 +56,14 @@ public class CustomerRestController {
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<?> update() {
+	public ResponseEntity<?> update() 
+			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 	
 	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<?> delete() {
+	public ResponseEntity<?> delete() 
+			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 }
