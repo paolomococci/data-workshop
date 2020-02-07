@@ -20,12 +20,14 @@ package local.example.data.controller;
 
 import java.net.URISyntaxException;
 
+import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,8 +64,9 @@ public class CustomerRestController {
 	}
 	
 	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<?> delete() 
+	public ResponseEntity<?> delete(@PathVariable ULong id) 
 			throws URISyntaxException {
+		customerService.deleteCustomer(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 }
