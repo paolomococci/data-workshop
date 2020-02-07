@@ -30,8 +30,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import local.example.data.domain.Room;
 import local.example.data.service.RoomService;
 
 @RepositoryRestController
@@ -42,13 +44,13 @@ public class RoomRestController {
 	RoomService roomService;
 
 	@PostMapping
-	public ResponseEntity<?> create() 
+	public ResponseEntity<?> create(@RequestBody Room room) 
 			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> read() {
+	public ResponseEntity<?> read(@PathVariable ULong id) {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
 	
@@ -58,7 +60,7 @@ public class RoomRestController {
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<?> update() 
+	public ResponseEntity<?> update(@RequestBody Room room, @PathVariable ULong id) 
 			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
 	}
