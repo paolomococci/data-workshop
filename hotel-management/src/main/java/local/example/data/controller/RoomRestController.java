@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import local.example.data.assembler.RoomRepresentationModelAssembler;
 import local.example.data.domain.Room;
 import local.example.data.service.RoomService;
 
@@ -42,6 +43,9 @@ public class RoomRestController {
 	
 	@Autowired
 	RoomService roomService;
+	
+	@Autowired
+	RoomRepresentationModelAssembler roomRepresentationModelAssembler;
 
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Room room) 
