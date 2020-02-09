@@ -23,6 +23,7 @@ import java.net.URISyntaxException;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import local.example.data.assembler.CustomerRepresentationModelAssembler;
 import local.example.data.domain.Customer;
 import local.example.data.service.CustomerService;
 
@@ -42,16 +44,26 @@ public class CustomerRestController {
 	
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired 
+	CustomerRepresentationModelAssembler customerRepresentationModelAssembler;
+	 
 
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Customer customer) 
 			throws URISyntaxException {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		  EntityModel<Customer> entityModelOfCustomer =
+				  customerRepresentationModelAssembler
+				  		.toModel(customerService.createCustomer(customer));		 
+		return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.CREATED);		
 	}
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable ULong id) {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		Customer customer = customerService.readCustomer(id);
+		EntityModel<Customer> entityModelOfCustomer = 
+				customerRepresentationModelAssembler.toModel(customer);
+		return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);		
 	}
 	
 	@GetMapping
