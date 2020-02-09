@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import local.example.data.assembler.BookingRepresentationModelAssembler;
 import local.example.data.domain.Booking;
 import local.example.data.service.BookingService;
 
@@ -42,6 +43,9 @@ public class BookingRestController {
 	
 	@Autowired
 	BookingService bookingService;
+	
+	@Autowired
+	BookingRepresentationModelAssembler bookingRepresentationModelAssembler;
 
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Booking booking) 
