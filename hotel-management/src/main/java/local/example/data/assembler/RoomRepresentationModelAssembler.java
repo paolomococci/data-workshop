@@ -18,10 +18,15 @@
 
 package local.example.data.assembler;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import local.example.data.controller.CustomerRestController;
 import local.example.data.domain.Room;
 
 @Component
@@ -30,7 +35,14 @@ public class RoomRepresentationModelAssembler
 
 	@Override
 	public EntityModel<Room> toModel(Room room) {
-		// TODO
-		return null;
+		return new EntityModel<>(room, 
+				linkTo(methodOn(CustomerRestController.class).read(room.getId())).withSelfRel(), 
+				linkTo(methodOn(CustomerRestController.class).readAll()).withRel("rooms"));
+	}
+
+	@Override
+	public CollectionModel<EntityModel<Room>> toCollectionModel(
+			Iterable<? extends Room> rooms) {
+		return RepresentationModelAssembler.super.toCollectionModel(rooms);
 	}
 }
