@@ -23,6 +23,7 @@ import java.net.URISyntaxException;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,8 +47,7 @@ public class CustomerRestController {
 	CustomerService customerService;
 	
 	@Autowired 
-	CustomerRepresentationModelAssembler customerRepresentationModelAssembler;
-	 
+	CustomerRepresentationModelAssembler customerRepresentationModelAssembler;	 
 
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Customer customer) 
@@ -68,7 +68,10 @@ public class CustomerRestController {
 	
 	@GetMapping
 	public ResponseEntity<?> readAll() {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		Iterable<Customer> customers = customerService.readAllCustomers();
+		CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = 
+				customerRepresentationModelAssembler.toCollectionModel(customers);
+		return new ResponseEntity<>(collectionModelOfCustomers, HttpStatus.OK);		
 	}
 	
 	@PutMapping(path = "/{id}")
