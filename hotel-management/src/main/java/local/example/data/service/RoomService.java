@@ -26,6 +26,7 @@ import java.util.List;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
+import org.jooq.exception.DataAccessException;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,8 @@ public class RoomService {
 	@Autowired
 	private DSLContext dslContext;
 	
-	public Room createRoom(Room room) {
+	public Room createRoom(Room room) 
+			throws DataAccessException {
 		RoomRecord roomRecord = (RoomRecord) dslContext
 				.insertInto(ROOM_DAO)
 				.set(ROOM_DAO.BEDS, room.getBeds())
@@ -60,7 +62,8 @@ public class RoomService {
 		return room;
 	}
 	
-	public Room readRoom(ULong id) {
+	public Room readRoom(ULong id) 
+			throws DataAccessException {
 		Record record = dslContext.select()
 				.from(ROOM_DAO)
 				.where(ROOM_DAO.ID.eq(id))
@@ -71,7 +74,8 @@ public class RoomService {
 		return null;
 	}
 	
-	public List<Room> readAllRooms() {
+	public List<Room> readAllRooms() 
+			throws DataAccessException {
 		List<Room> rooms = new ArrayList<Room>();
 		Result<Record> records = dslContext
 				.select()
@@ -83,7 +87,8 @@ public class RoomService {
 		return rooms;
 	}
 	
-	public void updateRoom(ULong id, Room room) {
+	public void updateRoom(ULong id, Room room) 
+			throws DataAccessException {
 		dslContext.update(ROOM_DAO)
 				.set(ROOM_DAO.BEDS, room.getBeds())
 				.set(ROOM_DAO.BASE_PRICE, room.getBasePrice())
@@ -101,13 +106,15 @@ public class RoomService {
 				.execute();
 	}
 	
-	public void deleteRoom(ULong id) {
+	public void deleteRoom(ULong id) 
+			throws DataAccessException {
 		dslContext.deleteFrom(ROOM_DAO)
 				.where(ROOM_DAO.ID.equal(id))
 				.execute();
 	}
 	
-	private Room getEntity(Record record) {
+	private Room getEntity(Record record) 
+			throws DataAccessException {
 		ULong id = record.getValue(ROOM_DAO.ID, ULong.class);
 		Integer beds = record.getValue(ROOM_DAO.BEDS, Integer.class);
 		Double basePrice = record.getValue(ROOM_DAO.BASE_PRICE, Double.class);
