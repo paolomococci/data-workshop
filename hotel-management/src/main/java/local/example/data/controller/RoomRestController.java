@@ -23,6 +23,7 @@ import java.net.URISyntaxException;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,29 +51,32 @@ public class RoomRestController {
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Room room) 
 			throws URISyntaxException {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		  EntityModel<Room> entityModelOfRoom =
+				  roomRepresentationModelAssembler
+				  		.toModel(roomService.createRoom(room));
+		return new ResponseEntity<>(entityModelOfRoom, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable ULong id) {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@GetMapping
 	public ResponseEntity<?> readAll() {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(@RequestBody Room room, @PathVariable ULong id) 
 			throws URISyntaxException {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<?> delete(@PathVariable ULong id) 
 			throws URISyntaxException {
 		roomService.deleteRoom(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }
