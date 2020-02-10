@@ -54,23 +54,26 @@ public class BookingRestController {
 		  EntityModel<Booking> entityModelOfBooking =
 				  bookingRepresentationModelAssembler
 				  		.toModel(bookingService.createBooking(booking));
-		return new ResponseEntity<>(entityModelOfBooking, HttpStatus.CREATED);		
+		return new ResponseEntity<>(entityModelOfBooking, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable ULong id) {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		Booking booking = bookingService.readBooking(id);
+		EntityModel<Booking> entityModelOfBooking = 
+				bookingRepresentationModelAssembler.toModel(booking);
+		return new ResponseEntity<>(entityModelOfBooking, HttpStatus.OK);
 	}
 	
 	@GetMapping
 	public ResponseEntity<?> readAll() {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(@RequestBody Booking booking, @PathVariable ULong id) 
 			throws URISyntaxException {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@DeleteMapping(path = "/{id}")
