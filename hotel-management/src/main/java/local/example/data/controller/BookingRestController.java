@@ -23,6 +23,7 @@ import java.net.URISyntaxException;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,7 +51,10 @@ public class BookingRestController {
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Booking booking) 
 			throws URISyntaxException {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		  EntityModel<Booking> entityModelOfBooking =
+				  bookingRepresentationModelAssembler
+				  		.toModel(bookingService.createBooking(booking));
+		return new ResponseEntity<>(entityModelOfBooking, HttpStatus.CREATED);		
 	}
 	
 	@GetMapping(path = "/{id}")
