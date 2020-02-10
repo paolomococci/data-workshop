@@ -23,6 +23,7 @@ import java.net.URISyntaxException;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,7 +68,10 @@ public class BookingRestController {
 	
 	@GetMapping
 	public ResponseEntity<?> readAll() {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		Iterable<Booking> reservations = bookingService.readAllReservations();
+		CollectionModel<EntityModel<Booking>> collectionModelOfReservations = 
+				bookingRepresentationModelAssembler.toCollectionModel(reservations);
+		return new ResponseEntity<>(collectionModelOfReservations, HttpStatus.OK);
 	}
 	
 	@PutMapping(path = "/{id}")
