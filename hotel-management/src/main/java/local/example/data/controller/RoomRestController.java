@@ -59,7 +59,10 @@ public class RoomRestController {
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable ULong id) {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		Room room = roomService.readRoom(id);
+		EntityModel<Room> entityModelOfRoom = 
+				roomRepresentationModelAssembler.toModel(room);
+		return new ResponseEntity<>(entityModelOfRoom, HttpStatus.OK);
 	}
 	
 	@GetMapping
