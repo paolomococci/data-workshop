@@ -27,6 +27,7 @@ import java.util.List;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
+import org.jooq.exception.DataAccessException;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,8 @@ public class CustomerService {
 	@Autowired
 	private DSLContext dslContext;
 
-	public Customer createCustomer(Customer customer) {
+	public Customer createCustomer(Customer customer) 
+			throws DataAccessException {
 		CustomerRecord customerRecord = (CustomerRecord) dslContext
 				.insertInto(CUSTOMER_DAO)
 				.set(CUSTOMER_DAO.FIRST_NAME, customer.getFirstName())
@@ -54,7 +56,8 @@ public class CustomerService {
 		return customer;
 	}
 	
-	public Customer readCustomer(ULong id) {
+	public Customer readCustomer(ULong id) 
+			throws DataAccessException {
 		Record record = dslContext.select()
 				.from(CUSTOMER_DAO)
 				.where(CUSTOMER_DAO.ID.eq(id))
@@ -65,7 +68,8 @@ public class CustomerService {
 		return null;
 	}
 	
-	public List<Customer> readAllCustomers() {
+	public List<Customer> readAllCustomers() 
+			throws DataAccessException {
 		List<Customer> customers = new ArrayList<Customer>();
 		Result<Record> records = dslContext
 				.select()
@@ -77,7 +81,8 @@ public class CustomerService {
 		return customers;
 	}
 	
-	public void updateCustomer(ULong id, Customer customer) {
+	public void updateCustomer(ULong id, Customer customer) 
+			throws DataAccessException {
 		dslContext.update(CUSTOMER_DAO)
 				.set(CUSTOMER_DAO.FIRST_NAME, customer.getFirstName())
 				.set(CUSTOMER_DAO.LAST_NAME, customer.getLastName())
@@ -88,13 +93,15 @@ public class CustomerService {
 				.execute();
 	}
 	
-	public void deleteCustomer(ULong id) {
+	public void deleteCustomer(ULong id) 
+			throws DataAccessException {
 		dslContext.deleteFrom(CUSTOMER_DAO)
 				.where(CUSTOMER_DAO.ID.equal(id))
 				.execute();
 	}
 	
-	private Customer getEntity(Record record) {
+	private Customer getEntity(Record record) 
+			throws DataAccessException {
 		ULong id = record.getValue(CUSTOMER_DAO.ID, ULong.class);
 		String firstName = record.getValue(CUSTOMER_DAO.FIRST_NAME, String.class);
 		String lastName = record.getValue(CUSTOMER_DAO.LAST_NAME, String.class);
