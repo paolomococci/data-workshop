@@ -54,8 +54,8 @@ public class CustomerRestController {
 			throws URISyntaxException {
 		  EntityModel<Customer> entityModelOfCustomer =
 				  customerRepresentationModelAssembler
-				  		.toModel(customerService.createCustomer(customer));		 
-		return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.CREATED);		
+				  		.toModel(customerService.createCustomer(customer));
+		return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "/{id}")
@@ -63,7 +63,7 @@ public class CustomerRestController {
 		Customer customer = customerService.readCustomer(id);
 		EntityModel<Customer> entityModelOfCustomer = 
 				customerRepresentationModelAssembler.toModel(customer);
-		return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);		
+		return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
 	}
 	
 	@GetMapping
@@ -77,13 +77,15 @@ public class CustomerRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(@RequestBody Customer customer, @PathVariable ULong id) 
 			throws URISyntaxException {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		Customer temp = customerService.readCustomer(id);
+		// TODO
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<?> delete(@PathVariable ULong id) 
 			throws URISyntaxException {
 		customerService.deleteCustomer(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }
