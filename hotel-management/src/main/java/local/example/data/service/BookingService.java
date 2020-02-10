@@ -27,6 +27,7 @@ import java.util.List;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
+import org.jooq.exception.DataAccessException;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,8 @@ public class BookingService {
 	@Autowired
 	private DSLContext dslContext;
 	
-	public Booking createBooking(Booking booking) {
+	public Booking createBooking(Booking booking) 
+			throws DataAccessException {
 		BookingRecord bookingRecord = (BookingRecord) dslContext
 				.insertInto(BOOKING_DAO)
 				.set(BOOKING_DAO.VACANCY, booking.getVacancy())
@@ -52,7 +54,8 @@ public class BookingService {
 		return booking;
 	}
 	
-	public Booking readBooking(ULong id) {
+	public Booking readBooking(ULong id) 
+			throws DataAccessException {
 		Record record = dslContext.select()
 				.from(BOOKING_DAO)
 				.where(BOOKING_DAO.ID.eq(id))
@@ -63,7 +66,8 @@ public class BookingService {
 		return null;
 	}
 	
-	public List<Booking> readAllReservations() {
+	public List<Booking> readAllReservations() 
+			throws DataAccessException {
 		List<Booking> reservations = new ArrayList<Booking>();
 		Result<Record> records = dslContext
 				.select()
@@ -75,7 +79,8 @@ public class BookingService {
 		return reservations;
 	}
 	
-	public void updateBooking(ULong id, Booking booking) {
+	public void updateBooking(ULong id, Booking booking) 
+			throws DataAccessException {
 		dslContext.update(BOOKING_DAO)
 				.set(BOOKING_DAO.VACANCY, booking.getVacancy())
 				.set(BOOKING_DAO.CHECK_IN, booking.getCheckIn())
@@ -84,13 +89,15 @@ public class BookingService {
 				.execute();
 	}
 	
-	public void deleteBooking(ULong id) {
+	public void deleteBooking(ULong id) 
+			throws DataAccessException {
 		dslContext.deleteFrom(BOOKING_DAO)
 				.where(BOOKING_DAO.ID.equal(id))
 				.execute();
 	}
 	
-	private Booking getEntity(Record record) {
+	private Booking getEntity(Record record) 
+			throws DataAccessException {
 		ULong id = record.getValue(BOOKING_DAO.ID, ULong.class);
 		String vacancy = record.getValue(BOOKING_DAO.VACANCY, String.class);
 		Date checkIn = record.getValue(BOOKING_DAO.CHECK_IN, Date.class);
