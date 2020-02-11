@@ -77,6 +77,7 @@ public class BookingRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(@RequestBody Booking booking, @PathVariable ULong id) 
 			throws URISyntaxException {
+		var temp = bookingService.readBooking(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
