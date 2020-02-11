@@ -77,9 +77,12 @@ public class CustomerRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(@RequestBody Customer customer, @PathVariable ULong id) 
 			throws URISyntaxException {
-		var temp = customerService.readCustomer(id);
-		// TODO
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		customerService.updateCustomer(id, customer);
+		var customerUpdated = customerService.readCustomer(id);
+		  EntityModel<Customer> entityModelOfCustomer =
+				  customerRepresentationModelAssembler
+				  		.toModel(customerService.createCustomer(customerUpdated));
+		return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path = "/{id}")
