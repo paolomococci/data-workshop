@@ -77,6 +77,7 @@ public class RoomRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(@RequestBody Room room, @PathVariable ULong id) 
 			throws URISyntaxException {
+		var temp = roomService.readRoom(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
