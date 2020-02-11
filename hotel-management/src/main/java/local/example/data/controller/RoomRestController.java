@@ -77,8 +77,12 @@ public class RoomRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(@RequestBody Room room, @PathVariable ULong id) 
 			throws URISyntaxException {
-		var temp = roomService.readRoom(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		roomService.updateRoom(id, room);
+		var roomUpdated = roomService.readRoom(id);
+		  EntityModel<Room> entityModelOfRoom =
+				  roomRepresentationModelAssembler
+				  		.toModel(roomService.createRoom(roomUpdated));
+		return new ResponseEntity<>(entityModelOfRoom, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path = "/{id}")
