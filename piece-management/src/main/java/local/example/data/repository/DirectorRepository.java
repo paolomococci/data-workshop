@@ -21,6 +21,6 @@ package local.example.data.repository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
-public class DirectorRepository {
+public interface DirectorRepository {
 
 }
