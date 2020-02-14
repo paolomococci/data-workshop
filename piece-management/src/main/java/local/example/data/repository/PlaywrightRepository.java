@@ -18,9 +18,16 @@
 
 package local.example.data.repository;
 
+import java.util.List;
+
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource
-public interface PlaywrightRepository {
+import local.example.data.entity.Playwright;
 
+@RepositoryRestResource
+public interface PlaywrightRepository 
+		extends PagingAndSortingRepository<Playwright, Long> {
+	List<Playwright> findByNickname(@Param("nickname") String nickname);
 }
