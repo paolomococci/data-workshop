@@ -19,8 +19,22 @@
 package local.example.data.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Producer {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Getter
+	private long id;
 
+	@Getter
+	@Setter
+	private String nickname;
 }
