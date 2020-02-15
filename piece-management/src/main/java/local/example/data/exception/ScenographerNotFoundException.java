@@ -22,4 +22,7 @@ public class ScenographerNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 798112120854703879L;
 
+	public ScenographerNotFoundException(Long id) {
+		super("could not find scenographer with id: " + id);
+	}
 }
