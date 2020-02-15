@@ -22,4 +22,7 @@ public class ProducerNotFoundException extends RuntimeException {
 	
 	private static final long serialVersionUID = 3050035448273951065L;
 
+	public ProducerNotFoundException(Long id) {
+		super("could not find producer with id: " + id);
+	}
 }
