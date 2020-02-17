@@ -18,9 +18,26 @@
 
 package local.example.data.assembler;
 
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-@Component
-public class DesignerRepresentationModelAssembler {
+import local.example.data.entity.Designer;
 
+@Component
+public class DesignerRepresentationModelAssembler 
+		implements RepresentationModelAssembler<Designer, EntityModel<Designer>> {
+
+	@Override
+	public EntityModel<Designer> toModel(Designer designer) {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public CollectionModel<EntityModel<Designer>> toCollectionModel(
+			Iterable<? extends Designer> designers) {
+		return RepresentationModelAssembler.super.toCollectionModel(designers);
+	}
 }
