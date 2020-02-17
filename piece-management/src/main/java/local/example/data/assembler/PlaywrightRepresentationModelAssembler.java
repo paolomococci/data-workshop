@@ -18,12 +18,16 @@
 
 package local.example.data.assembler;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 import local.example.data.entity.Playwright;
+import local.example.data.rest.controller.PlaywrightRestController;
 
 @Component
 public class PlaywrightRepresentationModelAssembler 
@@ -31,8 +35,9 @@ public class PlaywrightRepresentationModelAssembler
 
 	@Override
 	public EntityModel<Playwright> toModel(Playwright playwright) {
-		// TODO
-		return null;
+		return new EntityModel<>(playwright, 
+				linkTo(methodOn(PlaywrightRestController.class).read(playwright.getId())).withSelfRel(), 
+				linkTo(methodOn(PlaywrightRestController.class).readAll()).withRel("playwrights"));
 	}
 
 	@Override
