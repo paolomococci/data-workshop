@@ -18,11 +18,34 @@
 
 package local.example.data.rest.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import local.example.data.assembler.PlaywrightRepresentationModelAssembler;
+import local.example.data.repository.PlaywrightRepository;
 
 @RepositoryRestController
 @RequestMapping(path = "/api/playwrights")
 public class PlaywrightRestController {
 
+	@Autowired
+	PlaywrightRepository playwrightRepository;
+	
+	@Autowired
+	PlaywrightRepresentationModelAssembler playwrightRepresentationModelAssembler;
+	
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<?> read(@PathVariable Long id) {
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	}
+	
+	@GetMapping
+	public ResponseEntity<?> readAll() {
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	}
 }
