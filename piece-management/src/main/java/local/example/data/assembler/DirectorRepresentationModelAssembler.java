@@ -18,12 +18,16 @@
 
 package local.example.data.assembler;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 import local.example.data.entity.Director;
+import local.example.data.rest.controller.DirectorRestController;
 
 @Component
 public class DirectorRepresentationModelAssembler 
@@ -31,8 +35,9 @@ public class DirectorRepresentationModelAssembler
 
 	@Override
 	public EntityModel<Director> toModel(Director director) {
-		// TODO
-		return null;
+		return new EntityModel<>(director, 
+				linkTo(methodOn(DirectorRestController.class).read(director.getId())).withSelfRel(), 
+				linkTo(methodOn(DirectorRestController.class).readAll()).withRel("directors"));
 	}
 
 	@Override
