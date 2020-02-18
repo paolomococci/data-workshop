@@ -18,6 +18,8 @@
 
 package local.example.data.rest.controller;
 
+import java.net.URISyntaxException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
@@ -67,7 +69,9 @@ public class PlayerRestController {
 	}
 	
 	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<?> delete(@PathVariable Long id) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	public ResponseEntity<?> delete(@PathVariable Long id) 
+			throws URISyntaxException {
+		playerRepository.deleteById(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }
