@@ -22,6 +22,8 @@ import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -58,7 +60,11 @@ public class PlayerRestController {
 	
 	@GetMapping
 	public ResponseEntity<?> readAll() {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Iterable<Player> players = playerRepository.findAll();
+		CollectionModel<EntityModel<Player>> collectionModelOfPlayers;
+		collectionModelOfPlayers = playerRepresentationModelAssembler
+				.toCollectionModel(players);
+		return new ResponseEntity<>(collectionModelOfPlayers, HttpStatus.OK);
 	}
 	
 	@PutMapping(path = "/{id}")
