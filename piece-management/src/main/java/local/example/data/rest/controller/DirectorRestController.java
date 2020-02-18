@@ -22,6 +22,8 @@ import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -58,7 +60,11 @@ public class DirectorRestController {
 	
 	@GetMapping
 	public ResponseEntity<?> readAll() {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Iterable<Director> directors = directorRepository.findAll();
+		CollectionModel<EntityModel<Director>> collectionModelOfDirectors;
+		collectionModelOfDirectors = directorRepresentationModelAssembler
+				.toCollectionModel(directors);
+		return new ResponseEntity<>(collectionModelOfDirectors, HttpStatus.OK);
 	}
 	
 	@PutMapping(path = "/{id}")
