@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import local.example.data.assembler.PlayerRepresentationModelAssembler;
 import local.example.data.entity.Player;
+import local.example.data.exception.PlayerNotFoundException;
 import local.example.data.repository.PlayerRepository;
 
 @RepositoryRestController
@@ -55,7 +56,11 @@ public class PlayerRestController {
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Player player = playerRepository.findById(id)
+				.orElseThrow(() -> new PlayerNotFoundException(id));
+		EntityModel<Player> entityModelOfPlayer;
+		entityModelOfPlayer = playerRepresentationModelAssembler.toModel(player);
+		return new ResponseEntity<>(entityModelOfPlayer, HttpStatus.OK);
 	}
 	
 	@GetMapping
