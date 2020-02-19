@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import local.example.data.assembler.DirectorRepresentationModelAssembler;
 import local.example.data.entity.Director;
+import local.example.data.exception.DirectorNotFoundException;
 import local.example.data.repository.DirectorRepository;
 
 @RepositoryRestController
@@ -55,7 +56,11 @@ public class DirectorRestController {
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Director director = directorRepository.findById(id)
+				.orElseThrow(() -> new DirectorNotFoundException(id));
+		EntityModel<Director> entityModelOfDirector;
+		entityModelOfDirector = directorRepresentationModelAssembler.toModel(director);
+		return new ResponseEntity<>(entityModelOfDirector, HttpStatus.OK);
 	}
 	
 	@GetMapping
