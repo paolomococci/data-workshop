@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import local.example.data.assembler.DesignerRepresentationModelAssembler;
 import local.example.data.entity.Designer;
+import local.example.data.exception.DesignerNotFoundException;
 import local.example.data.repository.DesignerRepository;
 
 @RepositoryRestController
@@ -55,7 +56,11 @@ public class DesignerRestController {
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Designer designer = designerRepository.findById(id)
+				.orElseThrow(() -> new DesignerNotFoundException(id));
+		EntityModel<Designer> entityModelOfDesigner;
+		entityModelOfDesigner = designerRepresentationModelAssembler.toModel(designer);
+		return new ResponseEntity<>(entityModelOfDesigner, HttpStatus.OK);
 	}
 	
 	@GetMapping
