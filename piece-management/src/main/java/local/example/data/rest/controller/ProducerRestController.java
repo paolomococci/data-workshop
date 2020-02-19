@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import local.example.data.assembler.ProducerRepresentationModelAssembler;
 import local.example.data.entity.Producer;
+import local.example.data.exception.ProducerNotFoundException;
 import local.example.data.repository.ProducerRepository;
 
 @RepositoryRestController
@@ -55,7 +56,11 @@ public class ProducerRestController {
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Producer producer = producerRepository.findById(id)
+				.orElseThrow(() -> new ProducerNotFoundException(id));
+		EntityModel<Producer> entityModelOfProducer;
+		entityModelOfProducer = producerRepresentationModelAssembler.toModel(producer);
+		return new ResponseEntity<>(entityModelOfProducer, HttpStatus.OK);
 	}
 	
 	@GetMapping
