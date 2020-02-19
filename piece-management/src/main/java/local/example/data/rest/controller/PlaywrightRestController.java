@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import local.example.data.assembler.PlaywrightRepresentationModelAssembler;
 import local.example.data.entity.Playwright;
+import local.example.data.exception.PlaywrightNotFoundException;
 import local.example.data.repository.PlaywrightRepository;
 
 @RepositoryRestController
@@ -55,7 +56,11 @@ public class PlaywrightRestController {
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Playwright playwright = playwrightRepository.findById(id)
+				.orElseThrow(() -> new PlaywrightNotFoundException(id));
+		EntityModel<Playwright> entityModelOfPlaywright;
+		entityModelOfPlaywright = playwrightRepresentationModelAssembler.toModel(playwright);
+		return new ResponseEntity<>(entityModelOfPlaywright, HttpStatus.OK);
 	}
 	
 	@GetMapping
