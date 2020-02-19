@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import local.example.data.assembler.ScenographerRepresentationModelAssembler;
 import local.example.data.entity.Scenographer;
+import local.example.data.exception.ScenographerNotFoundException;
 import local.example.data.repository.ScenographerRepository;
 
 @RepositoryRestController
@@ -55,7 +56,11 @@ public class ScenographerRestController {
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Scenographer scenographer = scenographerRepository.findById(id)
+				.orElseThrow(() -> new ScenographerNotFoundException(id));
+		EntityModel<Scenographer> entityModelOfScenographer;
+		entityModelOfScenographer = scenographerRepresentationModelAssembler.toModel(scenographer);
+		return new ResponseEntity<>(entityModelOfScenographer, HttpStatus.OK);
 	}
 	
 	@GetMapping
