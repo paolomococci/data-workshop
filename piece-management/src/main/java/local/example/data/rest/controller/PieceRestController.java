@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import local.example.data.assembler.PieceRepresentationModelAssembler;
 import local.example.data.entity.Piece;
+import local.example.data.exception.PieceNotFoundException;
 import local.example.data.repository.PieceRepository;
 
 @RepositoryRestController
@@ -55,7 +56,11 @@ public class PieceRestController {
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Piece piece = pieceRepository.findById(id)
+				.orElseThrow(() -> new PieceNotFoundException(id));
+		EntityModel<Piece> entityModelOfPiece;
+		entityModelOfPiece = pieceRepresentationModelAssembler.toModel(piece);
+		return new ResponseEntity<>(entityModelOfPiece, HttpStatus.OK);
 	}
 	
 	@GetMapping
