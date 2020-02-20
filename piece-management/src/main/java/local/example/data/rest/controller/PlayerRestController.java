@@ -50,8 +50,12 @@ public class PlayerRestController {
 	PlayerRepresentationModelAssembler playerRepresentationModelAssembler;
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Player player) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	public ResponseEntity<?> create(@RequestBody Player player) 
+			throws URISyntaxException {
+		EntityModel<Player> entityModelOfPlayer;
+		entityModelOfPlayer = playerRepresentationModelAssembler
+				.toModel(player);
+		return new ResponseEntity<>(entityModelOfPlayer, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "/{id}")
