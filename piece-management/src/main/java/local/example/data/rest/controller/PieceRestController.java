@@ -50,8 +50,12 @@ public class PieceRestController {
 	PieceRepresentationModelAssembler pieceRepresentationModelAssembler;
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Piece piece) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	public ResponseEntity<?> create(@RequestBody Piece piece) 
+			throws URISyntaxException {
+		EntityModel<Piece> entityModelOfPiece;
+		entityModelOfPiece = pieceRepresentationModelAssembler
+				.toModel(piece);
+		return new ResponseEntity<>(entityModelOfPiece, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "/{id}")
