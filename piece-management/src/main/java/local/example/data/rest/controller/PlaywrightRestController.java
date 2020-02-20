@@ -50,8 +50,12 @@ public class PlaywrightRestController {
 	PlaywrightRepresentationModelAssembler playwrightRepresentationModelAssembler;
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Playwright playwright) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	public ResponseEntity<?> create(@RequestBody Playwright playwright) 
+			throws URISyntaxException {
+		EntityModel<Playwright> entityModelOfPlaywright;
+		entityModelOfPlaywright = playwrightRepresentationModelAssembler
+				.toModel(playwright);
+		return new ResponseEntity<>(entityModelOfPlaywright, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "/{id}")
