@@ -50,8 +50,12 @@ public class DesignerRestController {
 	DesignerRepresentationModelAssembler designerRepresentationModelAssembler;
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Designer designer) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	public ResponseEntity<?> create(@RequestBody Designer designer) 
+			throws URISyntaxException {
+		EntityModel<Designer> entityModelOfDesigner;
+		entityModelOfDesigner = designerRepresentationModelAssembler
+				.toModel(designer);
+		return new ResponseEntity<>(entityModelOfDesigner, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "/{id}")
