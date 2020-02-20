@@ -59,7 +59,8 @@ public class DesignerRestController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> read(@PathVariable Long id) {
+	public ResponseEntity<?> read(@PathVariable Long id) 
+			throws URISyntaxException {
 		Designer designer = designerRepository.findById(id)
 				.orElseThrow(() -> new DesignerNotFoundException(id));
 		EntityModel<Designer> entityModelOfDesigner;
@@ -68,7 +69,8 @@ public class DesignerRestController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> readAll() {
+	public ResponseEntity<?> readAll() 
+			throws URISyntaxException {
 		Iterable<Designer> designers = designerRepository.findAll();
 		CollectionModel<EntityModel<Designer>> collectionModelOfDesigners;
 		collectionModelOfDesigners = designerRepresentationModelAssembler
@@ -79,7 +81,8 @@ public class DesignerRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
 			@RequestBody Designer designer, 
-			@PathVariable Long id) {
+			@PathVariable Long id) 
+			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 	
