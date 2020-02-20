@@ -59,7 +59,8 @@ public class ScenographerRestController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> read(@PathVariable Long id) {
+	public ResponseEntity<?> read(@PathVariable Long id) 
+			throws URISyntaxException {
 		Scenographer scenographer = scenographerRepository.findById(id)
 				.orElseThrow(() -> new ScenographerNotFoundException(id));
 		EntityModel<Scenographer> entityModelOfScenographer;
@@ -68,7 +69,8 @@ public class ScenographerRestController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> readAll() {
+	public ResponseEntity<?> readAll() 
+			throws URISyntaxException {
 		Iterable<Scenographer> scenographers = scenographerRepository.findAll();
 		CollectionModel<EntityModel<Scenographer>> collectionModelOfScenographers;
 		collectionModelOfScenographers = scenographerRepresentationModelAssembler
@@ -79,7 +81,8 @@ public class ScenographerRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
 			@RequestBody Scenographer scenographer, 
-			@PathVariable Long id) {
+			@PathVariable Long id) 
+			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 	
