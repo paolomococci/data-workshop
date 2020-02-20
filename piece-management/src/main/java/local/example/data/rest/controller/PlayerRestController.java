@@ -59,7 +59,8 @@ public class PlayerRestController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> read(@PathVariable Long id) {
+	public ResponseEntity<?> read(@PathVariable Long id) 
+			throws URISyntaxException {
 		Player player = playerRepository.findById(id)
 				.orElseThrow(() -> new PlayerNotFoundException(id));
 		EntityModel<Player> entityModelOfPlayer;
@@ -68,7 +69,8 @@ public class PlayerRestController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> readAll() {
+	public ResponseEntity<?> readAll() 
+			throws URISyntaxException {
 		Iterable<Player> players = playerRepository.findAll();
 		CollectionModel<EntityModel<Player>> collectionModelOfPlayers;
 		collectionModelOfPlayers = playerRepresentationModelAssembler
@@ -79,7 +81,8 @@ public class PlayerRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
 			@RequestBody Player player, 
-			@PathVariable Long id) {
+			@PathVariable Long id) 
+			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 	
