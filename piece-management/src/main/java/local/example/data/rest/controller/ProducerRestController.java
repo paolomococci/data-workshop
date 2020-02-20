@@ -59,7 +59,8 @@ public class ProducerRestController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> read(@PathVariable Long id) {
+	public ResponseEntity<?> read(@PathVariable Long id) 
+			throws URISyntaxException {
 		Producer producer = producerRepository.findById(id)
 				.orElseThrow(() -> new ProducerNotFoundException(id));
 		EntityModel<Producer> entityModelOfProducer;
@@ -68,7 +69,8 @@ public class ProducerRestController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> readAll() {
+	public ResponseEntity<?> readAll() 
+			throws URISyntaxException {
 		Iterable<Producer> producers = producerRepository.findAll();
 		CollectionModel<EntityModel<Producer>> collectionModelOfProducers;
 		collectionModelOfProducers = producerRepresentationModelAssembler
@@ -79,7 +81,8 @@ public class ProducerRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
 			@RequestBody Producer producer, 
-			@PathVariable Long id) {
+			@PathVariable Long id) 
+			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 	
