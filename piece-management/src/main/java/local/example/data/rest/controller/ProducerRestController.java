@@ -50,8 +50,12 @@ public class ProducerRestController {
 	ProducerRepresentationModelAssembler producerRepresentationModelAssembler;
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Producer producer) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	public ResponseEntity<?> create(@RequestBody Producer producer) 
+			throws URISyntaxException {
+		EntityModel<Producer> entityModelOfProducer;
+		entityModelOfProducer = producerRepresentationModelAssembler
+				.toModel(producer);
+		return new ResponseEntity<>(entityModelOfProducer, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "/{id}")
