@@ -59,7 +59,8 @@ public class PieceRestController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> read(@PathVariable Long id) {
+	public ResponseEntity<?> read(@PathVariable Long id) 
+			throws URISyntaxException {
 		Piece piece = pieceRepository.findById(id)
 				.orElseThrow(() -> new PieceNotFoundException(id));
 		EntityModel<Piece> entityModelOfPiece;
@@ -68,7 +69,8 @@ public class PieceRestController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> readAll() {
+	public ResponseEntity<?> readAll() 
+			throws URISyntaxException {
 		Iterable<Piece> pieces = pieceRepository.findAll();
 		CollectionModel<EntityModel<Piece>> collectionModelOfPieces;
 		collectionModelOfPieces = pieceRepresentationModelAssembler
@@ -79,7 +81,8 @@ public class PieceRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
 			@RequestBody Piece piece, 
-			@PathVariable Long id) {
+			@PathVariable Long id) 
+			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 	
