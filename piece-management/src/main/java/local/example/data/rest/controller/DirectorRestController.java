@@ -59,7 +59,8 @@ public class DirectorRestController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> read(@PathVariable Long id) {
+	public ResponseEntity<?> read(@PathVariable Long id) 
+			throws URISyntaxException {
 		Director director = directorRepository.findById(id)
 				.orElseThrow(() -> new DirectorNotFoundException(id));
 		EntityModel<Director> entityModelOfDirector;
@@ -68,7 +69,8 @@ public class DirectorRestController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> readAll() {
+	public ResponseEntity<?> readAll() 
+			throws URISyntaxException {
 		Iterable<Director> directors = directorRepository.findAll();
 		CollectionModel<EntityModel<Director>> collectionModelOfDirectors;
 		collectionModelOfDirectors = directorRepresentationModelAssembler
@@ -79,7 +81,8 @@ public class DirectorRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
 			@RequestBody Director director, 
-			@PathVariable Long id) {
+			@PathVariable Long id) 
+			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 	
