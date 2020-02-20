@@ -50,8 +50,12 @@ public class DirectorRestController {
 	DirectorRepresentationModelAssembler directorRepresentationModelAssembler;
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Director director) {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	public ResponseEntity<?> create(@RequestBody Director director) 
+			throws URISyntaxException {
+		EntityModel<Director> entityModelOfDirector;
+		entityModelOfDirector = directorRepresentationModelAssembler
+				.toModel(director);
+		return new ResponseEntity<>(entityModelOfDirector, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "/{id}")
