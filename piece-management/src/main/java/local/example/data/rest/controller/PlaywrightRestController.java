@@ -59,7 +59,8 @@ public class PlaywrightRestController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> read(@PathVariable Long id) {
+	public ResponseEntity<?> read(@PathVariable Long id) 
+			throws URISyntaxException {
 		Playwright playwright = playwrightRepository.findById(id)
 				.orElseThrow(() -> new PlaywrightNotFoundException(id));
 		EntityModel<Playwright> entityModelOfPlaywright;
@@ -68,7 +69,8 @@ public class PlaywrightRestController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> readAll() {
+	public ResponseEntity<?> readAll() 
+			throws URISyntaxException {
 		Iterable<Playwright> playwrights = playwrightRepository.findAll();
 		CollectionModel<EntityModel<Playwright>> collectionModelOfPlaywrights;
 		collectionModelOfPlaywrights = playwrightRepresentationModelAssembler
@@ -79,7 +81,8 @@ public class PlaywrightRestController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
 			@RequestBody Playwright playwright, 
-			@PathVariable Long id) {
+			@PathVariable Long id) 
+			throws URISyntaxException {
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 	
