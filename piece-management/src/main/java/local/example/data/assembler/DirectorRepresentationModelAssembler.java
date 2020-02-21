@@ -21,6 +21,8 @@ package local.example.data.assembler;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+import java.net.URISyntaxException;
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -35,9 +37,15 @@ public class DirectorRepresentationModelAssembler
 
 	@Override
 	public EntityModel<Director> toModel(Director director) {
-		return new EntityModel<>(director, 
-				linkTo(methodOn(DirectorRestController.class).read(director.getId())).withSelfRel(), 
-				linkTo(methodOn(DirectorRestController.class).readAll()).withRel("directors"));
+		try {
+			return new EntityModel<>(director, 
+					linkTo(methodOn(DirectorRestController.class).read(director.getId())).withSelfRel(), 
+					linkTo(methodOn(DirectorRestController.class).readAll()).withRel("directors"));
+		} catch (URISyntaxException e) {
+			// TODO
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
