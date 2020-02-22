@@ -80,10 +80,21 @@ public class ProducerRestController {
 	
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
-			@RequestBody Producer producer, 
+			@RequestBody Producer producerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Producer temp = producerRepository.findById(id)
+				.map(producer -> {
+					producer.setNickname(producerUpdated.getNickname());
+					return producerRepository.save(producer);
+				})
+				.orElseGet(() -> {
+					return producerRepository.save(producerUpdated);
+				});
+		EntityModel<Producer> entityModelOfProducer;
+		entityModelOfProducer = producerRepresentationModelAssembler
+				.toModel(temp);
+		return new ResponseEntity<>(entityModelOfProducer, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path = "/{id}")
