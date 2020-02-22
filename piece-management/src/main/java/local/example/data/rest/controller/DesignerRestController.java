@@ -80,18 +80,19 @@ public class DesignerRestController {
 	
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
-			@RequestBody Designer designerUpdate, 
+			@RequestBody Designer designerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
 		Designer temp = designerRepository.findById(id)
 				.map(designer -> {
-					designer.setNickname(designerUpdate.getNickname());
+					designer.setNickname(designerUpdated.getNickname());
 					return designerRepository.save(designer);
 				}).orElseGet(() -> {
-					return designerRepository.save(designerUpdate);
+					return designerRepository.save(designerUpdated);
 				});
 		EntityModel<Designer> entityModelOfDesigner;
-		entityModelOfDesigner = designerRepresentationModelAssembler.toModel(temp);
+		entityModelOfDesigner = designerRepresentationModelAssembler
+				.toModel(temp);
 		return new ResponseEntity<>(entityModelOfDesigner, HttpStatus.OK);
 	}
 	
