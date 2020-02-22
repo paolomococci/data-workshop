@@ -80,10 +80,21 @@ public class DirectorRestController {
 	
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
-			@RequestBody Director director, 
+			@RequestBody Director directorUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Director temp = directorRepository.findById(id)
+				.map(director -> {
+					director.setNickname(directorUpdated.getNickname());
+					return directorRepository.save(director);
+				})
+				.orElseGet(() -> {
+					return directorRepository.save(directorUpdated);
+				});
+		EntityModel<Director> entityModelOfDirector;
+		entityModelOfDirector = directorRepresentationModelAssembler
+				.toModel(temp);
+		return new ResponseEntity<>(entityModelOfDirector, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path = "/{id}")
