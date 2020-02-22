@@ -80,10 +80,24 @@ public class PieceRestController {
 	
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
-			@RequestBody Piece piece, 
+			@RequestBody Piece pieceUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Piece temp = pieceRepository.findById(id)
+				.map(piece -> {
+					piece.setTitle(pieceUpdated.getTitle());
+					piece.setAct(pieceUpdated.getAct());
+					piece.setSession(pieceUpdated.getSession());
+					piece.setScript(pieceUpdated.getScript());
+					return pieceRepository.save(piece);
+				})
+				.orElseGet(() -> {
+					return pieceRepository.save(pieceUpdated);
+				});
+		EntityModel<Piece> entityModelOfPiece;
+		entityModelOfPiece = pieceRepresentationModelAssembler
+				.toModel(temp);
+		return new ResponseEntity<>(entityModelOfPiece, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path = "/{id}")
