@@ -80,10 +80,21 @@ public class ScenographerRestController {
 	
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> update(
-			@RequestBody Scenographer scenographer, 
+			@RequestBody Scenographer scenographerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+		Scenographer temp = scenographerRepository.findById(id)
+				.map(scenographer -> {
+					scenographer.setNickname(scenographerUpdated.getNickname());
+					return scenographerRepository.save(scenographer);
+				})
+				.orElseGet(() -> {
+					return scenographerRepository.save(scenographerUpdated);
+				});
+		EntityModel<Scenographer> entityModelOfScenographer;
+		entityModelOfScenographer = scenographerRepresentationModelAssembler
+				.toModel(temp);
+		return new ResponseEntity<>(entityModelOfScenographer, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path = "/{id}")
