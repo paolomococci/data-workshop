@@ -68,6 +68,16 @@ public class PlayerRestController {
 		return new ResponseEntity<>(entityModelOfPlayer, HttpStatus.OK);
 	}
 	
+	@GetMapping(path = "/nicknames/{nickname}")
+	public ResponseEntity<?> readByNickname(@PathVariable String nickname) 
+			throws URISyntaxException {
+		Iterable<Player> players = playerRepository.findByNickname(nickname);
+		CollectionModel<EntityModel<Player>> collectionModelOfPlayers;
+		collectionModelOfPlayers = playerRepresentationModelAssembler
+				.toCollectionModel(players);
+		return new ResponseEntity<>(collectionModelOfPlayers, HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public ResponseEntity<?> readAll() 
 			throws URISyntaxException {
