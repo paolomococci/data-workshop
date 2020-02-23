@@ -61,7 +61,7 @@ public class ScenographerRestController {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) 
 			throws URISyntaxException {
-		Scenographer scenographer = scenographerRepository.findById(id)
+		var scenographer = scenographerRepository.findById(id)
 				.orElseThrow(() -> new ScenographerNotFoundException(id));
 		EntityModel<Scenographer> entityModelOfScenographer;
 		entityModelOfScenographer = scenographerRepresentationModelAssembler.toModel(scenographer);
@@ -93,7 +93,7 @@ public class ScenographerRestController {
 			@RequestBody Scenographer scenographerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		Scenographer temp = scenographerRepository.findById(id)
+		var temporaryEntityOfScenographer = scenographerRepository.findById(id)
 				.map(scenographer -> {
 					scenographer.setNickname(scenographerUpdated.getNickname());
 					return scenographerRepository.save(scenographer);
@@ -103,7 +103,7 @@ public class ScenographerRestController {
 				});
 		EntityModel<Scenographer> entityModelOfScenographer;
 		entityModelOfScenographer = scenographerRepresentationModelAssembler
-				.toModel(temp);
+				.toModel(temporaryEntityOfScenographer);
 		return new ResponseEntity<>(entityModelOfScenographer, HttpStatus.OK);
 	}
 	
