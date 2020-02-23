@@ -68,6 +68,16 @@ public class ProducerRestController {
 		return new ResponseEntity<>(entityModelOfProducer, HttpStatus.OK);
 	}
 	
+	@GetMapping(path = "/nicknames/{nickname}")
+	public ResponseEntity<?> readByNickname(@PathVariable String nickname) 
+			throws URISyntaxException {
+		Iterable<Producer> producers = producerRepository.findByNickname(nickname);
+		CollectionModel<EntityModel<Producer>> collectionModelOfProducers;
+		collectionModelOfProducers = producerRepresentationModelAssembler
+				.toCollectionModel(producers);
+		return new ResponseEntity<>(collectionModelOfProducers, HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public ResponseEntity<?> readAll() 
 			throws URISyntaxException {
