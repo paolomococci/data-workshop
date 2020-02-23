@@ -30,4 +30,7 @@ import local.example.data.entity.Piece;
 public interface PieceRepository 
 		extends PagingAndSortingRepository<Piece, Long> {
 	List<Piece> findByTitle(@Param("title") String title);
+	List<Piece> findByAct(@Param("act") String act);
+	List<Piece> findBySession(@Param("session") String session);
+	List<Piece> findByScript(@Param("script") String script);
 }
