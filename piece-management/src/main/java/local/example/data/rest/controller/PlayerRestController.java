@@ -61,7 +61,7 @@ public class PlayerRestController {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) 
 			throws URISyntaxException {
-		Player player = playerRepository.findById(id)
+		var player = playerRepository.findById(id)
 				.orElseThrow(() -> new PlayerNotFoundException(id));
 		EntityModel<Player> entityModelOfPlayer;
 		entityModelOfPlayer = playerRepresentationModelAssembler.toModel(player);
@@ -93,7 +93,7 @@ public class PlayerRestController {
 			@RequestBody Player playerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		Player temp = playerRepository.findById(id)
+		var temporaryEntityOfPlayer = playerRepository.findById(id)
 				.map(player -> {
 					player.setNickname(playerUpdated.getNickname());
 					return playerRepository.save(player);
@@ -103,7 +103,7 @@ public class PlayerRestController {
 				});
 		EntityModel<Player> entityModelOfPlayer;
 		entityModelOfPlayer = playerRepresentationModelAssembler
-				.toModel(temp);
+				.toModel(temporaryEntityOfPlayer);
 		return new ResponseEntity<>(entityModelOfPlayer, HttpStatus.OK);
 	}
 	
