@@ -61,11 +61,51 @@ public class PieceRestController {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) 
 			throws URISyntaxException {
-		Piece piece = pieceRepository.findById(id)
+		var piece = pieceRepository.findById(id)
 				.orElseThrow(() -> new PieceNotFoundException(id));
 		EntityModel<Piece> entityModelOfPiece;
 		entityModelOfPiece = pieceRepresentationModelAssembler.toModel(piece);
 		return new ResponseEntity<>(entityModelOfPiece, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/titles/{title}")
+	public ResponseEntity<?> readByNickname(@PathVariable String title) 
+			throws URISyntaxException {
+		Iterable<Piece> pieces = pieceRepository.findByTitle(title);
+		CollectionModel<EntityModel<Piece>> collectionModelOfPieces;
+		collectionModelOfPieces = pieceRepresentationModelAssembler
+				.toCollectionModel(pieces);
+		return new ResponseEntity<>(collectionModelOfPieces, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/acts/{act}")
+	public ResponseEntity<?> readByAct(@PathVariable String act) 
+			throws URISyntaxException {
+		Iterable<Piece> pieces = pieceRepository.findByTitle(act);
+		CollectionModel<EntityModel<Piece>> collectionModelOfPieces;
+		collectionModelOfPieces = pieceRepresentationModelAssembler
+				.toCollectionModel(pieces);
+		return new ResponseEntity<>(collectionModelOfPieces, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/sessions/{session}")
+	public ResponseEntity<?> readBySession(@PathVariable String session) 
+			throws URISyntaxException {
+		Iterable<Piece> pieces = pieceRepository.findByTitle(session);
+		CollectionModel<EntityModel<Piece>> collectionModelOfPieces;
+		collectionModelOfPieces = pieceRepresentationModelAssembler
+				.toCollectionModel(pieces);
+		return new ResponseEntity<>(collectionModelOfPieces, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/scripts/{script}")
+	public ResponseEntity<?> readByScript(@PathVariable String script) 
+			throws URISyntaxException {
+		Iterable<Piece> pieces = pieceRepository.findByTitle(script);
+		CollectionModel<EntityModel<Piece>> collectionModelOfPieces;
+		collectionModelOfPieces = pieceRepresentationModelAssembler
+				.toCollectionModel(pieces);
+		return new ResponseEntity<>(collectionModelOfPieces, HttpStatus.OK);
 	}
 	
 	@GetMapping
@@ -83,7 +123,7 @@ public class PieceRestController {
 			@RequestBody Piece pieceUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		Piece temp = pieceRepository.findById(id)
+		var temp = pieceRepository.findById(id)
 				.map(piece -> {
 					piece.setTitle(pieceUpdated.getTitle());
 					piece.setAct(pieceUpdated.getAct());
