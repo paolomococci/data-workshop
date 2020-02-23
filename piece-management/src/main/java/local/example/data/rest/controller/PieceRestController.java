@@ -123,7 +123,7 @@ public class PieceRestController {
 			@RequestBody Piece pieceUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		var temp = pieceRepository.findById(id)
+		var temporaryEntityOfPiece = pieceRepository.findById(id)
 				.map(piece -> {
 					piece.setTitle(pieceUpdated.getTitle());
 					piece.setAct(pieceUpdated.getAct());
@@ -136,7 +136,7 @@ public class PieceRestController {
 				});
 		EntityModel<Piece> entityModelOfPiece;
 		entityModelOfPiece = pieceRepresentationModelAssembler
-				.toModel(temp);
+				.toModel(temporaryEntityOfPiece);
 		return new ResponseEntity<>(entityModelOfPiece, HttpStatus.OK);
 	}
 	
