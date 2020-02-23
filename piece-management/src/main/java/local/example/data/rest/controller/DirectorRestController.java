@@ -68,6 +68,16 @@ public class DirectorRestController {
 		return new ResponseEntity<>(entityModelOfDirector, HttpStatus.OK);
 	}
 	
+	@GetMapping(path = "/nicknames/{nickname}")
+	public ResponseEntity<?> readByNickname(@PathVariable String nickname)
+			throws URISyntaxException {
+		Iterable<Director> directors = directorRepository.findByNickname(nickname);
+		CollectionModel<EntityModel<Director>> collectionModelOfDirectors;
+		collectionModelOfDirectors = directorRepresentationModelAssembler
+				.toCollectionModel(directors);
+		return new ResponseEntity<>(collectionModelOfDirectors, HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public ResponseEntity<?> readAll() 
 			throws URISyntaxException {
