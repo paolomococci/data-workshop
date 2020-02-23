@@ -61,7 +61,7 @@ public class PlaywrightRestController {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) 
 			throws URISyntaxException {
-		Playwright playwright = playwrightRepository.findById(id)
+		var playwright = playwrightRepository.findById(id)
 				.orElseThrow(() -> new PlaywrightNotFoundException(id));
 		EntityModel<Playwright> entityModelOfPlaywright;
 		entityModelOfPlaywright = playwrightRepresentationModelAssembler.toModel(playwright);
@@ -93,7 +93,7 @@ public class PlaywrightRestController {
 			@RequestBody Playwright playwrightUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		Playwright temp = playwrightRepository.findById(id)
+		var temporaryEntityOfPlaywright = playwrightRepository.findById(id)
 				.map(playwright -> {
 					playwright.setNickname(playwrightUpdated.getNickname());
 					return playwrightRepository.save(playwright);
@@ -103,7 +103,7 @@ public class PlaywrightRestController {
 				});
 		EntityModel<Playwright> entityModelOfPlaywright;
 		entityModelOfPlaywright = playwrightRepresentationModelAssembler
-				.toModel(temp);
+				.toModel(temporaryEntityOfPlaywright);
 		return new ResponseEntity<>(entityModelOfPlaywright, HttpStatus.OK);
 	}
 	
