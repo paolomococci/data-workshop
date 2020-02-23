@@ -61,7 +61,7 @@ public class ProducerRestController {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) 
 			throws URISyntaxException {
-		Producer producer = producerRepository.findById(id)
+		var producer = producerRepository.findById(id)
 				.orElseThrow(() -> new ProducerNotFoundException(id));
 		EntityModel<Producer> entityModelOfProducer;
 		entityModelOfProducer = producerRepresentationModelAssembler.toModel(producer);
@@ -93,7 +93,7 @@ public class ProducerRestController {
 			@RequestBody Producer producerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		Producer temp = producerRepository.findById(id)
+		var temporaryEntityOfProducer = producerRepository.findById(id)
 				.map(producer -> {
 					producer.setNickname(producerUpdated.getNickname());
 					return producerRepository.save(producer);
@@ -103,7 +103,7 @@ public class ProducerRestController {
 				});
 		EntityModel<Producer> entityModelOfProducer;
 		entityModelOfProducer = producerRepresentationModelAssembler
-				.toModel(temp);
+				.toModel(temporaryEntityOfProducer);
 		return new ResponseEntity<>(entityModelOfProducer, HttpStatus.OK);
 	}
 	
