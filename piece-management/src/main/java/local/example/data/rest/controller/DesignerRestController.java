@@ -61,7 +61,7 @@ public class DesignerRestController {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) 
 			throws URISyntaxException {
-		Designer designer = designerRepository.findById(id)
+		var designer = designerRepository.findById(id)
 				.orElseThrow(() -> new DesignerNotFoundException(id));
 		EntityModel<Designer> entityModelOfDesigner;
 		entityModelOfDesigner = designerRepresentationModelAssembler.toModel(designer);
@@ -93,7 +93,7 @@ public class DesignerRestController {
 			@RequestBody Designer designerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		Designer temp = designerRepository.findById(id)
+		var temporaryEntityOfDesigner = designerRepository.findById(id)
 				.map(designer -> {
 					designer.setNickname(designerUpdated.getNickname());
 					return designerRepository.save(designer);
@@ -102,7 +102,7 @@ public class DesignerRestController {
 				});
 		EntityModel<Designer> entityModelOfDesigner;
 		entityModelOfDesigner = designerRepresentationModelAssembler
-				.toModel(temp);
+				.toModel(temporaryEntityOfDesigner);
 		return new ResponseEntity<>(entityModelOfDesigner, HttpStatus.OK);
 	}
 	
