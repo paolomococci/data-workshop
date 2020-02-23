@@ -61,7 +61,7 @@ public class DirectorRestController {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) 
 			throws URISyntaxException {
-		Director director = directorRepository.findById(id)
+		var director = directorRepository.findById(id)
 				.orElseThrow(() -> new DirectorNotFoundException(id));
 		EntityModel<Director> entityModelOfDirector;
 		entityModelOfDirector = directorRepresentationModelAssembler.toModel(director);
@@ -93,7 +93,7 @@ public class DirectorRestController {
 			@RequestBody Director directorUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		Director temp = directorRepository.findById(id)
+		var temporaryEntityOfDirector = directorRepository.findById(id)
 				.map(director -> {
 					director.setNickname(directorUpdated.getNickname());
 					return directorRepository.save(director);
@@ -103,7 +103,7 @@ public class DirectorRestController {
 				});
 		EntityModel<Director> entityModelOfDirector;
 		entityModelOfDirector = directorRepresentationModelAssembler
-				.toModel(temp);
+				.toModel(temporaryEntityOfDirector);
 		return new ResponseEntity<>(entityModelOfDirector, HttpStatus.OK);
 	}
 	
