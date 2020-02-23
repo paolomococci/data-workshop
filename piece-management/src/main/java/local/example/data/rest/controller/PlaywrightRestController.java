@@ -68,6 +68,16 @@ public class PlaywrightRestController {
 		return new ResponseEntity<>(entityModelOfPlaywright, HttpStatus.OK);
 	}
 	
+	@GetMapping(path = "/nicknames/{nickname}")
+	public ResponseEntity<?> readByNickname(@PathVariable String nickname) 
+			throws URISyntaxException {
+		Iterable<Playwright> playwrights = playwrightRepository.findByNickname(nickname);
+		CollectionModel<EntityModel<Playwright>> collectionModelOfPlaywrights;
+		collectionModelOfPlaywrights = playwrightRepresentationModelAssembler
+				.toCollectionModel(playwrights);
+		return new ResponseEntity<>(collectionModelOfPlaywrights, HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public ResponseEntity<?> readAll() 
 			throws URISyntaxException {
