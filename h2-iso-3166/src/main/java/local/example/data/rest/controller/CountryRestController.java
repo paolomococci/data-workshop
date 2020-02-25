@@ -18,6 +18,20 @@
 
 package local.example.data.rest.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import local.example.data.assembler.CountryRepresentationModelAssembler;
+import local.example.data.repository.CountryRestRepository;
+
+@RepositoryRestController
+@RequestMapping(path = "/api/countries")
 public class CountryRestController {
 
+	@Autowired
+	CountryRestRepository countryRestRepository;
+	
+	@Autowired
+	CountryRepresentationModelAssembler countryRepresentationModelAssembler;
 }
