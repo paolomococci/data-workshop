@@ -18,6 +18,20 @@
 
 package local.example.data.repository;
 
-public interface CountryRestRepository {
+import java.util.List;
 
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import local.example.data.entity.Country;
+
+@RepositoryRestResource
+public interface CountryRestRepository 
+		extends PagingAndSortingRepository<Country, Long> {
+
+	List<Country> findByName(@Param("name") String name);
+	List<Country> findByAlphaTwo(@Param("alphaTwo") String alphaTwo);
+	List<Country> findByAlphaThree(@Param("alphaThree") String alphaThree);
+	List<Country> findByCountryId(@Param("countryId") Integer countryId);
 }
