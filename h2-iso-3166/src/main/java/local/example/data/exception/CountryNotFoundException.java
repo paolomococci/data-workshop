@@ -18,6 +18,12 @@
 
 package local.example.data.exception;
 
-public class CountryNotFoundException {
+public class CountryNotFoundException 
+		extends RuntimeException {
+	
+	private static final long serialVersionUID = 4993195692810717622L;
 
+	public CountryNotFoundException(Long id) {
+		super("could not find country with id: " + id);
+	}
 }
