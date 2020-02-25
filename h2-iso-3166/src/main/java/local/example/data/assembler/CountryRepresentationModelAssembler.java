@@ -18,6 +18,26 @@
 
 package local.example.data.assembler;
 
-public class CountryRepresentationModelAssembler {
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.RepresentationModelAssembler;
+import org.springframework.stereotype.Component;
 
+import local.example.data.entity.Country;
+
+@Component
+public class CountryRepresentationModelAssembler 
+		implements RepresentationModelAssembler<Country, EntityModel<Country>> {
+
+	@Override
+	public EntityModel<Country> toModel(Country entity) {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public CollectionModel<EntityModel<Country>> toCollectionModel(Iterable<? extends Country> countries) {
+		// TODO
+		return RepresentationModelAssembler.super.toCollectionModel(countries);
+	}
 }
