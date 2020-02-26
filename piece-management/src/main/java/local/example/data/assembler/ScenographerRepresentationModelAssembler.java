@@ -42,10 +42,9 @@ public class ScenographerRepresentationModelAssembler
 					linkTo(methodOn(ScenographerRestController.class).read(scenographer.getId())).withSelfRel(), 
 					linkTo(methodOn(ScenographerRestController.class).readAll()).withRel("scenographers"));
 		} catch (URISyntaxException e) {
-			// TODO
 			e.printStackTrace();
 		}
-		return null;
+		return new EntityModel<>(new Scenographer());
 	}
 
 	@Override
