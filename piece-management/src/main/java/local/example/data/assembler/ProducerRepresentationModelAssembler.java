@@ -42,10 +42,9 @@ public class ProducerRepresentationModelAssembler
 					linkTo(methodOn(ProducerRestController.class).read(producer.getId())).withSelfRel(), 
 					linkTo(methodOn(ProducerRestController.class).readAll()).withRel("producers"));
 		} catch (URISyntaxException e) {
-			// TODO
 			e.printStackTrace();
 		}
-		return null;
+		return new EntityModel<>(new Producer());
 	}
 
 	@Override
