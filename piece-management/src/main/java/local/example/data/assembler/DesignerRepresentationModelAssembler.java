@@ -41,11 +41,10 @@ public class DesignerRepresentationModelAssembler
 			return new EntityModel<>(designer, 
 					linkTo(methodOn(DesignerRestController.class).read(designer.getId())).withSelfRel(), 
 					linkTo(methodOn(DesignerRestController.class).readAll()).withRel("designers"));
-		} catch (URISyntaxException uriSyntaxException) {
-			// TODO
-			uriSyntaxException.printStackTrace();
+		} catch (URISyntaxException uriException) {
+			uriException.printStackTrace();
 		}
-		return null;
+		return new EntityModel<>(new Designer());
 	}
 
 	@Override
