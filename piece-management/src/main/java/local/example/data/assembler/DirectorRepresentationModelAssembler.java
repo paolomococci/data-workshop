@@ -42,10 +42,9 @@ public class DirectorRepresentationModelAssembler
 					linkTo(methodOn(DirectorRestController.class).read(director.getId())).withSelfRel(), 
 					linkTo(methodOn(DirectorRestController.class).readAll()).withRel("directors"));
 		} catch (URISyntaxException e) {
-			// TODO
 			e.printStackTrace();
 		}
-		return null;
+		return new EntityModel<>(new Director());
 	}
 
 	@Override
