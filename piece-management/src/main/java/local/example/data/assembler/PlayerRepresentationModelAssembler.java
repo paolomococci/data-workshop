@@ -42,10 +42,9 @@ public class PlayerRepresentationModelAssembler
 					linkTo(methodOn(PlayerRestController.class).read(player.getId())).withSelfRel(), 
 					linkTo(methodOn(PlayerRestController.class).readAll()).withRel("players"));
 		} catch (URISyntaxException e) {
-			// TODO
 			e.printStackTrace();
 		}
-		return null;
+		return new EntityModel<>(new Player());
 	}
 
 	@Override
