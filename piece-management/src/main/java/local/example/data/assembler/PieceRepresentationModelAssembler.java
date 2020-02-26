@@ -42,10 +42,9 @@ public class PieceRepresentationModelAssembler
 					linkTo(methodOn(PieceRestController.class).read(piece.getId())).withSelfRel(), 
 					linkTo(methodOn(PieceRestController.class).readAll()).withRel("pieces"));
 		} catch (URISyntaxException e) {
-			// TODO
 			e.printStackTrace();
 		}
-		return null;
+		return new EntityModel<>(new Piece());
 	}
 
 	@Override
