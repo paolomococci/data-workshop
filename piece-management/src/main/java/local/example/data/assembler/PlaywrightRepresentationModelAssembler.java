@@ -42,10 +42,9 @@ public class PlaywrightRepresentationModelAssembler
 					linkTo(methodOn(PlaywrightRestController.class).read(playwright.getId())).withSelfRel(), 
 					linkTo(methodOn(PlaywrightRestController.class).readAll()).withRel("playwrights"));
 		} catch (URISyntaxException e) {
-			// TODO
 			e.printStackTrace();
 		}
-		return null;
+		return new EntityModel<>(new Playwright());
 	}
 
 	@Override
