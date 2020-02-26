@@ -18,11 +18,25 @@
 
 package local.example.data.rest.controller;
 
+import java.net.URISyntaxException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import local.example.data.assembler.CountryRepresentationModelAssembler;
+import local.example.data.entity.Country;
+import local.example.data.exception.CountryNotFoundException;
 import local.example.data.repository.CountryRestRepository;
 
 @RepositoryRestController
@@ -34,4 +48,101 @@ public class CountryRestController {
 	
 	@Autowired
 	CountryRepresentationModelAssembler countryRepresentationModelAssembler;
+
+	@PostMapping
+	public ResponseEntity<?> create(@RequestBody Country country) 
+			throws URISyntaxException {
+		EntityModel<Country> entityModelOfCountry;
+		entityModelOfCountry = countryRepresentationModelAssembler
+				.toModel(country);
+		return new ResponseEntity<>(entityModelOfCountry, HttpStatus.CREATED);
+	}
+
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<?> read(@PathVariable Long id) 
+			throws URISyntaxException {
+		var country = countryRestRepository.findById(id)
+				.orElseThrow(() -> new CountryNotFoundException(id));
+		EntityModel<Country> entityModelOfCountry;
+		entityModelOfCountry = countryRepresentationModelAssembler.toModel(country);
+		return new ResponseEntity<>(entityModelOfCountry, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/names/{name}")
+	public ResponseEntity<?> readByName(@PathVariable String name) 
+			throws URISyntaxException {
+		Iterable<Country> countries = countryRestRepository.findByName(name);
+		CollectionModel<EntityModel<Country>> collectionModelOfCountries;
+		collectionModelOfCountries = countryRepresentationModelAssembler
+				.toCollectionModel(countries);
+		return new ResponseEntity<>(collectionModelOfCountries, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/alpha2/{alphaTwo}")
+	public ResponseEntity<?> readByAlphaTwo(@PathVariable String alphaTwo) 
+			throws URISyntaxException {
+		Iterable<Country> countries = countryRestRepository.findByAlphaTwo(alphaTwo);
+		CollectionModel<EntityModel<Country>> collectionModelOfCountries;
+		collectionModelOfCountries = countryRepresentationModelAssembler
+				.toCollectionModel(countries);
+		return new ResponseEntity<>(collectionModelOfCountries, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/alpha3/{alphaThree}")
+	public ResponseEntity<?> readByAlphaThree(@PathVariable String alphaThree) 
+			throws URISyntaxException {
+		Iterable<Country> countries = countryRestRepository.findByAlphaThree(alphaThree);
+		CollectionModel<EntityModel<Country>> collectionModelOfCountries;
+		collectionModelOfCountries = countryRepresentationModelAssembler
+				.toCollectionModel(countries);
+		return new ResponseEntity<>(collectionModelOfCountries, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/countryIds/{countryId}")
+	public ResponseEntity<?> readByCountryId(@PathVariable Integer countryId) 
+			throws URISyntaxException {
+		Iterable<Country> countries = countryRestRepository.findByCountryId(countryId);
+		CollectionModel<EntityModel<Country>> collectionModelOfCountries;
+		collectionModelOfCountries = countryRepresentationModelAssembler
+				.toCollectionModel(countries);
+		return new ResponseEntity<>(collectionModelOfCountries, HttpStatus.OK);
+	}
+
+	@GetMapping
+	public ResponseEntity<?> readAll() 
+			throws URISyntaxException {
+		Iterable<Country> countries = countryRestRepository.findAll();
+		CollectionModel<EntityModel<Country>> collectionModelOfCountries;
+		collectionModelOfCountries = countryRepresentationModelAssembler
+				.toCollectionModel(countries);
+		return new ResponseEntity<>(collectionModelOfCountries, HttpStatus.OK);
+	}
+
+	@PutMapping(path = "/{id}")
+	public ResponseEntity<?> update(
+			@RequestBody Country countryUpdated, 
+			@PathVariable Long id) 
+			throws URISyntaxException {
+		var temporaryEntityOfCountry = countryRestRepository.findById(id)
+				.map(country -> {
+					country.setName(countryUpdated.getName());
+					country.setAlphaTwo(countryUpdated.getAlphaTwo());
+					country.setAlphaThree(countryUpdated.getAlphaThree());
+					country.setCountryId(countryUpdated.getCountryId());
+					return countryRestRepository.save(country);
+				}).orElseGet(() -> {
+					return countryRestRepository.save(countryUpdated);
+				});
+		EntityModel<Country> entityModelOfCountry;
+		entityModelOfCountry = countryRepresentationModelAssembler
+				.toModel(temporaryEntityOfCountry);
+		return new ResponseEntity<>(entityModelOfCountry, HttpStatus.OK);
+	}
+
+	@DeleteMapping(path = "/{id}")
+	public ResponseEntity<?> delete(@PathVariable Long id) 
+			throws URISyntaxException {
+		countryRestRepository.deleteById(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 }
