@@ -18,6 +18,22 @@
 
 package local.example.data.repository;
 
-public class CountryRepositoryMockMvcTests {
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class CountryRepositoryMockMvcTests {
+	
+	@Autowired
+	CountryRestRepository countryRepository;
+	
+	@Test
+	public void contextTest() 
+			throws Exception {
+		assertThat(countryRepository)
+			.isNotNull();
+	}
 }
