@@ -29,7 +29,7 @@ public class DesignerRepositoryMockMvcTests {
 	
 	@Autowired
 	DesignerRepository designerRepository;
-	
+
 	@Test
 	public void contextTest() 
 			throws Exception {
