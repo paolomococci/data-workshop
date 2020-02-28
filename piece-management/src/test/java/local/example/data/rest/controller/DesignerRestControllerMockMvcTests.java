@@ -32,13 +32,13 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class DesignerRestControllerMockMvcTests {
-	
+
 	@Autowired
 	MockMvc mockMvc;
-	
+
 	@Autowired
 	DesignerRestController designerRestController;
-	
+
 	@Test
 	public void contextTest() 
 			throws Exception {
