@@ -19,13 +19,21 @@
 package local.example.data.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 public class DirectorRepositoryMockMvcTests {
+
+	@Autowired
+	MockMvc mockMvc;
 
 	@Autowired
 	DirectorRepository directorRepository;
@@ -40,30 +48,37 @@ public class DirectorRepositoryMockMvcTests {
 	@Test
 	public void createTest() 
 			throws Exception {
-		
+		// TODO
 	}
 
 	@Test
 	public void readTest() 
 			throws Exception {
-		
+		// TODO
 	}
 
 	@Test
 	public void readAllTest() 
 			throws Exception {
-		
+		// TODO
 	}
 
 	@Test
 	public void updateTest() 
 			throws Exception {
-		
+		// TODO
 	}
 
 	@Test
 	public void deleteTest() 
 			throws Exception {
-		
+		// TODO
+		var mvcResult = mockMvc
+				.perform(post("/directors").content(""))
+				.andExpect(status().isCreated())
+				.andReturn();
+		var result = mvcResult.getResponse().getHeader("");
+		mockMvc.perform(delete(result)).andExpect(status().isNoContent());
+		mockMvc.perform(get(result)).andExpect(status().isNotFound());
 	}
 }
