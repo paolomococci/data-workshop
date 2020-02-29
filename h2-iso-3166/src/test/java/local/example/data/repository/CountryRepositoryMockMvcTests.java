@@ -29,17 +29,47 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CountryRepositoryMockMvcTests {
-	
+
 	@Autowired
 	MockMvc mockMvc;
-	
+
 	@Autowired
 	CountryRestRepository countryRepository;
-	
+
 	@Test
 	public void contextTest() 
 			throws Exception {
 		assertThat(countryRepository)
 			.isNotNull();
+	}
+
+	@Test
+	public void createTest() 
+			throws Exception {
+		
+	}
+
+	@Test
+	public void readTest() 
+			throws Exception {
+		
+	}
+
+	@Test
+	public void readAllTest() 
+			throws Exception {
+		
+	}
+
+	@Test
+	public void updateTest() 
+			throws Exception {
+		
+	}
+
+	@Test
+	public void DeleteTest() 
+			throws Exception {
+		
 	}
 }
