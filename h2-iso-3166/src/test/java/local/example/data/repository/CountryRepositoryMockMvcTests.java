@@ -68,7 +68,7 @@ public class CountryRepositoryMockMvcTests {
 	}
 
 	@Test
-	public void DeleteTest() 
+	public void deleteTest() 
 			throws Exception {
 		
 	}
