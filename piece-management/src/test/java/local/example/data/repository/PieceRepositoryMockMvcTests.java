@@ -36,4 +36,34 @@ public class PieceRepositoryMockMvcTests {
 		assertThat(pieceRepository)
 			.isNotNull();
 	}
+
+	@Test
+	public void createTest() 
+			throws Exception {
+		
+	}
+
+	@Test
+	public void readTest() 
+			throws Exception {
+		
+	}
+
+	@Test
+	public void readAllTest() 
+			throws Exception {
+		
+	}
+
+	@Test
+	public void updateTest() 
+			throws Exception {
+		
+	}
+
+	@Test
+	public void deleteTest() 
+			throws Exception {
+		
+	}
 }
