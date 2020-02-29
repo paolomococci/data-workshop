@@ -74,7 +74,7 @@ public class DesignerRepositoryMockMvcTests {
 			throws Exception {
 		// TODO
 		var mvcResult = mockMvc
-				.perform(post("/").content(""))
+				.perform(post("/designers").content(""))
 				.andExpect(status().isCreated())
 				.andReturn();
 		var result = mvcResult.getResponse().getHeader("");
