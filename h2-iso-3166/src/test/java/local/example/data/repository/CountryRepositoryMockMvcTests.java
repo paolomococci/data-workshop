@@ -19,6 +19,10 @@
 package local.example.data.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +74,12 @@ public class CountryRepositoryMockMvcTests {
 	@Test
 	public void deleteTest() 
 			throws Exception {
-		
+		var mvcResult = mockMvc
+				.perform(post("/countries").content(""))
+				.andExpect(status().isCreated())
+				.andReturn();
+		var result = mvcResult.getResponse().getHeader("");
+		mockMvc.perform(delete(result)).andExpect(status().isNoContent());
+		mockMvc.perform(get(result)).andExpect(status().isNotFound());
 	}
 }
