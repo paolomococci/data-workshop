@@ -34,6 +34,9 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 public class PlayerRepositoryMockMvcTests {
 
+	private static String PLAYER_TEST_STRING = 
+			"{\"nickname\":\"someone\"}";
+
 	@Autowired
 	MockMvc mockMvc;
 
@@ -84,12 +87,11 @@ public class PlayerRepositoryMockMvcTests {
 	@Test
 	public void deleteTest() 
 			throws Exception {
-		// TODO
 		var mvcResult = mockMvc
-				.perform(post("/players").content(""))
+				.perform(post("/players").content(PLAYER_TEST_STRING))
 				.andExpect(status().isCreated())
 				.andReturn();
-		var result = mvcResult.getResponse().getHeader("");
+		var result = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(delete(result)).andExpect(status().isNoContent());
 		mockMvc.perform(get(result)).andExpect(status().isNotFound());
 	}
