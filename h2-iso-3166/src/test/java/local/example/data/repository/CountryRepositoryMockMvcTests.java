@@ -36,6 +36,9 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class CountryRepositoryMockMvcTests {
 
+	private static String ISO_3166_TEST_STRING = 
+			"{\"name\":\"Italy\",\"alphaTwo\":\"IT\",\"alphaThree\":\"ITA\",\"countryId\":\"380\"}";
+
 	@Autowired
 	MockMvc mockMvc;
 
@@ -86,12 +89,11 @@ public class CountryRepositoryMockMvcTests {
 	@Test
 	public void deleteTest() 
 			throws Exception {
-		// TODO
 		var mvcResult = mockMvc
-				.perform(post("/countries").content(""))
+				.perform(post("/countries").content(ISO_3166_TEST_STRING))
 				.andExpect(status().isCreated())
 				.andReturn();
-		var result = mvcResult.getResponse().getHeader("");
+		var result = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(delete(result)).andExpect(status().isNoContent());
 		mockMvc.perform(get(result)).andExpect(status().isNotFound());
 	}
