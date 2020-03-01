@@ -22,6 +22,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,16 @@ public class PlayerRepositoryMockMvcTests {
 			throws Exception {
 		assertThat(playerRepository)
 			.isNotNull();
+	}
+
+	@Test
+	public void verifyExistence() 
+			throws Exception {
+		mockMvc
+			.perform(get("/"))
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$._links.players").exists());
 	}
 
 	@Test
