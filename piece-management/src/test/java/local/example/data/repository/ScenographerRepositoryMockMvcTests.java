@@ -34,6 +34,9 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 public class ScenographerRepositoryMockMvcTests {
 
+	private static String SCENOGRAPHER_TEST_STRING = 
+			"{\"nickname\":\"someone\"}";
+
 	@Autowired
 	MockMvc mockMvc;
 
@@ -84,12 +87,11 @@ public class ScenographerRepositoryMockMvcTests {
 	@Test
 	public void deleteTest() 
 			throws Exception {
-		// TODO
 		var mvcResult = mockMvc
-				.perform(post("/scenographers").content(""))
+				.perform(post("/scenographers").content(SCENOGRAPHER_TEST_STRING))
 				.andExpect(status().isCreated())
 				.andReturn();
-		var result = mvcResult.getResponse().getHeader("");
+		var result = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(delete(result)).andExpect(status().isNoContent());
 		mockMvc.perform(get(result)).andExpect(status().isNotFound());
 	}
