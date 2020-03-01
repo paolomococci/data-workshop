@@ -34,6 +34,9 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 public class PieceRepositoryMockMvcTests {
 
+	private static String PIECE_TEST_STRING = 
+			"{\"title\":\"some_title\",\"act\":\"some_act\",\"session\":\"some_session\",\"script\":\"some_script\"}";
+
 	@Autowired
 	MockMvc mockMvc;
 
@@ -84,12 +87,11 @@ public class PieceRepositoryMockMvcTests {
 	@Test
 	public void deleteTest() 
 			throws Exception {
-		// TODO
 		var mvcResult = mockMvc
-				.perform(post("/pieces").content(""))
+				.perform(post("/pieces").content(PIECE_TEST_STRING))
 				.andExpect(status().isCreated())
 				.andReturn();
-		var result = mvcResult.getResponse().getHeader("");
+		var result = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(delete(result)).andExpect(status().isNoContent());
 		mockMvc.perform(get(result)).andExpect(status().isNotFound());
 	}
