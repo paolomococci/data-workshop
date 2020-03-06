@@ -75,7 +75,14 @@ public class CountryRepositoryMockMvcTests {
 	@Test
 	public void readTest() 
 			throws Exception {
-		// TODO
+		var mvcResult = mockMvc
+				.perform(post("/countries").content(ISO_3166_TEST_STRING))
+				.andExpect(status().isCreated())
+				.andReturn();
+		var result = mvcResult.getResponse().getHeader("Location");
+		mockMvc.perform(get(result))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.name").value("Italy"));
 	}
 
 	@Test
