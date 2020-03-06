@@ -22,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -94,7 +95,16 @@ public class CountryRepositoryMockMvcTests {
 	@Test
 	public void updateTest() 
 			throws Exception {
-		// TODO
+		var mvcResult = mockMvc
+				.perform(post("/countries").content(ISO_3166_TEST_STRING))
+				.andExpect(status().isCreated())
+				.andReturn();
+		var result = mvcResult.getResponse().getHeader("Location");
+		mockMvc.perform(patch(result).content("{\"name\":\"Italia\"}"))
+				.andExpect(status().isNoContent());
+		mockMvc.perform(get(result))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.name").value("Italia"));
 	}
 
 	@Test
