@@ -1,5 +1,5 @@
 '{"name":"Afghanistan","alphaTwo":"AF","alphaThree":"AFG","countryId":"004"}'
-'{"name":"Albania","alphaTwo":"AL","alphaThree":"ALB","countryId":"008""}'
+'{"name":"Albania","alphaTwo":"AL","alphaThree":"ALB","countryId":"008"}'
 '{"name":"Antarctica","alphaTwo":"AQ","alphaThree":"ATA","countryId":"010"}'
 '{"name":"Algeria","alphaTwo":"DZ","alphaThree":"DZA","countryId":"012"}'
 '{"name":"American Samoa","alphaTwo":"AS","alphaThree":"ASM","countryId":"016"}'
