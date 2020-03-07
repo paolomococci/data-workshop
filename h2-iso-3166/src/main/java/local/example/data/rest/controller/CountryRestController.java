@@ -54,7 +54,7 @@ public class CountryRestController {
 			throws URISyntaxException {
 		EntityModel<Country> entityModelOfCountry;
 		entityModelOfCountry = countryRepresentationModelAssembler
-				.toModel(country);
+				.toModel(countryRestRepository.save(country));
 		return new ResponseEntity<>(entityModelOfCountry, HttpStatus.CREATED);
 	}
 
