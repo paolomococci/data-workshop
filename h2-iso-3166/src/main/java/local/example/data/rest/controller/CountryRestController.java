@@ -120,7 +120,7 @@ public class CountryRestController {
 	}
 
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<?> update(
+	public ResponseEntity<?> putUpdate(
 			@RequestBody Country countryUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
