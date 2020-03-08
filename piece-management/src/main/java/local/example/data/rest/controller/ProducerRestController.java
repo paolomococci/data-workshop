@@ -54,7 +54,7 @@ public class ProducerRestController {
 			throws URISyntaxException {
 		EntityModel<Producer> entityModelOfProducer;
 		entityModelOfProducer = producerRepresentationModelAssembler
-				.toModel(producer);
+				.toModel(producerRepository.save(producer));
 		return new ResponseEntity<>(entityModelOfProducer, HttpStatus.CREATED);
 	}
 	
