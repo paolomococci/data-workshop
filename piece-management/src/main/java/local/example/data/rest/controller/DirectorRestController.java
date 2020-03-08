@@ -54,7 +54,7 @@ public class DirectorRestController {
 			throws URISyntaxException {
 		EntityModel<Director> entityModelOfDirector;
 		entityModelOfDirector = directorRepresentationModelAssembler
-				.toModel(director);
+				.toModel(directorRepository.save(director));
 		return new ResponseEntity<>(entityModelOfDirector, HttpStatus.CREATED);
 	}
 	
