@@ -54,7 +54,7 @@ public class PieceRestController {
 			throws URISyntaxException {
 		EntityModel<Piece> entityModelOfPiece;
 		entityModelOfPiece = pieceRepresentationModelAssembler
-				.toModel(piece);
+				.toModel(pieceRepository.save(piece));
 		return new ResponseEntity<>(entityModelOfPiece, HttpStatus.CREATED);
 	}
 	
