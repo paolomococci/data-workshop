@@ -54,7 +54,7 @@ public class PlayerRestController {
 			throws URISyntaxException {
 		EntityModel<Player> entityModelOfPlayer;
 		entityModelOfPlayer = playerRepresentationModelAssembler
-				.toModel(player);
+				.toModel(playerRepository.save(player));
 		return new ResponseEntity<>(entityModelOfPlayer, HttpStatus.CREATED);
 	}
 	
