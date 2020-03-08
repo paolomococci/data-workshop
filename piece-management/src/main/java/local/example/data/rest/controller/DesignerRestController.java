@@ -54,7 +54,7 @@ public class DesignerRestController {
 			throws URISyntaxException {
 		EntityModel<Designer> entityModelOfDesigner;
 		entityModelOfDesigner = designerRepresentationModelAssembler
-				.toModel(designer);
+				.toModel(designerRepository.save(designer));
 		return new ResponseEntity<>(entityModelOfDesigner, HttpStatus.CREATED);
 	}
 	
