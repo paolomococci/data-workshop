@@ -54,7 +54,7 @@ public class ScenographerRestController {
 			throws URISyntaxException {
 		EntityModel<Scenographer> entityModelOfScenographer;
 		entityModelOfScenographer = scenographerRepresentationModelAssembler
-				.toModel(scenographer);
+				.toModel(scenographerRepository.save(scenographer));
 		return new ResponseEntity<>(entityModelOfScenographer, HttpStatus.CREATED);
 	}
 	
