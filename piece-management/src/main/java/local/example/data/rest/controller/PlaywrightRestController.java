@@ -54,7 +54,7 @@ public class PlaywrightRestController {
 			throws URISyntaxException {
 		EntityModel<Playwright> entityModelOfPlaywright;
 		entityModelOfPlaywright = playwrightRepresentationModelAssembler
-				.toModel(playwright);
+				.toModel(playwrightRepository.save(playwright));
 		return new ResponseEntity<>(entityModelOfPlaywright, HttpStatus.CREATED);
 	}
 	
