@@ -28,6 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -96,6 +97,27 @@ public class ProducerRestController {
 		var temporaryEntityOfProducer = producerRepository.findById(id)
 				.map(producer -> {
 					producer.setNickname(producerUpdated.getNickname());
+					return producerRepository.save(producer);
+				})
+				.orElseGet(() -> {
+					return producerRepository.save(producerUpdated);
+				});
+		EntityModel<Producer> entityModelOfProducer;
+		entityModelOfProducer = producerRepresentationModelAssembler
+				.toModel(temporaryEntityOfProducer);
+		return new ResponseEntity<>(entityModelOfProducer, HttpStatus.OK);
+	}
+	
+	@PatchMapping(path = "/{id}")
+	public ResponseEntity<?> patchUpdate(
+			@RequestBody Producer producerUpdated, 
+			@PathVariable Long id) 
+			throws URISyntaxException {
+		var temporaryEntityOfProducer = producerRepository.findById(id)
+				.map(producer -> {
+					if (producerUpdated.getNickname() != null) {
+						producer.setNickname(producerUpdated.getNickname());
+					}
 					return producerRepository.save(producer);
 				})
 				.orElseGet(() -> {
