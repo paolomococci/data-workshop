@@ -89,7 +89,7 @@ public class ScenographerRestController {
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<?> update(
+	public ResponseEntity<?> putUpdate(
 			@RequestBody Scenographer scenographerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
