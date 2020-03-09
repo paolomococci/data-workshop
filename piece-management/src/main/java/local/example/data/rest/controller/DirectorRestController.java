@@ -89,7 +89,7 @@ public class DirectorRestController {
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<?> update(
+	public ResponseEntity<?> putUpdate(
 			@RequestBody Director directorUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
