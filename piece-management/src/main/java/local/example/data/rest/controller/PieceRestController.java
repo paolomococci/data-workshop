@@ -119,7 +119,7 @@ public class PieceRestController {
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<?> update(
+	public ResponseEntity<?> putUpdate(
 			@RequestBody Piece pieceUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
