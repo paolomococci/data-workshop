@@ -28,6 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -129,6 +130,36 @@ public class PieceRestController {
 					piece.setAct(pieceUpdated.getAct());
 					piece.setSession(pieceUpdated.getSession());
 					piece.setScript(pieceUpdated.getScript());
+					return pieceRepository.save(piece);
+				})
+				.orElseGet(() -> {
+					return pieceRepository.save(pieceUpdated);
+				});
+		EntityModel<Piece> entityModelOfPiece;
+		entityModelOfPiece = pieceRepresentationModelAssembler
+				.toModel(temporaryEntityOfPiece);
+		return new ResponseEntity<>(entityModelOfPiece, HttpStatus.OK);
+	}
+	
+	@PatchMapping(path = "/{id}")
+	public ResponseEntity<?> patchUpdate(
+			@RequestBody Piece pieceUpdated, 
+			@PathVariable Long id) 
+			throws URISyntaxException {
+		var temporaryEntityOfPiece = pieceRepository.findById(id)
+				.map(piece -> {
+					if (pieceUpdated.getTitle() != null) {
+						piece.setTitle(pieceUpdated.getTitle());
+					}
+					if (pieceUpdated.getAct() != null) {
+						piece.setAct(pieceUpdated.getAct());
+					}
+					if (pieceUpdated.getSession() != null) {
+						piece.setSession(pieceUpdated.getSession());
+					}
+					if (pieceUpdated.getScript() != null) {
+						piece.setScript(pieceUpdated.getScript());
+					}
 					return pieceRepository.save(piece);
 				})
 				.orElseGet(() -> {
