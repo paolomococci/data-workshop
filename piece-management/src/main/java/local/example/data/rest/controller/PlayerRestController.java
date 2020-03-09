@@ -89,7 +89,7 @@ public class PlayerRestController {
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<?> update(
+	public ResponseEntity<?> putUpdate(
 			@RequestBody Player playerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
