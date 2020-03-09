@@ -28,6 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -96,6 +97,27 @@ public class PlaywrightRestController {
 		var temporaryEntityOfPlaywright = playwrightRepository.findById(id)
 				.map(playwright -> {
 					playwright.setNickname(playwrightUpdated.getNickname());
+					return playwrightRepository.save(playwright);
+				})
+				.orElseGet(() -> {
+					return playwrightRepository.save(playwrightUpdated);
+				});
+		EntityModel<Playwright> entityModelOfPlaywright;
+		entityModelOfPlaywright = playwrightRepresentationModelAssembler
+				.toModel(temporaryEntityOfPlaywright);
+		return new ResponseEntity<>(entityModelOfPlaywright, HttpStatus.OK);
+	}
+	
+	@PatchMapping(path = "/{id}")
+	public ResponseEntity<?> patchUpdate(
+			@RequestBody Playwright playwrightUpdated, 
+			@PathVariable Long id) 
+			throws URISyntaxException {
+		var temporaryEntityOfPlaywright = playwrightRepository.findById(id)
+				.map(playwright -> {
+					if (playwrightUpdated.getNickname() != null) {
+						playwright.setNickname(playwrightUpdated.getNickname());
+					}
 					return playwrightRepository.save(playwright);
 				})
 				.orElseGet(() -> {
