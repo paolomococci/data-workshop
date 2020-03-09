@@ -89,7 +89,7 @@ public class DesignerRestController {
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<?> update(
+	public ResponseEntity<?> putUpdate(
 			@RequestBody Designer designerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
