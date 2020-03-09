@@ -28,6 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -96,6 +97,27 @@ public class ScenographerRestController {
 		var temporaryEntityOfScenographer = scenographerRepository.findById(id)
 				.map(scenographer -> {
 					scenographer.setNickname(scenographerUpdated.getNickname());
+					return scenographerRepository.save(scenographer);
+				})
+				.orElseGet(() -> {
+					return scenographerRepository.save(scenographerUpdated);
+				});
+		EntityModel<Scenographer> entityModelOfScenographer;
+		entityModelOfScenographer = scenographerRepresentationModelAssembler
+				.toModel(temporaryEntityOfScenographer);
+		return new ResponseEntity<>(entityModelOfScenographer, HttpStatus.OK);
+	}
+	
+	@PatchMapping(path = "/{id}")
+	public ResponseEntity<?> patchUpdate(
+			@RequestBody Scenographer scenographerUpdated, 
+			@PathVariable Long id) 
+			throws URISyntaxException {
+		var temporaryEntityOfScenographer = scenographerRepository.findById(id)
+				.map(scenographer -> {
+					if (scenographerUpdated.getNickname() != null) {
+						scenographer.setNickname(scenographerUpdated.getNickname());
+					}
 					return scenographerRepository.save(scenographer);
 				})
 				.orElseGet(() -> {
