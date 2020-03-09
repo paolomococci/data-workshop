@@ -28,6 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -96,6 +97,27 @@ public class PlayerRestController {
 		var temporaryEntityOfPlayer = playerRepository.findById(id)
 				.map(player -> {
 					player.setNickname(playerUpdated.getNickname());
+					return playerRepository.save(player);
+				})
+				.orElseGet(() -> {
+					return playerRepository.save(playerUpdated);
+				});
+		EntityModel<Player> entityModelOfPlayer;
+		entityModelOfPlayer = playerRepresentationModelAssembler
+				.toModel(temporaryEntityOfPlayer);
+		return new ResponseEntity<>(entityModelOfPlayer, HttpStatus.OK);
+	}
+	
+	@PatchMapping(path = "/{id}")
+	public ResponseEntity<?> patchUpdate(
+			@RequestBody Player playerUpdated, 
+			@PathVariable Long id) 
+			throws URISyntaxException {
+		var temporaryEntityOfPlayer = playerRepository.findById(id)
+				.map(player -> {
+					if (playerUpdated.getNickname() != null) {
+						player.setNickname(playerUpdated.getNickname());
+					}
 					return playerRepository.save(player);
 				})
 				.orElseGet(() -> {
