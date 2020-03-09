@@ -89,7 +89,7 @@ public class ProducerRestController {
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<?> update(
+	public ResponseEntity<?> putUpdate(
 			@RequestBody Producer producerUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
