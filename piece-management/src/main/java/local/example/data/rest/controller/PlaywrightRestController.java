@@ -89,7 +89,7 @@ public class PlaywrightRestController {
 	}
 	
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<?> update(
+	public ResponseEntity<?> putUpdate(
 			@RequestBody Playwright playwrightUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
