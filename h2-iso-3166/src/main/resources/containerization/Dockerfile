@@ -1,1 +1,5 @@
-
+#FROM
+#COPY
+#WORKDIR
+#CMD ["","",""]
+#EXPOSE 9090
