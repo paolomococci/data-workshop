@@ -34,6 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -76,11 +77,11 @@ public class CountryRepositoryMockMvcTests {
 	@Test
 	public void readTest() 
 			throws Exception {
-		var mvcResult = mockMvc
+		MvcResult mvcResult = mockMvc
 				.perform(post("/countries").content(ISO_3166_TEST_STRING))
 				.andExpect(status().isCreated())
 				.andReturn();
-		var result = mvcResult.getResponse().getHeader("Location");
+		String result = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(get(result))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.name").value("Italy"));
@@ -89,11 +90,11 @@ public class CountryRepositoryMockMvcTests {
 	@Test
 	public void readAllTest() 
 			throws Exception {
-		var mvcResult = mockMvc
+		MvcResult mvcResult = mockMvc
 				.perform(post("/countries").content(ISO_3166_TEST_STRING))
 				.andExpect(status().isCreated())
 				.andReturn();
-		var result = mvcResult.getResponse().getHeader("Location");
+		String result = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(get(result))
 				.andExpect(status().isOk());
 	}
@@ -101,11 +102,11 @@ public class CountryRepositoryMockMvcTests {
 	@Test
 	public void updateTest() 
 			throws Exception {
-		var mvcResult = mockMvc
+		MvcResult mvcResult = mockMvc
 				.perform(post("/countries").content(ISO_3166_TEST_STRING))
 				.andExpect(status().isCreated())
 				.andReturn();
-		var result = mvcResult.getResponse().getHeader("Location");
+		String result = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(patch(result).content("{\"name\":\"Italia\"}"))
 				.andExpect(status().isNoContent());
 		mockMvc.perform(get(result))
@@ -116,11 +117,11 @@ public class CountryRepositoryMockMvcTests {
 	@Test
 	public void deleteTest() 
 			throws Exception {
-		var mvcResult = mockMvc
+		MvcResult mvcResult = mockMvc
 				.perform(post("/countries").content(ISO_3166_TEST_STRING))
 				.andExpect(status().isCreated())
 				.andReturn();
-		var result = mvcResult.getResponse().getHeader("Location");
+		String result = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(delete(result)).andExpect(status().isNoContent());
 		mockMvc.perform(get(result)).andExpect(status().isNotFound());
 	}
