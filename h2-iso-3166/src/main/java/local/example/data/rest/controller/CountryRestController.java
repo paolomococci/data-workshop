@@ -62,7 +62,7 @@ public class CountryRestController {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> read(@PathVariable Long id) 
 			throws URISyntaxException {
-		var country = countryRestRepository.findById(id)
+		Country country = countryRestRepository.findById(id)
 				.orElseThrow(() -> new CountryNotFoundException(id));
 		EntityModel<Country> entityModelOfCountry;
 		entityModelOfCountry = countryRepresentationModelAssembler.toModel(country);
@@ -124,7 +124,7 @@ public class CountryRestController {
 			@RequestBody Country countryUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		var temporaryEntityOfCountry = countryRestRepository.findById(id)
+		 Country temporaryEntityOfCountry = countryRestRepository.findById(id)
 				.map(country -> {
 					country.setName(countryUpdated.getName());
 					country.setAlphaTwo(countryUpdated.getAlphaTwo());
@@ -145,7 +145,7 @@ public class CountryRestController {
 			@RequestBody Country countryUpdated, 
 			@PathVariable Long id) 
 			throws URISyntaxException {
-		var temporaryEntityOfCountry = countryRestRepository.findById(id)
+		Country temporaryEntityOfCountry = countryRestRepository.findById(id)
 				.map(country -> {
 					if (countryUpdated.getName() != null) {
 						country.setName(countryUpdated.getName());
