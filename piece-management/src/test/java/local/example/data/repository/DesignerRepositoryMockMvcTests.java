@@ -74,7 +74,14 @@ public class DesignerRepositoryMockMvcTests {
 	@Test
 	public void readTest() 
 			throws Exception {
-		// TODO
+		var mvcResult = mockMvc
+				.perform(post("/designers").content(DESIGNER_TEST_STRING))
+				.andExpect(status().isCreated())
+				.andReturn();
+		var result = mvcResult.getResponse().getHeader("Location");
+		mockMvc.perform(get(result))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.nickname").value("someone"));
 	}
 
 	@Test
