@@ -81,7 +81,10 @@ public class PieceRepositoryMockMvcTests {
 		var result = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(get(result))
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.title").value("some_title"));
+			.andExpect(jsonPath("$.title").value("some_title"))
+			.andExpect(jsonPath("$.act").value("some_act"))
+			.andExpect(jsonPath("$.session").value("some_session"))
+			.andExpect(jsonPath("$.script").value("some_script"));
 	}
 
 	@Test
