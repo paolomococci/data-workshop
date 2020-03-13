@@ -65,7 +65,10 @@ public class ScenographerRepositoryMockMvcTests {
 	@Test
 	public void createTest() 
 			throws Exception {
-		// TODO
+		mockMvc
+			.perform(post("/scenographers").content(SCENOGRAPHER_TEST_STRING))
+			.andExpect(status().isCreated())
+			.andExpect(header().string("Location", containsString("scenographers/")));
 	}
 
 	@Test
