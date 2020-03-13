@@ -74,7 +74,14 @@ public class DirectorRepositoryMockMvcTests {
 	@Test
 	public void readTest() 
 			throws Exception {
-		// TODO
+		var mvcResult = mockMvc
+				.perform(post("/directors").content(DIRECTOR_TEST_STRING))
+				.andExpect(status().isCreated())
+				.andReturn();
+		var result = mvcResult.getResponse().getHeader("Location");
+		mockMvc.perform(get(result))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.nickname").value("someone"));
 	}
 
 	@Test
