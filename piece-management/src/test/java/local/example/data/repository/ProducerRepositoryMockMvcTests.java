@@ -65,7 +65,10 @@ public class ProducerRepositoryMockMvcTests {
 	@Test
 	public void createTest() 
 			throws Exception {
-		// TODO
+		mockMvc
+			.perform(post("/producers").content(PRODUCER_TEST_STRING))
+			.andExpect(status().isCreated())
+			.andExpect(header().string("Location", containsString("producers/")));
 	}
 
 	@Test
