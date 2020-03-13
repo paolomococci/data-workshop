@@ -74,7 +74,14 @@ public class PieceRepositoryMockMvcTests {
 	@Test
 	public void readTest() 
 			throws Exception {
-		// TODO
+		var mvcResult = mockMvc
+				.perform(post("/pieces").content(PIECE_TEST_STRING))
+				.andExpect(status().isCreated())
+				.andReturn();
+		var result = mvcResult.getResponse().getHeader("Location");
+		mockMvc.perform(get(result))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.title").value("some_title"));
 	}
 
 	@Test
