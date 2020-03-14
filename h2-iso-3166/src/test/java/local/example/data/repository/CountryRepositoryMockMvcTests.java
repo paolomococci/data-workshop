@@ -100,7 +100,7 @@ public class CountryRepositoryMockMvcTests {
 	}
 
 	@Test
-	public void updateTest() 
+	public void partialUpdateTest() 
 			throws Exception {
 		MvcResult mvcResult = mockMvc
 				.perform(post("/countries").content(ISO_3166_TEST_STRING))
