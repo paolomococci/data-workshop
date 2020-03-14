@@ -32,6 +32,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 public class PlayerRepositoryMockMvcTests {
@@ -87,7 +88,13 @@ public class PlayerRepositoryMockMvcTests {
 	@Test
 	public void readAllTest() 
 			throws Exception {
-		// TODO
+		MvcResult mvcResult = mockMvc
+				.perform(post("/players").content(PLAYER_TEST_STRING))
+				.andExpect(status().isCreated())
+				.andReturn();
+		String result = mvcResult.getResponse().getHeader("Location");
+		mockMvc.perform(get(result))
+				.andExpect(status().isOk());
 	}
 
 	@Test
