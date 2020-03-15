@@ -24,6 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -40,6 +41,8 @@ public class PieceRepositoryMockMvcTests {
 
 	private static String PIECE_TEST_STRING = 
 			"{\"title\":\"some_title\",\"act\":\"some_act\",\"session\":\"some_session\",\"script\":\"some_script\"}";
+	private static String PIECE_UPDATE_STRING = 
+			"{\"title\":\"waiting_for_nobody\",\"act\":\"nobody_act\",\"session\":\"nobody_session\",\"script\":\"nobody_script\"}";
 
 	@Autowired
 	MockMvc mockMvc;
@@ -99,6 +102,24 @@ public class PieceRepositoryMockMvcTests {
 		String result = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(get(result))
 				.andExpect(status().isOk());
+	}
+
+	@Test
+	public void updateTest() 
+			throws Exception {
+		MvcResult mvcResult = mockMvc
+				.perform(post("/pieces").content(PIECE_TEST_STRING))
+				.andExpect(status().isCreated())
+				.andReturn();
+		String result = mvcResult.getResponse().getHeader("Location");
+		mockMvc.perform(put(result).content(PIECE_UPDATE_STRING))
+				.andExpect(status().isNoContent());
+		mockMvc.perform(get(result))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.title").value("waiting_for_nobody"))
+				.andExpect(jsonPath("$.act").value("nobody_act"))
+				.andExpect(jsonPath("$.session").value("nobody_session"))
+				.andExpect(jsonPath("$.script").value("nobody_script"));
 	}
 
 	@Test
