@@ -53,7 +53,7 @@ curl -v -i -H "Content-Type:application/json" -d '{"name":"Congo","alphaTwo":"CG
 curl -v -i -H "Content-Type:application/json" -d '{"name":"Congo, The Democratic Republic of the","alphaTwo":"CD","alphaThree":"COD","countryId":"180"}' http://127.0.0.1:9090/api/countries
 curl -v -i -H "Content-Type:application/json" -d '{"name":"Cook Islands","alphaTwo":"CK","alphaThree":"COK","countryId":"184"}' http://127.0.0.1:9090/api/countries
 curl -v -i -H "Content-Type:application/json" -d '{"name":"Costa Rica","alphaTwo":"CR","alphaThree":"CRI","countryId":"188"}' http://127.0.0.1:9090/api/countries
-curl -v -i -H "Content-Type:application/json" -d '{"name":"Croatia or Hrvatska)","alphaTwo":"HR","alphaThree":"HRV","countryId":"191"}' http://127.0.0.1:9090/api/countries
+curl -v -i -H "Content-Type:application/json" -d '{"name":"Croatia or Hrvatska","alphaTwo":"HR","alphaThree":"HRV","countryId":"191"}' http://127.0.0.1:9090/api/countries
 curl -v -i -H "Content-Type:application/json" -d '{"name":"Cuba","alphaTwo":"CU","alphaThree":"CUB","countryId":"192"}' http://127.0.0.1:9090/api/countries
 curl -v -i -H "Content-Type:application/json" -d '{"name":"Cyprus","alphaTwo":"CY","alphaThree":"CYP","countryId":"196"}' http://127.0.0.1:9090/api/countries
 curl -v -i -H "Content-Type:application/json" -d '{"name":"Czech Republic","alphaTwo":"CZ","alphaThree":"CZE","countryId":"203"}' http://127.0.0.1:9090/api/countries
