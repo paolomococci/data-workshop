@@ -18,13 +18,16 @@
 
 package local.example.data.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import local.example.data.entity.Employee;
 
 @RepositoryRestResource
 public interface EmployeeRestRepository 
-	extends PagingAndSortingRepository<Employee, Long> {
-
+		extends PagingAndSortingRepository<Employee, Long> {
+	List<Employee> findByNickname(@Param("nickname") String nickname);
 }
