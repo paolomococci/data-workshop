@@ -18,12 +18,18 @@
 
 package local.example.data.assembler;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import java.net.URISyntaxException;
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 import local.example.data.entity.Customer;
+import local.example.data.rest.controller.CustomerRestController;
 
 @Component
 public class CustomerRepresentationModelAssembler 
@@ -31,8 +37,14 @@ public class CustomerRepresentationModelAssembler
 
 	@Override
 	public EntityModel<Customer> toModel(Customer customer) {
-		// TODO 
-		return null;
+		try {
+			return new EntityModel<>(customer, 
+					linkTo(methodOn(CustomerRestController.class).read(customer.getId())).withSelfRel(), 
+					linkTo(methodOn(CustomerRestController.class).readAll()).withRel("customers"));
+		} catch (URISyntaxException uriException) {
+			uriException.printStackTrace();
+		}
+		return new EntityModel<>(new Customer());
 	}
 
 	@Override
