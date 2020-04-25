@@ -72,10 +72,10 @@ public class CustomerRestController {
 	@GetMapping(path = "/nicknames/{nickname}")
 	public ResponseEntity<?> readByNickname(@PathVariable String nickname) 
 			throws URISyntaxException {
-		Iterable<Customer> countries = customerRestRepository.findByNickname(nickname);
+		Iterable<Customer> customers = customerRestRepository.findByNickname(nickname);
 		CollectionModel<EntityModel<Customer>> collectionModelOfCustomers;
 		collectionModelOfCustomers = customerRepresentationModelAssembler
-				.toCollectionModel(countries);
+				.toCollectionModel(customers);
 		return new ResponseEntity<>(collectionModelOfCustomers, HttpStatus.OK);
 	}
 
