@@ -30,6 +30,8 @@ import org.springframework.stereotype.Component;
 
 import local.example.data.entity.Customer;
 import local.example.data.rest.controller.CustomerRestController;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Component
 public class CustomerRepresentationModelAssembler 
@@ -51,5 +53,22 @@ public class CustomerRepresentationModelAssembler
 	public CollectionModel<EntityModel<Customer>> toCollectionModel(
 			Iterable<? extends Customer> customers) {
 		return RepresentationModelAssembler.super.toCollectionModel(customers);
+	}
+
+	public Mono<EntityModel<Customer>> toMono(Customer customer) 
+			throws URISyntaxException {
+		EntityModel<Customer> entityModelOfCustomer;
+		entityModelOfCustomer = new EntityModel<>(customer, 
+				linkTo(methodOn(CustomerRestController.class).read(customer.getId())).withSelfRel(), 
+				linkTo(methodOn(CustomerRestController.class).readAll()).withRel("customers"));
+		Mono<EntityModel<Customer>> monoOfCustomer = Mono.justOrEmpty(entityModelOfCustomer);
+		return monoOfCustomer;
+	}
+
+	public Flux<CollectionModel<EntityModel<Customer>>> toFlux(
+			Iterable<? extends Customer> customers) {
+		var collectionModelOfCustomers = RepresentationModelAssembler.super.toCollectionModel(customers);
+		var fluxOfCustomers = Flux.just(collectionModelOfCustomers);
+		return fluxOfCustomers;
 	}
 }
