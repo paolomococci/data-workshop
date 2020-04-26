@@ -30,6 +30,8 @@ import org.springframework.stereotype.Component;
 
 import local.example.data.entity.Job;
 import local.example.data.rest.controller.JobRestController;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Component
 public class JobRepresentationModelAssembler 
@@ -51,5 +53,22 @@ public class JobRepresentationModelAssembler
 	public CollectionModel<EntityModel<Job>> toCollectionModel(
 			Iterable<? extends Job> jobs) {
 		return RepresentationModelAssembler.super.toCollectionModel(jobs);
+	}
+
+	public Mono<EntityModel<Job>> toMono(Job job) 
+			throws URISyntaxException {
+		EntityModel<Job> entityModelOfJob;
+		entityModelOfJob = new EntityModel<>(job, 
+				linkTo(methodOn(JobRestController.class).read(job.getId())).withSelfRel(), 
+				linkTo(methodOn(JobRestController.class).readAll()).withRel("jobs"));
+		Mono<EntityModel<Job>> monoOfJob = Mono.justOrEmpty(entityModelOfJob);
+		return monoOfJob;
+	}
+
+	public Flux<CollectionModel<EntityModel<Job>>> toFlux(
+			Iterable<? extends Job> jobs) {
+		var collectionModelOfJobs = RepresentationModelAssembler.super.toCollectionModel(jobs);
+		var fluxOfJobs = Flux.just(collectionModelOfJobs);
+		return fluxOfJobs;
 	}
 }
