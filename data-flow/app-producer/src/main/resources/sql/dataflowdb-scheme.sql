@@ -31,8 +31,9 @@ CREATE TABLE `job` (
   `id` bigint(20) NOT NULL,
   `code` varchar(10) NOT NULL,
   `updated` datetime(6) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 --
 -- Table structure for table `job_customers`
