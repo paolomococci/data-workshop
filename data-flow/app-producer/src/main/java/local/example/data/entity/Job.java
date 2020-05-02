@@ -21,6 +21,7 @@ package local.example.data.entity;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,6 +47,7 @@ public class Job {
 	@Getter
 	@Setter
 	@NotNull
+	@Column(unique = true)
 	@Size(min = 5, max = 10, message = "range of this value is 5 to 10 characters")
 	@Pattern(
 			regexp = "^[a-z0-9]*$", 
