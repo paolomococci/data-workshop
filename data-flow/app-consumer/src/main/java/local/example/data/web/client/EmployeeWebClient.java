@@ -18,6 +18,9 @@
 
 package local.example.data.web.client;
 
+import org.springframework.web.reactive.function.client.WebClient;
+
 public class EmployeeWebClient {
 
+	WebClient webClient = WebClient.create("http://127.0.0.1:8090");
 }
