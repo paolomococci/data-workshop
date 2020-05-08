@@ -31,6 +31,6 @@ public class MvcConfig
 		viewControllerRegistry.addViewController("/").setViewName("home");
 		viewControllerRegistry.addViewController("/home").setViewName("home");
 		viewControllerRegistry.addViewController("/login").setViewName("login");
-		viewControllerRegistry.addViewController("/view").setViewName("view");
+		viewControllerRegistry.addViewController("/root").setViewName("root");
 	}
 }
