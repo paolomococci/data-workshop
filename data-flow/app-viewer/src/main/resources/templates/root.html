@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
 <meta content="Paolo Mococci" name="author">
 <title>root</title>
-<link href="/css/sample.css" media="all" rel="stylesheet">
+<link href="/css/default.css" media="all" rel="stylesheet">
 </head>
 <body>
+	<h1>root</h1>
+	<form th:action="@{/logout}" method="post">
+		<fieldset>
+			<legend>click for logout</legend>
+			<input type="submit" value="log out"/>
+		</fieldset>
+	</form>
 	<div id="root_view"></div>
 </body>
 <script type="text/javascript" src="/webjars/react/react.min.js"></script>
 <script type="text/javascript" src="/webjars/react/react-dom.min.js"></script>
-<script type="text/javascript" src="/js/sample.js"></script>
+<script type="text/javascript" src="/js/root.js"></script>
 </html>
