@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
 <meta content="Paolo Mococci" name="author">
 <title>home</title>
-<link href="/css/sample.css" media="all" rel="stylesheet">
+<style type="text/css" media="all">
+	h1 {
+		margin-left: 5px;
+		padding: 3px;
+	}
+	p {
+		margin-left: 7px;
+	}
+</style>
 </head>
 <body>
-	<div id="home_view"></div>
+	<h1>home</h1>
+	<p>link <a th:href="@{/root}">root</a> page</p>
 </body>
-<script type="text/javascript" src="/webjars/react/react.min.js"></script>
-<script type="text/javascript" src="/webjars/react/react-dom.min.js"></script>
-<script type="text/javascript" src="/js/sample.js"></script>
 </html>
