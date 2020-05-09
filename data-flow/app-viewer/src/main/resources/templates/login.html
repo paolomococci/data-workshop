@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
 <meta content="Paolo Mococci" name="author">
 <title>login</title>
-<link href="/css/sample.css" media="all" rel="stylesheet">
+<style type="text/css" media="all">
+	h1 {
+		margin-left: 5px;
+		padding: 3px;
+	}
+	form {
+		padding: 2px;
+	}
+	label {
+		padding: 2px;
+	}
+	input {
+		padding: 2px;
+	}
+</style>
 </head>
 <body>
-	<div id="login_view"></div>
+	<h1>login</h1>
+	<form th:action="@{/login}" method="post">
+		<fieldset>
+			<legend>login with your credentials</legend>
+			<label for="username">user name:</label><input type="text" name="username"/>
+			<label for="password">password:</label><input type="password" name="password"/><br>
+			<input type="submit" value="log in"/>
+		</fieldset>
+	</form>
 </body>
-<script type="text/javascript" src="/webjars/react/react.min.js"></script>
-<script type="text/javascript" src="/webjars/react/react-dom.min.js"></script>
-<script type="text/javascript" src="/js/sample.js"></script>
 </html>
