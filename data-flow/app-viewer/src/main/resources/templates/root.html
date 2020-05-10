@@ -8,15 +8,15 @@
 </head>
 <body>
 	<h1>root</h1>
+	<div id="hello"></div>
 	<form th:action="@{/logout}" method="post">
 		<fieldset>
 			<legend>click for logout</legend>
 			<input type="submit" value="log out"/>
 		</fieldset>
 	</form>
-	<div id="root_view"></div>
 </body>
-<script type="text/javascript" src="/webjars/react/react.min.js"></script>
-<script type="text/javascript" src="/webjars/react/react-dom.min.js"></script>
-<script type="text/javascript" src="/js/root.js"></script>
+<script type="text/javascript" src="/lib/react-16.13.1/react.development.js"></script>
+<script type="text/javascript" src="/lib/react-16.13.1/react-dom.development.js"></script>
+<script type="text/javascript" src="/js/hello.js"></script>
 </html>
