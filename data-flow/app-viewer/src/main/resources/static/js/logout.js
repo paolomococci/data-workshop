@@ -19,6 +19,6 @@ class Logout extends React.Component {
 }
 
 ReactDOM.render(
-		React.createElement(Logout, null), 
-		document.getElementById('logout')
+	React.createElement(Logout, null), 
+	document.getElementById('logout')
 );
