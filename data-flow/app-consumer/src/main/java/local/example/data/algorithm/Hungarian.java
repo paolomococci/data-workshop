@@ -18,6 +18,6 @@
 
 package local.example.data.algorithm;
 
-public class Hungarian {
+public interface Hungarian {
 
 }
