@@ -20,6 +20,11 @@ package local.example.data;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.jgrapht.Graph;
+import org.jgrapht.alg.connectivity.KosarajuStrongConnectivityInspector;
+import org.jgrapht.alg.interfaces.StrongConnectivityAlgorithm;
+import org.jgrapht.graph.DefaultDirectedGraph;
+import org.jgrapht.graph.DefaultEdge;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
@@ -27,12 +32,26 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@Execution(ExecutionMode.SAME_THREAD)
+@Execution(ExecutionMode.CONCURRENT)
 class ApplicationTests {
 
 	@Test
-	@DisplayName("sample assert true test")
+	@DisplayName("strongly connected directed graph test")
 	void sampleTest() {
-		assertTrue(true);
+		Graph<String, DefaultEdge> directedGraph;
+		directedGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
+		// add vertexes
+		directedGraph.addVertex("A");
+		directedGraph.addVertex("B");
+		directedGraph.addVertex("C");
+		directedGraph.addVertex("D");
+		// add edges
+		directedGraph.addEdge("A", "B");
+		directedGraph.addEdge("B", "D");
+		directedGraph.addEdge("D", "C");
+		directedGraph.addEdge("C", "A");
+		StrongConnectivityAlgorithm<String, DefaultEdge> strongConnectivityAlgorithm;
+		strongConnectivityAlgorithm = new KosarajuStrongConnectivityInspector<>(directedGraph);
+		assertTrue(strongConnectivityAlgorithm.isStronglyConnected());
 	}
 }
