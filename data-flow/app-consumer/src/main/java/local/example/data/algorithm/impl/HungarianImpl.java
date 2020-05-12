@@ -18,9 +18,59 @@
 
 package local.example.data.algorithm.impl;
 
+import local.example.data.adt.EmployeeADT;
 import local.example.data.algorithm.Hungarian;
 
 public class HungarianImpl 
 		implements Hungarian {
+
+	@Override
+	public boolean initialFeasibleSolution() {
+		// TODO
+		return false;
+	}
+
+	@Override
+	public int[] execute() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public boolean executePhase() {
+		// TODO
+		return false;
+	}
+
+	@Override
+	public EmployeeADT fetchUnmatchedEmployee() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public void greedyMatch() {
+		// TODO		
+	}
+
+	@Override
+	public void initializePhase() {
+		// TODO		
+	}
+
+	@Override
+	public void match() {
+		// TODO		
+	}
+
+	@Override
+	public void reduce() {
+		// TODO		
+	}
+
+	@Override
+	public void update() {
+		// TODO		
+	}
 
 }
