@@ -20,6 +20,7 @@ package local.example.data.algorithm.impl;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
@@ -27,10 +28,11 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@Execution(ExecutionMode.SAME_THREAD)
+@Execution(ExecutionMode.CONCURRENT)
 public class AhujaOrlinImplTests {
 
 	@Test
+	@Disabled
 	@DisplayName("example of assert true test")
 	void exampleTest() {
 		assertTrue(true);
