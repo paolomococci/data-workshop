@@ -18,6 +18,17 @@
 
 package local.example.data.algorithm;
 
+import local.example.data.adt.EmployeeADT;
+
 public interface Hungarian {
 
+	public boolean initialFeasibleSolution();
+	public int[] execute();
+	public boolean executePhase();
+	public EmployeeADT fetchUnmatchedEmployee();
+	public void greedyMatch();
+	public void initializePhase();
+	public void match();
+	public void reduce();
+	public void update();
 }
