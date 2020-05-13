@@ -25,16 +25,20 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@Execution(ExecutionMode.CONCURRENT)
 public class PlanarGraphAlgoriyhmsTests {
 
-	private static Graph<String, DefaultWeightedEdge> weightedGraph  = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
+	private static Graph<String, DefaultWeightedEdge> weightedGraph;
 
 	@BeforeAll
 	static void init() 
 			throws Exception {
+		weightedGraph  = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 		weightedGraph.addVertex("A");
 		weightedGraph.addVertex("B");
 		weightedGraph.addVertex("C");
