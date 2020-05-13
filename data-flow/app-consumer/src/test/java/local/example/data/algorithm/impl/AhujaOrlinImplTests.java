@@ -34,7 +34,8 @@ public class AhujaOrlinImplTests {
 	@Test
 	@Disabled
 	@DisplayName("example of assert true test")
-	void exampleTest() {
+	void exampleTest() 
+			throws Exception {
 		assertTrue(true);
 	}
 }
