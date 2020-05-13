@@ -32,21 +32,24 @@ public class HungarianImplTests {
 	@Test
 	@Disabled
 	@DisplayName("further explanation of validity test")
-	void validityTest() {
+	void validityTest() 
+			throws Exception {
 		
 	}
 
 	@Test
 	@Disabled
 	@DisplayName("further explanation of unassigned job test")
-	void unassignedJobTest() {
+	void unassignedJobTest() 
+			throws Exception {
 		
 	}
 
 	@Test
 	@Disabled
 	@DisplayName("further explanation of unassigned employee test")
-	void unassignedEmployeeTest() {
+	void unassignedEmployeeTest() 
+			throws Exception {
 		
 	}
 }
