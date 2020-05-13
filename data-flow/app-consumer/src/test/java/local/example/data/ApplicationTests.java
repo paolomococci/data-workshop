@@ -25,6 +25,7 @@ import org.jgrapht.alg.connectivity.KosarajuStrongConnectivityInspector;
 import org.jgrapht.alg.interfaces.StrongConnectivityAlgorithm;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
@@ -35,11 +36,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Execution(ExecutionMode.CONCURRENT)
 class ApplicationTests {
 
-	@Test
-	@DisplayName("strongly connected directed graph test")
-	void sampleTest() 
+	private static Graph<String, DefaultEdge> directedGraph;
+
+	@BeforeAll
+	static void init() 
 			throws Exception {
-		Graph<String, DefaultEdge> directedGraph;
 		directedGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
 		// add vertexes
 		directedGraph.addVertex("A");
@@ -51,6 +52,12 @@ class ApplicationTests {
 		directedGraph.addEdge("B", "D");
 		directedGraph.addEdge("D", "C");
 		directedGraph.addEdge("C", "A");
+	}
+
+	@Test
+	@DisplayName("strongly connected directed graph test")
+	void sampleTest() 
+			throws Exception {
 		StrongConnectivityAlgorithm<String, DefaultEdge> strongConnectivityAlgorithm;
 		strongConnectivityAlgorithm = new KosarajuStrongConnectivityInspector<>(directedGraph);
 		assertTrue(strongConnectivityAlgorithm.isStronglyConnected());
