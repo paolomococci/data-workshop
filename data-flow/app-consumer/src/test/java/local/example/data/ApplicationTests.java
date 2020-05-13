@@ -37,7 +37,8 @@ class ApplicationTests {
 
 	@Test
 	@DisplayName("strongly connected directed graph test")
-	void sampleTest() {
+	void sampleTest() 
+			throws Exception {
 		Graph<String, DefaultEdge> directedGraph;
 		directedGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
 		// add vertexes
