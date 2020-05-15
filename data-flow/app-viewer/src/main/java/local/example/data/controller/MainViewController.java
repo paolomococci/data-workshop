@@ -22,10 +22,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class RootController {
+public class MainViewController {
 
-	@GetMapping(value = {"/root", "/root.html"})
+	@GetMapping(value = {"/main", "/main.html"})
 	public String root() {
-		return "root";
+		return "main";
 	}
 }
