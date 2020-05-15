@@ -18,21 +18,13 @@
 
 package local.example.data;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@Execution(ExecutionMode.SAME_THREAD)
 class ApplicationTests {
 
 	@Test
-	@DisplayName("sample assert true test")
-	void sampletest() {
-		assertTrue(true);
+	void voidTests() {
 	}
 }
