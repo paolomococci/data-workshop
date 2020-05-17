@@ -40,12 +40,14 @@ public class EmployeeRepresentationModelAssembler
 	@Override
 	public EntityModel<Employee> toModel(Employee employee) {
 		try {
+			// TODO, deprecated, to fix
 			return new EntityModel<>(employee, 
 					linkTo(methodOn(EmployeeRestController.class).read(employee.getId())).withSelfRel(), 
 					linkTo(methodOn(EmployeeRestController.class).readAll()).withRel("employees"));
 		} catch (URISyntaxException uriException) {
 			uriException.printStackTrace();
 		}
+		// TODO, deprecated, to fix
 		return new EntityModel<>(new Employee());
 	}
 
@@ -58,6 +60,7 @@ public class EmployeeRepresentationModelAssembler
 	public Mono<EntityModel<Employee>> toMono(Employee employee) 
 			throws URISyntaxException {
 		EntityModel<Employee> entityModelOfEmployee;
+		// TODO, deprecated, to fix
 		entityModelOfEmployee = new EntityModel<>(employee, 
 				linkTo(methodOn(EmployeeRestController.class).read(employee.getId())).withSelfRel(), 
 				linkTo(methodOn(EmployeeRestController.class).readAll()).withRel("employees"));
