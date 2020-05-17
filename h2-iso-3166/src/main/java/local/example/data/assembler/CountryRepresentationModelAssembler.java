@@ -38,13 +38,13 @@ public class CountryRepresentationModelAssembler
 	@Override
 	public EntityModel<Country> toModel(Country country) {
 		try {
-			return new EntityModel<>(country, 
+			return EntityModel.of(country, 
 					linkTo(methodOn(CountryRestController.class).read(country.getId())).withSelfRel(), 
 					linkTo(methodOn(CountryRestController.class).readAll()).withRel("countries"));
 		} catch (URISyntaxException uriException) {
 			uriException.printStackTrace();
 		}
-		return new EntityModel<>(new Country());
+		return EntityModel.of(new Country());
 	}
 
 	@Override
