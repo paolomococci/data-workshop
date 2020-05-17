@@ -40,15 +40,14 @@ public class JobRepresentationModelAssembler
 	@Override
 	public EntityModel<Job> toModel(Job job) {
 		try {
-			// TODO, deprecated, to fix
-			return new EntityModel<>(job, 
+			EntityModel<Job> entityModelOfJob = EntityModel.of(job, 
 					linkTo(methodOn(JobRestController.class).read(job.getId())).withSelfRel(), 
 					linkTo(methodOn(JobRestController.class).readAll()).withRel("jobs"));
+			return entityModelOfJob;
 		} catch (URISyntaxException uriException) {
 			uriException.printStackTrace();
 		}
-		// TODO, deprecated, to fix
-		return new EntityModel<>(new Job());
+		return EntityModel.of(new Job());
 	}
 
 	@Override
@@ -59,9 +58,7 @@ public class JobRepresentationModelAssembler
 
 	public Mono<EntityModel<Job>> toMono(Job job) 
 			throws URISyntaxException {
-		EntityModel<Job> entityModelOfJob;
-		// TODO, deprecated, to fix
-		entityModelOfJob = new EntityModel<>(job, 
+		EntityModel<Job> entityModelOfJob= EntityModel.of(job, 
 				linkTo(methodOn(JobRestController.class).read(job.getId())).withSelfRel(), 
 				linkTo(methodOn(JobRestController.class).readAll()).withRel("jobs"));
 		Mono<EntityModel<Job>> monoOfJob = Mono.justOrEmpty(entityModelOfJob);
