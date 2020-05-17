@@ -40,12 +40,14 @@ public class CustomerRepresentationModelAssembler
 	@Override
 	public EntityModel<Customer> toModel(Customer customer) {
 		try {
+			// TODO, deprecated, to fix
 			return new EntityModel<>(customer, 
 					linkTo(methodOn(CustomerRestController.class).read(customer.getId())).withSelfRel(), 
 					linkTo(methodOn(CustomerRestController.class).readAll()).withRel("customers"));
 		} catch (URISyntaxException uriException) {
 			uriException.printStackTrace();
 		}
+		// TODO, deprecated, to fix
 		return new EntityModel<>(new Customer());
 	}
 
@@ -58,6 +60,7 @@ public class CustomerRepresentationModelAssembler
 	public Mono<EntityModel<Customer>> toMono(Customer customer) 
 			throws URISyntaxException {
 		EntityModel<Customer> entityModelOfCustomer;
+		// TODO, deprecated, to fix
 		entityModelOfCustomer = new EntityModel<>(customer, 
 				linkTo(methodOn(CustomerRestController.class).read(customer.getId())).withSelfRel(), 
 				linkTo(methodOn(CustomerRestController.class).readAll()).withRel("customers"));
