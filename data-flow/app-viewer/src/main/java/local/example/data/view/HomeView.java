@@ -18,20 +18,37 @@
 
 package local.example.data.view;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.accordion.Accordion;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.server.VaadinRequest;
+import com.vaadin.flow.spring.annotation.UIScope;
 
-import local.example.data.view.component.HomeViewComponent;
-import lombok.Getter;
+@UIScope
+@Route("/")
+@RouteAlias("/home")
+@PWA(name = "Home Page", shortName = "home")
+public class HomeView 
+		extends UI {
 
-@Route(value = "/")
-@RouteAlias(value = "/home")
-public class HomeView {
-
-	@Getter
-	private final HomeViewComponent homeViewComponent;
+	private static final long serialVersionUID = -8375389836593224664L;
+	private static Accordion accordion;
+	private static VerticalLayout verticalLayout;
 
 	public HomeView() {
-		homeViewComponent = new HomeViewComponent();
+		accordion = new Accordion();
+		verticalLayout = new VerticalLayout();
+	}
+
+	@Override
+	protected void init(VaadinRequest request) {
+		super.init(request);
+		verticalLayout.add(new TextField("name"), new TextField("surname"), new TextField("email"));
+		accordion.add("contact information", verticalLayout);
+		this.add(accordion);
 	}
 }
