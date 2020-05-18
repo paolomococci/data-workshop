@@ -18,8 +18,8 @@
 
 package local.example.data.view;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.PWA;
 
 import local.example.data.view.component.CustomerEditorComponent;
 import local.example.data.view.component.EmployeeEditorComponent;
@@ -27,9 +27,11 @@ import local.example.data.view.component.JobEditorComponent;
 import local.example.data.view.component.MainViewComponent;
 import lombok.Getter;
 
-@Route(value = "/main")
-@PWA(name = "Main Page", shortName = "main")
-public class MainView {
+@Route("/main")
+public class MainView 
+		extends UI {
+
+	private static final long serialVersionUID = -4949061752443135413L;
 
 	@Getter
 	private final MainViewComponent mainViewComponent;
@@ -48,5 +50,6 @@ public class MainView {
 		customerEditorComponent = new CustomerEditorComponent();
 		employeeEditorComponent = new EmployeeEditorComponent();
 		jobEditorComponent = new JobEditorComponent();
+		this.add(mainViewComponent);
 	}
 }
