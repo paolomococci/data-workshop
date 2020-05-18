@@ -18,18 +18,23 @@
 
 package local.example.data.view;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.Route;
 
 import local.example.data.view.component.LoginViewComponent;
 import lombok.Getter;
 
-@Route(value = "/login")
-public class LoginView {
+@Route("/login")
+public class LoginView 
+		extends UI {
+
+	private static final long serialVersionUID = 1791246927321006095L;
 
 	@Getter
 	private final LoginViewComponent loginViewComponent;
 
 	public LoginView() {
 		loginViewComponent = new LoginViewComponent();
+		this.add(loginViewComponent);
 	}
 }
