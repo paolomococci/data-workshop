@@ -32,7 +32,7 @@ public class WebSecurityConfig
 	protected void configure(HttpSecurity httpSecurity) 
 			throws Exception {
 		httpSecurity.authorizeRequests()
-			.antMatchers("/", "/home").permitAll().anyRequest().authenticated()
+			.antMatchers("/", "/home", "/VAADIN/**").permitAll().anyRequest().authenticated()
 			.and().formLogin().loginPage("/login").permitAll()
 			.and().logout().permitAll();
 	}
