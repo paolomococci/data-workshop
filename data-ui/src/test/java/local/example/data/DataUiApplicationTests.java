@@ -18,6 +18,9 @@
 
 package local.example.data;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -26,5 +29,14 @@ class DataUiApplicationTests {
 
 	@Test
 	void voidTest() {
+	}
+
+	@Test
+	void arithmeticTest() 
+			throws Exception {
+		assertAll("arithmetical", 
+					() -> assertEquals(2, 1+1),
+					() -> assertEquals(4, 2*2)
+				);
 	}
 }
