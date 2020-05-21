@@ -18,9 +18,20 @@
 
 package local.example.data.view;
 
+import org.springframework.util.StringUtils;
+
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+
+import local.example.data.entity.Customer;
+import local.example.data.repository.CustomerRepository;
+import local.example.data.view.editor.CustomerViewEditor;
 
 @Route(value = "root")
 @RouteAlias(value = "")
@@ -28,5 +39,64 @@ public class DataUiRootView
 		extends VerticalLayout {
 
 	private static final long serialVersionUID = 7646412135200145396L;
+	private final CustomerRepository customerRepository;
+	private final Grid<Customer> gridOfCustomers;
+	private final TextField idFilter;
+	private final TextField nicknameFilter;
+	private final TextField abcClassificationFilter;
+	private final HorizontalLayout filters;
+	private final CustomerViewEditor customerViewEditor;
+	private final Button addCustomer;
+	private final VerticalLayout uploadNewCustomer;
 
+	public DataUiRootView(
+			CustomerRepository customerRepository, 
+			CustomerViewEditor viewEditor
+			) {
+		super();
+		this.customerRepository = customerRepository;
+		this.gridOfCustomers = new Grid<>(Customer.class);
+		this.gridOfCustomers.setColumns("id", "nickname", "abcClassification");
+		this.gridOfCustomers.getColumnByKey("id");
+		this.idFilter = new TextField();
+		this.idFilter.setPlaceholder("by id");
+		this.idFilter.setValueChangeMode(ValueChangeMode.LAZY);
+		this.nicknameFilter = new TextField();
+		this.nicknameFilter.setPlaceholder("by nickname");
+		this.nicknameFilter.setValueChangeMode(ValueChangeMode.LAZY);
+		this.nicknameFilter.addValueChangeListener(
+				listener -> listOfCustomers(listener.getValue())
+		);
+		this.abcClassificationFilter = new TextField();
+		this.abcClassificationFilter.setPlaceholder("by ABC classification");
+		this.nicknameFilter.setValueChangeMode(ValueChangeMode.LAZY);
+		this.filters = new HorizontalLayout();
+		this.filters.add(idFilter, nicknameFilter, abcClassificationFilter);
+		this.customerViewEditor = viewEditor;
+		this.addCustomer = new Button("new customer");
+		this.addCustomer.setSizeFull();
+		this.addCustomer.setSizeUndefined();
+		this.addCustomer.addClickListener(
+				listener -> {
+					boolean visible = customerViewEditor.getElement().isVisible();
+					if (!visible) {
+						customerViewEditor.setVisible(true);
+					} else {
+						customerViewEditor.setVisible(false);
+					}
+				}
+		);
+		this.uploadNewCustomer = new VerticalLayout(addCustomer, customerViewEditor);
+		this.uploadNewCustomer.setSizeFull();
+		this.add(filters, gridOfCustomers, uploadNewCustomer);
+	}
+
+	private void listOfCustomers(String nickname) {
+		if (StringUtils.isEmpty(nickname)) {
+			gridOfCustomers.setItems(customerRepository.findAll());
+		}
+		else {
+			gridOfCustomers.setItems(customerRepository.findByNickname(nickname));
+		}
+	}
 }
