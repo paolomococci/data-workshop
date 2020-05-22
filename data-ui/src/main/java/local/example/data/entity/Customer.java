@@ -23,6 +23,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -34,13 +37,23 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Getter
-	private long id;
+	private Long id;
 
 	@Getter
 	@Setter
+	@NotNull
+	@Size(min = 1, max = 20, message = "range of this value is 1 to 20 characters")
+	@Pattern(
+			regexp = "^[a-z]*$", 
+			message = "only the characters `a-z` are allowed"
+			)
 	private String nickname;
 
 	@Getter
 	@Setter
+	@Pattern(
+			regexp = "^[ABC]{1}$", 
+			message = "only the characters `A|B|C` are allowed"
+			)
 	private String abcClassification;
 }
