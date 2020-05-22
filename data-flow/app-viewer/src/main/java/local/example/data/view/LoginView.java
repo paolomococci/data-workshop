@@ -24,7 +24,7 @@ import com.vaadin.flow.router.Route;
 import local.example.data.view.component.LoginViewComponent;
 import lombok.Getter;
 
-@Route("/login")
+@Route("login")
 public class LoginView 
 		extends UI {
 
