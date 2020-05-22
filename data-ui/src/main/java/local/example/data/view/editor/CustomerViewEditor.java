@@ -44,14 +44,14 @@ public class CustomerViewEditor
 
 	private static final long serialVersionUID = -2486816437236479000L;
 	private final CustomerRepository customerRepository;
-	private final TextField nickname;
-	private final TextField abcClassification;
-	private final Button save;
-	private final Button cancel;
-	private final Button delete;
+	private final TextField nicknameTextField;
+	private final TextField abcClassificationTextField;
+	private final Button saveButton;
+	private final Button cancelButton;
+	private final Button deleteButton;
 	private final HorizontalLayout tools;
 	private final Binder<Customer> binderOfCustomers;
-	private CustomerChangeHandler changeHandler;
+	private CustomerChangeHandler customerChangeHandler;
 
 	@Getter
 	@Setter
@@ -61,22 +61,26 @@ public class CustomerViewEditor
 	public CustomerViewEditor(CustomerRepository customerRepository) {
 		super();
 		this.customerRepository = customerRepository;
-		this.nickname = new TextField("nickname");
-		this.abcClassification = new TextField("abc classification");
-		this.save = new Button("save", VaadinIcon.UPLOAD.create());
-		this.cancel = new Button("cancel", VaadinIcon.MINUS_CIRCLE.create());
-		this.delete = new Button("delete", VaadinIcon.TRASH.create());
-		this.tools = new HorizontalLayout(save, cancel, delete);
+		this.nicknameTextField = new TextField("nickname");
+		this.abcClassificationTextField = new TextField("abc classification");
+		this.saveButton = new Button("save", VaadinIcon.UPLOAD.create());
+		this.cancelButton = new Button("cancel", VaadinIcon.DEL.create());
+		this.deleteButton = new Button("delete", VaadinIcon.TRASH.create());
+		this.tools = new HorizontalLayout(saveButton, cancelButton, deleteButton);
 		this.binderOfCustomers = new Binder<>(Customer.class);
 		this.binderOfCustomers.bindInstanceFields(this);
 		this.setSpacing(true);
-		this.add(nickname, abcClassification, tools);
+		this.add(nicknameTextField, abcClassificationTextField, tools);
 		this.setVisible(false);
 	}
 
-	public void save() {
+	public final void edit(Customer temp) {
 		// TODO
-		changeHandler.onChange();
+	}
+
+	public void save() {
+		customerRepository.save(this.customer);
+		customerChangeHandler.onChange();
 	}
 
 	public void cancel() {
@@ -85,6 +89,6 @@ public class CustomerViewEditor
 
 	public void delete() {
 		// TODO
-		changeHandler.onChange();
+		customerChangeHandler.onChange();
 	}
 }
