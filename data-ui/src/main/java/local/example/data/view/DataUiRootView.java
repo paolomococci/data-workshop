@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -46,7 +47,7 @@ public class DataUiRootView
 	private final TextField abcClassificationFilter;
 	private final HorizontalLayout filters;
 	private final CustomerViewEditor customerViewEditor;
-	private final Button addCustomer;
+	private final Button addNewCustomer;
 	private final VerticalLayout uploadNewCustomer;
 
 	public DataUiRootView(
@@ -73,10 +74,10 @@ public class DataUiRootView
 		this.filters = new HorizontalLayout();
 		this.filters.add(idFilter, nicknameFilter, abcClassificationFilter);
 		this.customerViewEditor = viewEditor;
-		this.addCustomer = new Button("new customer");
-		this.addCustomer.setSizeFull();
-		this.addCustomer.setSizeUndefined();
-		this.addCustomer.addClickListener(
+		this.addNewCustomer = new Button("new", VaadinIcon.ELLIPSIS_V.create());
+		this.addNewCustomer.setSizeFull();
+		this.addNewCustomer.setSizeUndefined();
+		this.addNewCustomer.addClickListener(
 				listener -> {
 					boolean visible = customerViewEditor.getElement().isVisible();
 					if (!visible) {
@@ -86,7 +87,7 @@ public class DataUiRootView
 					}
 				}
 		);
-		this.uploadNewCustomer = new VerticalLayout(addCustomer, customerViewEditor);
+		this.uploadNewCustomer = new VerticalLayout(addNewCustomer, customerViewEditor);
 		this.uploadNewCustomer.setSizeFull();
 		this.add(filters, gridOfCustomers, uploadNewCustomer);
 	}
