@@ -27,7 +27,7 @@ import local.example.data.view.component.JobEditorComponent;
 import local.example.data.view.component.MainViewComponent;
 import lombok.Getter;
 
-@Route("/main")
+@Route("main")
 public class MainView 
 		extends UI {
 
