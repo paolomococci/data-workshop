@@ -29,8 +29,8 @@ import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.spring.annotation.UIScope;
 
 @UIScope
-@Route("/")
-@RouteAlias("/home")
+@Route("home")
+@RouteAlias("")
 @PWA(name = "Home Page", shortName = "home")
 public class HomeView 
 		extends UI {
