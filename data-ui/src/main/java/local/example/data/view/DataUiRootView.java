@@ -54,14 +54,16 @@ public class DataUiRootView
 			CustomerRepository customerRepository, 
 			CustomerViewEditor viewEditor
 			) {
-		super();
 		this.customerRepository = customerRepository;
 		this.gridOfCustomers = new Grid<>(Customer.class);
 		this.gridOfCustomers.setColumns("id", "nickname", "abcClassification");
-		this.gridOfCustomers.getColumnByKey("id");
+		this.gridOfCustomers.getColumnByKey("id").setWidth("200px").setFlexGrow(0);
 		this.idFilter = new TextField();
 		this.idFilter.setPlaceholder("by id");
 		this.idFilter.setValueChangeMode(ValueChangeMode.LAZY);
+		this.idFilter.addValueChangeListener(
+				listener -> listOfIds(listener.getValue())
+		);
 		this.nicknameFilter = new TextField();
 		this.nicknameFilter.setPlaceholder("by nickname");
 		this.nicknameFilter.setValueChangeMode(ValueChangeMode.LAZY);
@@ -70,7 +72,10 @@ public class DataUiRootView
 		);
 		this.abcClassificationFilter = new TextField();
 		this.abcClassificationFilter.setPlaceholder("by ABC classification");
-		this.nicknameFilter.setValueChangeMode(ValueChangeMode.LAZY);
+		this.abcClassificationFilter.setValueChangeMode(ValueChangeMode.LAZY);
+		this.abcClassificationFilter.addValueChangeListener(
+				listener -> listOfAbcClassifications(listener.getValue())
+		);
 		this.filters = new HorizontalLayout();
 		this.filters.add(idFilter, nicknameFilter, abcClassificationFilter);
 		this.customerViewEditor = viewEditor;
@@ -92,6 +97,10 @@ public class DataUiRootView
 		this.add(filters, gridOfCustomers, uploadNewCustomer);
 	}
 
+	private void listOfIds(String id) {
+		// TODO 
+	}
+
 	private void listOfCustomers(String nickname) {
 		if (StringUtils.isEmpty(nickname)) {
 			gridOfCustomers.setItems(customerRepository.findAll());
@@ -99,5 +108,9 @@ public class DataUiRootView
 		else {
 			gridOfCustomers.setItems(customerRepository.findByNickname(nickname));
 		}
+	}
+
+	private void listOfAbcClassifications(String abcClassification) {
+		// TODO 
 	}
 }
