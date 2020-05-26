@@ -30,7 +30,7 @@ import local.example.data.entity.EndUser;
 public interface EndUserRestRepository 
 		extends PagingAndSortingRepository<EndUser, Long> {
 
-	List<EndUser> findByFirstName(@Param("firstName") String firstName);
-	List<EndUser> findByLastName(@Param("lastName") String lastName);
+	List<EndUser> findByName(@Param("name") String name);
+	List<EndUser> findBySurname(@Param("surname") String surname);
 	List<EndUser> findByUsername(@Param("username") String username);
 }
