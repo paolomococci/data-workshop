@@ -18,12 +18,18 @@
 
 package local.example.data.assembler;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import java.net.URISyntaxException;
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 import local.example.data.entity.EndUser;
+import local.example.data.rest.repository.EndUserRestController;
 
 @Component
 public class EndUserRepresentationModelAssembler 
@@ -31,8 +37,15 @@ public class EndUserRepresentationModelAssembler
 
 	@Override
 	public EntityModel<EndUser> toModel(EndUser endUser) {
-		// TODO
-		return null;
+		try {
+			EntityModel<EndUser> entityModelOfendUser = EntityModel.of(endUser, 
+					linkTo(methodOn(EndUserRestController.class).read(endUser.getId())).withSelfRel(), 
+					linkTo(methodOn(EndUserRestController.class).readAll()).withRel("endUsers"));
+			return entityModelOfendUser;
+		} catch (URISyntaxException uriException) {
+			uriException.printStackTrace();
+		}
+		return EntityModel.of(new EndUser());
 	}
 
 	@Override
@@ -40,5 +53,4 @@ public class EndUserRepresentationModelAssembler
 			Iterable<? extends EndUser> endUsers) {
 		return RepresentationModelAssembler.super.toCollectionModel(endUsers);
 	}
-
 }
