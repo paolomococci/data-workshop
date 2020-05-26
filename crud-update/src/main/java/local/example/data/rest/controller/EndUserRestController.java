@@ -16,7 +16,7 @@
  *
  */
 
-package local.example.data.rest.repository;
+package local.example.data.rest.controller;
 
 import java.net.URISyntaxException;
 
@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import local.example.data.assembler.EndUserRepresentationModelAssembler;
 import local.example.data.entity.EndUser;
 import local.example.data.exception.EndUserNotFoundException;
+import local.example.data.rest.repository.EndUserRestRepository;
 
 @RepositoryRestController
 @RequestMapping(path = "/rest/endUsers")
