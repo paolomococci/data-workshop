@@ -18,9 +18,17 @@
 
 package local.example.data.view;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+
+import local.example.data.view.component.HelpComponent;
+import local.example.data.view.component.OverviewComponent;
 
 @Route(value = "root")
 @RouteAlias(value = "")
@@ -29,4 +37,23 @@ public class RootView
 
 	private static final long serialVersionUID = -847263394035462160L;
 
+	private final HelpComponent helpComponent;
+	private final OverviewComponent overviewComponent;
+	private Tab helpComponentTab;
+	private Tab endUserOverviewTab;
+	private Tabs tabs;
+
+	@Autowired
+	public RootView(HelpComponent help, OverviewComponent overview) {
+		super();
+		this.helpComponent = help;
+		this.overviewComponent = overview;
+		this.helpComponentTab = new Tab("help");
+		this.helpComponentTab.add(helpComponent);
+		this.endUserOverviewTab = new Tab("overview");
+		this.endUserOverviewTab.add(overviewComponent);
+		this.tabs = new Tabs(helpComponentTab, endUserOverviewTab);
+		this.tabs.addThemeVariants(TabsVariant.LUMO_CENTERED);
+		this.add(tabs);
+	}
 }
