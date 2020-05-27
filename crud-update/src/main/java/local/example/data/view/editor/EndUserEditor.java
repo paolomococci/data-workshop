@@ -18,10 +18,17 @@
 
 package local.example.data.view.editor;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.vaadin.flow.component.KeyNotifier;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+
+import local.example.data.entity.EndUser;
+import local.example.data.repository.EndUserRepository;
 
 @SpringComponent
 @UIScope
@@ -31,4 +38,20 @@ public class EndUserEditor
 
 	private static final long serialVersionUID = 2510377311669291491L;
 
+	private EndUser endUser;
+	private final EndUserRepository endUserRepository;
+	private Binder<EndUser> binderOfEndUser;
+	private VerticalLayout main;
+	private FormLayout editor;
+
+	@Autowired
+	public EndUserEditor(EndUserRepository endUserRepository) {
+		super();
+		this.endUserRepository = endUserRepository;
+		this.binderOfEndUser = new Binder<>();
+		this.editor = new FormLayout();
+		this.main = new VerticalLayout();
+		// TODO
+		this.add(main);
+	}
 }
