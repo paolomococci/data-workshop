@@ -20,7 +20,7 @@ package local.example.data.view.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -32,22 +32,17 @@ public class HelpComponent
 
 	private static final long serialVersionUID = 5051706727369834507L;
 
-	public static final String TITLE_VIEW = "Help View";
-	public static final String VIEW_NAME = "";
-	private static final String SUB_TITLE = "Create Read Update and Delete " + 
-			"data fields of system users";
-	private static final String PRESENTATION = "This CRUD Web Application.";
-	private static final String EXPLANITION =  
-			"From which it's possible to administer the registration and " + 
-			"cancellation of users in a hypotetical system.";
-	public final Label label = new Label(TITLE_VIEW);
-	public final Label subtitle = new Label(SUB_TITLE);
-	public final Label present = new Label(PRESENTATION);
-	public final Label explain = new Label(EXPLANITION);
+	private VerticalLayout main;
+	private Div content;
 
 	@Autowired
 	public HelpComponent() {
 		super();
-		this.add(label, subtitle, present, explain);
+		this.content = new Div();
+		this.content.setTitle("help page");
+		this.content.setText("help TODO text");
+		this.main = new VerticalLayout();
+		// TODO
+		this.add(main);
 	}
 }
