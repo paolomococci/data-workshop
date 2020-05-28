@@ -20,9 +20,6 @@ package local.example.data.view.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -35,21 +32,9 @@ public class OverviewComponent
 	private static final long serialVersionUID = 7293973219485438417L;
 
 	public static final String[] COLUMNS = {"id", "name", "surname", "username"};
-	private VerticalLayout main;
-	private Div content;
-	private Header header;
-	private Paragraph paragraph;
 
 	@Autowired
 	public OverviewComponent() {
 		super();
-		this.paragraph = new Paragraph("");
-		this.header = new Header();
-		this.content = new Div();
-		this.content.setTitle("overview page");
-		this.content.setText("overview TODO");
-		this.main = new VerticalLayout();
-		// TODO
-		this.add(main);
 	}
 }
