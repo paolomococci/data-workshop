@@ -20,9 +20,6 @@ package local.example.data.view.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -34,21 +31,8 @@ public class HelpComponent
 
 	private static final long serialVersionUID = 5051706727369834507L;
 
-	private VerticalLayout main;
-	private Div content;
-	private Header header;
-	private Paragraph paragraph;
-
 	@Autowired
 	public HelpComponent() {
 		super();
-		this.paragraph = new Paragraph("");
-		this.header = new Header();
-		this.content = new Div();
-		this.content.setTitle("help page");
-		this.content.setText("help TODO text");
-		this.main = new VerticalLayout();
-		// TODO
-		this.add(main);
 	}
 }
