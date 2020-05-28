@@ -16,7 +16,7 @@
  *
  */
 
-package local.example.data.view.editor;
+package local.example.data.view.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,7 +32,7 @@ import local.example.data.repository.EndUserRepository;
 
 @SpringComponent
 @UIScope
-public class EndUserEditor 
+public class EditorComponent 
 		extends VerticalLayout 
 		implements KeyNotifier {
 
@@ -41,17 +41,13 @@ public class EndUserEditor
 	private EndUser endUser;
 	private final EndUserRepository endUserRepository;
 	private Binder<EndUser> binderOfEndUser;
-	private VerticalLayout main;
 	private FormLayout editor;
 
 	@Autowired
-	public EndUserEditor(EndUserRepository endUserRepository) {
+	public EditorComponent(EndUserRepository endUserRepository) {
 		super();
 		this.endUserRepository = endUserRepository;
 		this.binderOfEndUser = new Binder<>();
 		this.editor = new FormLayout();
-		this.main = new VerticalLayout();
-		// TODO
-		this.add(main);
 	}
 }
