@@ -29,6 +29,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.server.PWA;
 
+import local.example.data.view.component.EditorComponent;
 import local.example.data.view.component.HelpComponent;
 import local.example.data.view.component.OverviewComponent;
 
@@ -42,21 +43,27 @@ public class RootView
 
 	private final HelpComponent helpComponent;
 	private final OverviewComponent overviewComponent;
-	private Tab helpComponentTab;
-	private Tab endUserOverviewTab;
+	private final EditorComponent editorComponent;
+	private Tab helpTab;
+	private Tab overviewTab;
+	private Tab editorTab;
 	private Tabs tabs;
 
 	@Autowired
-	public RootView(HelpComponent help, OverviewComponent overview) {
+	public RootView(HelpComponent help, OverviewComponent overview, EditorComponent editor) {
 		super();
 		this.helpComponent = help;
 		this.overviewComponent = overview;
-		this.helpComponentTab = new Tab("help");
-		this.helpComponentTab.add(helpComponent);
-		this.endUserOverviewTab = new Tab("overview");
-		this.endUserOverviewTab.add(overviewComponent);
-		this.tabs = new Tabs(helpComponentTab, endUserOverviewTab);
-		this.tabs.addThemeVariants(TabsVariant.LUMO_CENTERED);
+		this.editorComponent = editor;
+		this.helpTab = new Tab("help");
+		this.helpTab.add(helpComponent);
+		this.overviewTab = new Tab("view");
+		this.overviewTab.add(overviewComponent);
+		this.editorTab = new Tab("editor");
+		this.editorTab.add(editorComponent);
+		this.tabs = new Tabs(helpTab, overviewTab, editorTab);
+		this.tabs.addThemeVariants(TabsVariant.LUMO_SMALL);
+		this.tabs.setWidth("350px");
 		this.addToNavbar(new DrawerToggle());
 		this.addToDrawer(tabs);
 	}
