@@ -54,7 +54,10 @@ public class RootView
 	private Label title;
 
 	@Autowired
-	public RootView(HelpComponent help, OverviewComponent overview, EditorComponent editor) {
+	public RootView(
+			HelpComponent help, 
+			OverviewComponent overview, 
+			EditorComponent editor) {
 		super();
 		this.helpComponent = help;
 		this.overviewComponent = overview;
