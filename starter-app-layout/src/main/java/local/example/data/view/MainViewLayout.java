@@ -43,7 +43,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 
 @Theme(Lumo.class)
 @Route(value = "main")
-@RouteAlias(value = "")
+@RouteAlias(value = MainViewLayout.URL)
 @Viewport(value = "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")
 public class MainViewLayout 
 		extends AppLayout {
