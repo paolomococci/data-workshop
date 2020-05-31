@@ -18,18 +18,29 @@
 
 package local.example.data.view;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.server.VaadinSession;
 
 import local.example.data.view.component.EditorComponent;
 import local.example.data.view.component.HelpComponent;
@@ -47,10 +58,8 @@ public class RootView
 	private final HelpComponent helpComponent;
 	private final OverviewComponent overviewComponent;
 	private final EditorComponent editorComponent;
-	private Tab helpTab;
-	private Tab overviewTab;
-	private Tab editorTab;
 	private Tabs tabs;
+	private Map<Tab, Component> workspace;
 	private Label title;
 
 	@Autowired
@@ -59,22 +68,74 @@ public class RootView
 			OverviewComponent overview, 
 			EditorComponent editor) {
 		super();
+		this.title = new Label("CRUD update");
 		this.helpComponent = help;
 		this.overviewComponent = overview;
 		this.editorComponent = editor;
-		this.helpTab = new Tab("help");
-		this.helpTab.add(helpComponent);
-		this.overviewTab = new Tab("view");
-		this.overviewTab.add(overviewComponent);
-		this.editorTab = new Tab("editor");
-		this.editorTab.add(editorComponent);
-		this.tabs = new Tabs(helpTab, overviewTab, editorTab);
-		this.tabs.addThemeVariants(TabsVariant.LUMO_SMALL);
-		this.tabs.setWidth("350px");
+		this.workspace = new HashMap<>();
+		this.tabs = new Tabs(
+				this.blank(),
+				this.help(), 
+				this.overview(), 
+				this.editor(), 
+				this.logout()
+				);
 		this.tabs.setOrientation(Tabs.Orientation.VERTICAL);
-		this.addToNavbar(new DrawerToggle());
-		this.title = new Label("CRUD update");
-		this.addToNavbar(title);
+		this.tabs.addSelectedChangeListener(listener -> {
+			final Tab selected = listener.getSelectedTab();
+			final Component component = this.workspace.get(selected);
+			this.setContent(component);
+		});
+		this.addToNavbar(new DrawerToggle(), this.title);
 		this.addToDrawer(tabs);
+	}
+
+	private Tab blank() {
+		final Span span = new Span("blank");
+		final Icon icon = VaadinIcon.DOT_CIRCLE.create();
+		final Tab tab = new Tab(new HorizontalLayout(icon, span));
+		this.workspace.put(tab, new VerticalLayout(new Label("")));
+		return tab;
+	}
+
+	private Tab help() {
+		final Span span = new Span("help");
+		final Icon icon = VaadinIcon.BOOK.create();
+		final Tab tab = new Tab(new HorizontalLayout(icon, span));
+		this.workspace.put(tab, this.helpComponent);
+		return tab;
+	}
+
+	private Tab overview() {
+		final Span span = new Span("overview");
+		final Icon icon = VaadinIcon.OPEN_BOOK.create();
+		final Tab tab = new Tab(new HorizontalLayout(icon, span));
+		this.workspace.put(tab, this.overviewComponent);
+		return tab;
+	}
+
+	private Tab editor() {
+		final Span span = new Span("edit");
+		final Icon icon = VaadinIcon.EDIT.create();
+		final Tab tab = new Tab(new HorizontalLayout(icon, span));
+		this.workspace.put(tab, this.editorComponent);
+		return tab;
+	}
+
+	private Tab logout() {
+		final Icon icon = VaadinIcon.SIGN_OUT.create();
+		final Button button = new Button();
+		final Tab tab;
+		button.setText("Logout");
+		button.setIcon(icon);
+		button.addClickListener(listener -> {
+			UI ui = UI.getCurrent();
+			VaadinSession vaadinSession = ui.getSession();
+			// TODO
+			vaadinSession.close();
+			ui.navigate(RootView.class);
+		});
+		tab = new Tab(button);
+		return tab;
 	}
 }
