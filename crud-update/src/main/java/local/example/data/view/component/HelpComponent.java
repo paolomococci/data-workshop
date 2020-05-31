@@ -20,6 +20,7 @@ package local.example.data.view.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -31,8 +32,11 @@ public class HelpComponent
 
 	private static final long serialVersionUID = 5051706727369834507L;
 
+	private Label label = new Label("#help");
+
 	@Autowired
 	public HelpComponent() {
 		super();
+		this.add(this.label);
 	}
 }
