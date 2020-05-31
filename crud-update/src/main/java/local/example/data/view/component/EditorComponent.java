@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -38,9 +39,14 @@ public class EditorComponent
 
 	private static final long serialVersionUID = 2510377311669291491L;
 
+	private Label label = new Label("#editor");
+	@SuppressWarnings("unused")
 	private EndUser endUser;
+	@SuppressWarnings("unused")
 	private final EndUserRepository endUserRepository;
+	@SuppressWarnings("unused")
 	private Binder<EndUser> binderOfEndUser;
+	@SuppressWarnings("unused")
 	private FormLayout editor;
 
 	@Autowired
@@ -49,5 +55,6 @@ public class EditorComponent
 		this.endUserRepository = endUserRepository;
 		this.binderOfEndUser = new Binder<>();
 		this.editor = new FormLayout();
+		this.add(this.label);
 	}
 }
