@@ -20,6 +20,7 @@ package local.example.data.view.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -32,9 +33,11 @@ public class OverviewComponent
 	private static final long serialVersionUID = 7293973219485438417L;
 
 	public static final String[] COLUMNS = {"id", "name", "surname", "username"};
+	private Label label = new Label("#overview");
 
 	@Autowired
 	public OverviewComponent() {
 		super();
+		this.add(this.label);
 	}
 }
