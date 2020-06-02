@@ -27,8 +27,8 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 
 @Route("")
-@RouteAlias("login")
-public class LoginLayout 
+@RouteAlias("signinto")
+public class SignintoLayout 
 		extends VerticalLayout {
 
 	private static final long serialVersionUID = 7296126119319793087L;
@@ -37,7 +37,7 @@ public class LoginLayout
 	private LoginForm login;
 
 	@Autowired
-	public LoginLayout() {
+	public SignintoLayout() {
 		super();
 		this.login = new LoginForm();
 		this.dialog = new Dialog(this.login);
