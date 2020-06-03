@@ -32,8 +32,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig 
 		extends WebSecurityConfigurerAdapter {
 
-	private static final String[] patterns = {"", "login", "/VAADIN/**"};
-	private static final String loginPage = "login";
+	private static final String[] patterns = {"/login", "/VAADIN/**"};
+	private static final String loginPage = "/login";
 	private static final String username = "guest";
 	private static final String rawPassword = "123guest456";
 	private static final String roles = "USER";
