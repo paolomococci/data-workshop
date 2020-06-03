@@ -35,12 +35,14 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
 
 import local.example.data.layout.component.EditorComponent;
 import local.example.data.layout.component.HelpComponent;
 import local.example.data.layout.component.OverviewComponent;
 
-@Route("main")
+@Route("")
+@RouteAlias("main")
 public class MainLayout 
 		extends VerticalLayout {
 
