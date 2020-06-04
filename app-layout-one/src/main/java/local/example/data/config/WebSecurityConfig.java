@@ -19,15 +19,24 @@
 package local.example.data.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+import local.example.data.cache.CustomizedRequestCache;
+import local.example.data.util.SecurityUtil;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig 
 		extends WebSecurityConfigurerAdapter {
+
+	private static final String LOGIN_URL = "/login";
+	private static final String LOGIN_FAILURE_URL = "/login?error";
+	private static final String[] ANT_PATTERNS = {"/VAADIN/**"};
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) 
@@ -43,9 +52,21 @@ public class WebSecurityConfig
 	@Override
 	protected void configure(HttpSecurity httpSecurity) 
 			throws Exception {
-		httpSecurity.authorizeRequests()
-			.antMatchers("/login", "/VAADIN/**").permitAll().anyRequest().authenticated()
-			.and().formLogin().loginPage("/login").permitAll()
-			.and().logout().permitAll();
+		httpSecurity
+			.csrf().disable()
+			.requestCache().requestCache(new CustomizedRequestCache())
+			.and().authorizeRequests()
+			.requestMatchers(SecurityUtil::isFrameworkInternalRequest).permitAll()
+			.anyRequest().authenticated()
+			.and().formLogin().loginPage(LOGIN_URL).permitAll()
+			.loginProcessingUrl(LOGIN_URL)
+			.failureUrl(LOGIN_FAILURE_URL)
+			.and().logout().logoutSuccessUrl(LOGIN_URL);
+	}
+
+	@Override
+	public void configure(WebSecurity webSecurity) 
+			throws Exception {
+		webSecurity.ignoring().antMatchers(HttpMethod.GET, ANT_PATTERNS);
 	}
 }
