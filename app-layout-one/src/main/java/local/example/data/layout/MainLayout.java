@@ -34,6 +34,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 
@@ -43,6 +44,7 @@ import local.example.data.layout.component.OverviewComponent;
 
 @Route("")
 @RouteAlias("main")
+@PageTitle("app layout one - main page")
 public class MainLayout 
 		extends VerticalLayout {
 
