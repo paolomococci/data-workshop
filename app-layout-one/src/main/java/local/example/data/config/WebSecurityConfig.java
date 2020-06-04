@@ -34,7 +34,10 @@ public class WebSecurityConfig
 			throws Exception {
 		authenticationManagerBuilder.inMemoryAuthentication()
 			.withUser("julie").password("julie123").roles("USER", "ADMIN")
-			.and().withUser("john").password("john123").roles("USER");
+			.and().withUser("john").password("john123").roles("USER")
+			.and().withUser("keith").password("keith123").roles("USER")
+			.and().withUser("michelle").password("michelle123").roles("USER")
+			.and().withUser("neil").password("neil123").roles("USER");
 	}
 
 	@Override
