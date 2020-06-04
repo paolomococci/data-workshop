@@ -27,10 +27,13 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -54,6 +57,8 @@ public class MainLayout
 	private OverviewComponent overviewComponent;
 	private EditorComponent editorComponent;
 
+	private HorizontalLayout horizontalLayoutHeader;
+	private Anchor logoutAnchor;
 	private Dialog dialog;
 	private Tab tab0, tab1, tab2;
 	private Div div0, div1, div2;
@@ -71,6 +76,10 @@ public class MainLayout
 		this.helpComponent = new HelpComponent();
 		this.overviewComponent = new OverviewComponent();
 		this.editorComponent = new EditorComponent();
+		
+		this.logoutAnchor = new Anchor("logout", "log out");
+		this.horizontalLayoutHeader = new HorizontalLayout(new DrawerToggle(), this.logoutAnchor);
+		this.horizontalLayoutHeader.setSizeFull();
 		
 		this.dialog = new Dialog();
 		
@@ -148,6 +157,6 @@ public class MainLayout
 		this.dialog.setOpened(true);
 		this.dialog.setHeight("800px");
 		this.dialog.setWidth("900px");
-		this.add(this.dialog);
+		this.add(this.horizontalLayoutHeader,this.dialog);
 	}
 }
