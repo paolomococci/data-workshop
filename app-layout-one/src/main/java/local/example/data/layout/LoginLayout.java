@@ -23,25 +23,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route("login")
+@PageTitle("app layout one - login page")
 public class LoginLayout 
-		extends VerticalLayout {
+		extends VerticalLayout 
+		implements BeforeEnterObserver {
 
 	private static final long serialVersionUID = 7296126119319793087L;
 
 	private Dialog dialog;
-	private LoginForm login;
+	private LoginForm loginForm;
 
 	@Autowired
 	public LoginLayout() {
 		super();
-		this.login = new LoginForm();
-		this.dialog = new Dialog(this.login);
+		this.loginForm = new LoginForm();
+		this.loginForm.setAction("login");
+		this.dialog = new Dialog(this.loginForm);
 		this.dialog.setOpened(true);
 		this.dialog.setHeight("420px");
 		this.dialog.setWidth("380px");
 		this.add(this.dialog);
+	}
+
+	@Override
+	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
+		if (beforeEnterEvent.getLocation().getQueryParameters().getParameters().containsKey("error")) {
+			loginForm.setError(true);
+		}
 	}
 }
