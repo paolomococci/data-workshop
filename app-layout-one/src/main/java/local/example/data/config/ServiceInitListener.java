@@ -18,9 +18,13 @@
 
 package local.example.data.config;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
+
+import local.example.data.layout.LoginLayout;
+import local.example.data.util.SecurityUtil;
 
 public class ServiceInitListener 
 		implements VaadinServiceInitListener {
@@ -29,10 +33,16 @@ public class ServiceInitListener
 
 	@Override
 	public void serviceInit(ServiceInitEvent serviceInitEvent) {
-		// TODO
+		serviceInitEvent.getSource().addUIInitListener(listener -> {
+			final UI ui = listener.getUI();
+			ui.addBeforeEnterListener(this::authenticatedNavigation);
+		});
 	}
 
 	private void authenticatedNavigation(BeforeEnterEvent beforeEnterEvent) {
-		// TODO
+		if (!LoginLayout.class.equals(beforeEnterEvent.getNavigationTarget()) && 
+				!SecurityUtil.isUserLoggedIn()) {
+			beforeEnterEvent.rerouteTo(LoginLayout.class);
+		}
 	}
 }
