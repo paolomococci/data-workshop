@@ -16,7 +16,7 @@
  *
  */
 
-package local.example.data.config;
+package local.example.data.listener;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.BeforeEnterEvent;
