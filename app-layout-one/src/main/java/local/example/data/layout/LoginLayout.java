@@ -46,7 +46,7 @@ public class LoginLayout
 		this.loginForm.setAction("login");
 		this.dialog = new Dialog(this.loginForm);
 		this.dialog.setOpened(true);
-		this.dialog.setHeight("420px");
+		this.dialog.setHeight("500x");
 		this.dialog.setWidth("380px");
 		this.add(this.dialog);
 	}
