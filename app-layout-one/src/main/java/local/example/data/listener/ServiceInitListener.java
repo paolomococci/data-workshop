@@ -18,6 +18,8 @@
 
 package local.example.data.listener;
 
+import org.springframework.stereotype.Component;
+
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.server.ServiceInitEvent;
@@ -26,6 +28,7 @@ import com.vaadin.flow.server.VaadinServiceInitListener;
 import local.example.data.layout.LoginLayout;
 import local.example.data.util.SecurityUtil;
 
+@Component
 public class ServiceInitListener 
 		implements VaadinServiceInitListener {
 
