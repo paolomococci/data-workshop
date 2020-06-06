@@ -79,6 +79,7 @@ public class MainLayout
 		
 		this.logoutAnchor = new Anchor("logout", "log out");
 		this.horizontalLayoutHeader = new HorizontalLayout(new DrawerToggle(), this.logoutAnchor);
+		this.horizontalLayoutHeader.setDefaultVerticalComponentAlignment(Alignment.AUTO);
 		this.horizontalLayoutHeader.setSizeFull();
 		
 		this.dialog = new Dialog();
