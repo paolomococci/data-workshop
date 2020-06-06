@@ -18,6 +18,7 @@
 
 package local.example.data.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,6 +26,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import local.example.data.cache.CustomizedRequestCache;
 import local.example.data.util.SecurityUtil;
@@ -36,7 +41,18 @@ public class WebSecurityConfig
 
 	private static final String LOGIN_URL = "/login";
 	private static final String LOGIN_FAILURE_URL = "/login?error";
-	private static final String[] ANT_PATTERNS = {"/VAADIN/**"};
+	private static final String[] ANT_PATTERNS = {
+			"/VAADIN/**", 
+			"favicon.ico",
+			"robots.txt", 
+			"manifest.webmanifest", 
+			"sw.js", 
+			"offline.html", 
+			"/icons/**", 
+			"/images/**", 
+			"/styles/**", 
+			"/h2-console/**"
+			};
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) 
@@ -68,5 +84,13 @@ public class WebSecurityConfig
 	public void configure(WebSecurity webSecurity) 
 			throws Exception {
 		webSecurity.ignoring().antMatchers(HttpMethod.GET, ANT_PATTERNS);
+	}
+
+	@Bean
+	@Override
+	protected UserDetailsService userDetailsService() {
+		UserDetails userDetails = User.withUsername("guest").password("guest")
+				.roles("USER").build();
+		return new InMemoryUserDetailsManager(userDetails);
 	}
 }
