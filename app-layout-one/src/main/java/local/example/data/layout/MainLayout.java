@@ -27,7 +27,6 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Anchor;
@@ -78,7 +77,7 @@ public class MainLayout
 		this.editorComponent = new EditorComponent();
 		
 		this.logoutAnchor = new Anchor("logout", "log out");
-		this.horizontalLayoutHeader = new HorizontalLayout(new DrawerToggle(), this.logoutAnchor);
+		this.horizontalLayoutHeader = new HorizontalLayout(this.logoutAnchor);
 		this.horizontalLayoutHeader.setDefaultVerticalComponentAlignment(Alignment.AUTO);
 		this.horizontalLayoutHeader.setSizeFull();
 		
