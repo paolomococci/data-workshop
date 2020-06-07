@@ -29,6 +29,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import local.example.data.cache.CustomizedRequestCache;
@@ -43,7 +45,7 @@ public class WebSecurityConfig
 	private static final String LOGIN_FAILURE_URL = "/login?error";
 	private static final String[] ANT_PATTERNS = {
 			"/VAADIN/**", 
-			"favicon.ico",
+			//"favicon.ico",
 			"robots.txt", 
 			"manifest.webmanifest", 
 			"sw.js", 
@@ -58,11 +60,11 @@ public class WebSecurityConfig
 	protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) 
 			throws Exception {
 		authenticationManagerBuilder.inMemoryAuthentication()
-			.withUser("julie").password("julie123").roles("USER", "ADMIN")
-			.and().withUser("john").password("john123").roles("USER")
-			.and().withUser("keith").password("keith123").roles("USER")
-			.and().withUser("michelle").password("michelle123").roles("USER")
-			.and().withUser("neil").password("neil123").roles("USER");
+			.withUser("julie").password(this.passwordEncoder().encode("julie123")).roles("USER", "ADMIN")
+			.and().withUser("john").password(this.passwordEncoder().encode("john123")).roles("USER")
+			.and().withUser("keith").password(this.passwordEncoder().encode("keith123")).roles("USER")
+			.and().withUser("michelle").password(this.passwordEncoder().encode("michelle123")).roles("USER")
+			.and().withUser("neil").password(this.passwordEncoder().encode("neil123")).roles("USER");
 	}
 
 	@Override
@@ -92,5 +94,10 @@ public class WebSecurityConfig
 		UserDetails userDetails = User.withUsername("guest").password("guest")
 				.roles("USER").build();
 		return new InMemoryUserDetailsManager(userDetails);
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 }
