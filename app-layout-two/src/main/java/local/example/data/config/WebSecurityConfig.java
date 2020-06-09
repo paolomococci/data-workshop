@@ -47,7 +47,6 @@ public class WebSecurityConfig
 			"/VAADIN/**", 
 			"robots.txt", 
 			"manifest.webmanifest", 
-			"sw.js", 
 			"offline.html", 
 			"/icons/**", 
 			"/images/**", 
