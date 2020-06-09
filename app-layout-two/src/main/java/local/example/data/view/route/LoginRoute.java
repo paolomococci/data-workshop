@@ -34,8 +34,8 @@ public class LoginRoute
 		extends VerticalLayout 
 		implements BeforeEnterObserver {
 
-	private static final long serialVersionUID = -2441643143055788379L;
-
+	private static final long serialVersionUID = 6110410247992360704L;
+	
 	private Dialog dialog;
 	private LoginForm loginForm;
 
