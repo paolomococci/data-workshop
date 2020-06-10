@@ -20,7 +20,6 @@ package local.example.data.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -47,6 +46,7 @@ public class WebSecurityConfig
 			"/VAADIN/**", 
 			"robots.txt", 
 			"manifest.webmanifest", 
+			//"sw.js", 
 			"offline.html", 
 			"/icons/**", 
 			"/images/**", 
@@ -81,7 +81,7 @@ public class WebSecurityConfig
 	@Override
 	public void configure(WebSecurity webSecurity) 
 			throws Exception {
-		webSecurity.ignoring().antMatchers(HttpMethod.GET, ANT_PATTERNS);
+		webSecurity.ignoring().antMatchers(ANT_PATTERNS);
 	}
 
 	@Bean
