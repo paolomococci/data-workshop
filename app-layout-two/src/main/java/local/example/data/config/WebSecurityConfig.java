@@ -46,12 +46,12 @@ public class WebSecurityConfig
 			"/VAADIN/**", 
 			"robots.txt", 
 			"manifest.webmanifest", 
-			//"sw.js", 
 			"offline.html", 
 			"/icons/**", 
 			"/images/**", 
 			"/styles/**", 
-			"/h2-console/**"
+			"/h2-console/**", 
+			"/servlet/session/**"
 			};
 
 	@Override
