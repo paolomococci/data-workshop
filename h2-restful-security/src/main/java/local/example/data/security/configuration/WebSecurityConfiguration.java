@@ -18,11 +18,14 @@
 
 package local.example.data.security.configuration;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class WebSecurityConfiguration 
@@ -34,8 +37,8 @@ public class WebSecurityConfiguration
 	protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) 
 			throws Exception {
 		authenticationManagerBuilder.inMemoryAuthentication()
-			.withUser("user").password("qwerty123").roles("USER")
-			.and().withUser("admin").password("asdfgh098").roles("USER", "ADMIN");
+			.withUser("user").password(this.passwordEncoder().encode("qwerty123")).roles("USER")
+			.and().withUser("admin").password(this.passwordEncoder().encode("asdfgh098")).roles("USER", "ADMIN");
 	}
 
 	@Override
@@ -50,4 +53,8 @@ public class WebSecurityConfiguration
 			.and().csrf().disable().formLogin().disable();
 	}
 
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }
