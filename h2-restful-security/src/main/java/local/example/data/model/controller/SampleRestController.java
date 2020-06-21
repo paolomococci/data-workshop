@@ -42,7 +42,7 @@ import local.example.data.model.repository.SampleRestRepository;
 
 @Validated
 @RepositoryRestController
-@RequestMapping(path = "/samples")
+@RequestMapping(path = "/rest/api/samples")
 public class SampleRestController {
 
 	@Autowired
