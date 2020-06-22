@@ -32,7 +32,7 @@ public class SampleNotFoundAdvice {
 	@ResponseBody
 	@ExceptionHandler
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	String customerNotFoundHandler(SampleNotFoundException sampleNotFoundException) {
+	String sampleNotFoundHandler(SampleNotFoundException sampleNotFoundException) {
 		return sampleNotFoundException.getMessage();
 	}
 }
