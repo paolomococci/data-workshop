@@ -43,18 +43,21 @@ public class WebSecurityConfig
 
 	private static final String LOGIN_URL = "/login";
 	private static final String LOGIN_FAILURE_URL = "/login?error";
-	private static final String[] ANT_PATTERNS = {
+	private static final String[] ANT_PATTERNS = { 
 			"/VAADIN/**", 
-			//"favicon.ico",
-			"robots.txt", 
-			"manifest.webmanifest", 
-			"sw.js", 
-			"offline.html", 
+			"/robots.txt", 
+			"/favicon.ico", 
+			"/manifest.webmanifest", 
+			"/sw.js", 
+			"/offline-page.html", 
+			"/frontend/**", 
+			"/frontend-es5/**", 
+			"/frontend-es6/**", 
+			"/webjars/**", 
 			"/icons/**", 
 			"/images/**", 
 			"/styles/**", 
-			"/h2-console/**"
-			};
+			"/h2-console/**"};
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) 
