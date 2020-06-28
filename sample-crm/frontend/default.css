@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.centered {
+	padding-top: 100px;
+	margin: 0 auto;
+	max-width: 300px;
+}
