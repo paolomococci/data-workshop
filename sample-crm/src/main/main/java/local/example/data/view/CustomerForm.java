@@ -39,6 +39,7 @@ public class CustomerForm
 	private final Button save;
 	private final Button delete;
 
+	@Autowired
 	public CustomerForm() {
 		super();
 		this.name = new TextField("name");
