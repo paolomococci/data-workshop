@@ -56,6 +56,7 @@ public class MainViewTests {
 	void existTest() 
 			throws Exception {
 		assertEquals(1, this.customerRepository.count());
+		// TODO
 	}
 
 	@Configuration
