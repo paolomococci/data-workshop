@@ -42,9 +42,14 @@ public class MainView
 
 	private static final long serialVersionUID = 4241629279709817521L;
 
+	@SuppressWarnings("unused")
+	private final CustomerForm customerForm;
+
 	@Autowired
-	public MainView() {
+	public MainView(CustomerForm customerForm) {
 		super();
+
+		this.customerForm = customerForm;
 
 		TextField name = new TextField("your name, please");
 		
