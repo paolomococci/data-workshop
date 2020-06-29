@@ -45,7 +45,7 @@ public class CustomerForm
 	private final CustomerRepository customerRepository;
 	private Optional<Customer> customer;
 	private Binder<Customer> binder;
-	private ChangeHandler changeHandler;
+	private CustomerChangeHandler customerChangeHandler;
 
 	private final TextField name;
 	private final TextField surname;
@@ -93,16 +93,16 @@ public class CustomerForm
 
 	private void save() {
 		this.customerRepository.save(this.customer);
-		this.changeHandler.onChange();
+		this.customerChangeHandler.onChange();
 	}
 
 	private void delete() {
 		this.customerRepository.delete(this.customer);
-		this.changeHandler.onChange();
+		this.customerChangeHandler.onChange();
 	}
 
-	public void setChangeHandler(ChangeHandler changeHandler) {
-		this.changeHandler = changeHandler;
+	public void setChangeHandler(CustomerChangeHandler customerChangeHandler) {
+		this.customerChangeHandler = customerChangeHandler;
 	}
 
 	public final void edit(Customer customer) {
