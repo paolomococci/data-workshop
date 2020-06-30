@@ -118,13 +118,13 @@ public class CustomerForm
 
 	private void edit(Customer temp) {
 		Long id = temp.getId();
-		final boolean alreadyExist = (temp.getId() != null);
-		if (alreadyExist) {
+		final boolean alreadyExisting = (temp.getId() != null);
+		if (alreadyExisting) {
 			this.customer = this.customerRepository.findById(id).get();
 		} else {
 			this.customer = temp;
 		}
-		this.cancel.setVisible(alreadyExist);
+		this.cancel.setVisible(alreadyExisting);
 		this.binder.setBean(this.customer);
 		this.setVisible(true);
 		this.name.focus();
