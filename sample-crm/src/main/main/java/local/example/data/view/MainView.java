@@ -20,19 +20,18 @@ package local.example.data.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.Notification.Position;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
-import local.example.data.service.GreetingService;
+import local.example.data.model.Customer;
+import local.example.data.model.CustomerRepository;
 
 @Route
 @PWA(name = "sample crm", shortName = "crm", enableInstallPrompt = false)
@@ -43,23 +42,34 @@ public class MainView
 	private static final long serialVersionUID = 4241629279709817521L;
 
 	@SuppressWarnings("unused")
+	private final CustomerRepository customerRepository;
+
+	@SuppressWarnings("unused")
 	private final CustomerForm customerForm;
 
+	final Grid<Customer> gridOfCustomer;
+	final TextField filterField;
+	final Button addCustomer;
+	final HorizontalLayout tools;
+
 	@Autowired
-	public MainView(CustomerForm customerForm) {
+	public MainView(
+			CustomerRepository customerRepository,
+			CustomerForm customerForm) {
 		super();
+		
+		this.customerRepository = customerRepository;
 
 		this.customerForm = customerForm;
-
-		TextField name = new TextField("your name, please");
-		
-		Button greet = new Button("greeting", VaadinIcon.SMILEY_O.create(), event -> {
-			Notification.show(GreetingService.greet(name.getValue()), 2000, Position.BOTTOM_CENTER);
-		});
-		greet.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-		greet.addClickShortcut(Key.ENTER);
-		this.addClassName("centered");
-		this.add(name, greet);
+	
+		this.gridOfCustomer = new Grid<>(Customer.class);
+		this.gridOfCustomer.addClassName("data-grid");
+		this.filterField = new TextField();
+		this.addCustomer = new Button("add customer", VaadinIcon.PLUS.create());
+		this.tools = new HorizontalLayout(this.filterField, this.addCustomer);
+	
+		this.addClassName("main");
+		this.add(this.tools, this.gridOfCustomer);
 		this.setSizeFull();
 	}
 }
