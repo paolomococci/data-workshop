@@ -18,8 +18,6 @@
 
 package local.example.data.view;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.Key;
@@ -32,18 +30,22 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 
 import local.example.data.model.Customer;
 import local.example.data.model.CustomerRepository;
 import local.example.data.model.CustomerStatus;
 
+@UIScope
+@SpringComponent
 public class CustomerForm 
 		extends FormLayout {
 
 	private static final long serialVersionUID = 8460707291910308110L;
 
 	private final CustomerRepository customerRepository;
-	private Optional<Customer> customer;
+	private Customer customer;
 	private Binder<Customer> binder;
 	private CustomerChangeHandler customerChangeHandler;
 
@@ -82,8 +84,9 @@ public class CustomerForm
 		this.cancel = new Button("cancel", VaadinIcon.CIRCLE_THIN.create());
 		this.cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
 		this.cancel.addClickListener(listener -> {
-			this.setVisible(false);
+			this.editCustomer(customer);
 		});
+		this.cancel.addClickShortcut(Key.ESCAPE);
 		this.buttons = new HorizontalLayout(this.save, this.delete, this.cancel);
 		this.add(name, surname, birthday, email, status, buttons);
 		this.setSizeFull();
@@ -105,21 +108,24 @@ public class CustomerForm
 		this.customerChangeHandler = customerChangeHandler;
 	}
 
-	public final void edit(Customer customer) {
-	
-		if (customer == null) {
-			this.setVisible(false);
-			return;
-		}
-	
-		final boolean isPersist = (customer.getId() != null);
-		if (isPersist) {
-			this.customer = this.customerRepository.findById(customer.getId());
+	public final void editCustomer(Customer temp) {
+		if (temp != null) {
+			this.edit(temp);
 		} else {
-			this.customer = Optional.of(customer);
+			this.setVisible(false);
 		}
-		this.cancel.setVisible(isPersist);
-		this.binder.setBean(customer);
+	}
+
+	private void edit(Customer temp) {
+		Long id = temp.getId();
+		final boolean alreadyExist = (temp.getId() != null);
+		if (alreadyExist) {
+			this.customer = this.customerRepository.findById(id).get();
+		} else {
+			this.customer = temp;
+		}
+		this.cancel.setVisible(alreadyExist);
+		this.binder.setBean(this.customer);
 		this.setVisible(true);
 		this.name.focus();
 	}
