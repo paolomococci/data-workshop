@@ -63,7 +63,14 @@ public class MainView
 		this.customerForm = customerForm;
 	
 		this.gridOfCustomer = new Grid<>(Customer.class);
+		this.gridOfCustomer.addColumn(Customer::getId);
+		this.gridOfCustomer.addColumn(Customer::getName);
+		this.gridOfCustomer.addColumn(Customer::getSurname);
+		this.gridOfCustomer.addColumn(Customer::getBirthday);
+		this.gridOfCustomer.addColumn(Customer::getEmail);
+		this.gridOfCustomer.addColumn(Customer::getCustomerStatus);
 		this.gridOfCustomer.addClassName("data-grid");
+	
 		this.filterField = new TextField();
 		this.addCustomer = new Button("add customer", VaadinIcon.PLUS.create());
 		this.tools = new HorizontalLayout(this.filterField, this.addCustomer);
