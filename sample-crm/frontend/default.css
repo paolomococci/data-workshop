@@ -1,7 +1,10 @@
 @charset "UTF-8";
 
-.centered {
-	padding-top: 100px;
+.main {
+	padding-top: 10px;
 	margin: 0 auto;
-	max-width: 300px;
+}
+
+.data-grid {
+	padding: 10 px;
 }
