@@ -19,7 +19,6 @@
 package local.example.data.model;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -31,7 +30,4 @@ public interface CustomerRepository
 	List<Customer> findByName(String name);
 	List<Customer> findBySurname(String surname);
 	List<Customer> findByEmail(String email);
-	void save(Optional<Customer> customer);
-	void delete(Optional<Customer> customer);
-	Optional<Customer> findById(Customer customer);
 }
