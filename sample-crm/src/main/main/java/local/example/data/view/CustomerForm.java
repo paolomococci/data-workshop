@@ -53,6 +53,7 @@ public class CustomerForm
 	private final TextField surname;
 	private final DatePicker birthday;
 	private final TextField email;
+	@SuppressWarnings("unused")
 	private final ComboBox<CustomerStatus> status;
 	private final Button save;
 	private final Button delete;
@@ -68,14 +69,14 @@ public class CustomerForm
 		this.surname = new TextField("surname");
 		this.birthday = new DatePicker("birthday");
 		this.email = new TextField("email");
-		this.status = new ComboBox<>("status");
+		this.status = new ComboBox<CustomerStatus>("status");
 		this.save = new Button("save", VaadinIcon.PLUS_CIRCLE.create());
 		this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		this.save.addClickListener(listener -> {
 			this.save();
 		});
 		this.save.addClickShortcut(Key.ENTER);
-		this.delete = new Button("cancel", VaadinIcon.MINUS_CIRCLE.create());
+		this.delete = new Button("delete", VaadinIcon.MINUS_CIRCLE.create());
 		this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
 		this.delete.addClickListener(listener -> {
 			this.delete();
@@ -88,7 +89,7 @@ public class CustomerForm
 		});
 		this.cancel.addClickShortcut(Key.ESCAPE);
 		this.buttons = new HorizontalLayout(this.save, this.delete, this.cancel);
-		this.add(name, surname, birthday, email, status, buttons);
+		this.add(name, surname, birthday, email, buttons);
 		this.setSizeFull();
 		this.binder.bindInstanceFields(this);
 		this.setVisible(false);
