@@ -23,10 +23,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.Grid.Column;
+import com.vaadin.flow.component.grid.HeaderRow;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
@@ -41,13 +45,12 @@ public class MainView
 
 	private static final long serialVersionUID = 4241629279709817521L;
 
-	@SuppressWarnings("unused")
 	private final CustomerRepository customerRepository;
 
-	@SuppressWarnings("unused")
 	private final CustomerForm customerForm;
 
 	final Grid<Customer> gridOfCustomer;
+	final HeaderRow addressInformation;
 	final TextField filterField;
 	final Button addCustomer;
 	final HorizontalLayout tools;
@@ -62,21 +65,50 @@ public class MainView
 
 		this.customerForm = customerForm;
 	
-		this.gridOfCustomer = new Grid<>(Customer.class);
-		this.gridOfCustomer.addColumn(Customer::getId);
-		this.gridOfCustomer.addColumn(Customer::getName);
-		this.gridOfCustomer.addColumn(Customer::getSurname);
-		this.gridOfCustomer.addColumn(Customer::getBirthday);
-		this.gridOfCustomer.addColumn(Customer::getEmail);
-		this.gridOfCustomer.addColumn(Customer::getCustomerStatus);
+		this.gridOfCustomer = new Grid<>();
+		this.gridOfCustomer.addColumn(Customer::getId).setHeader("id").setResizable(true).setSortable(true);
+		Column<Customer> name = this.gridOfCustomer.addColumn(Customer::getName).setHeader("name").setResizable(true).setSortable(true);
+		Column<Customer> surname = this.gridOfCustomer.addColumn(Customer::getSurname).setHeader("surname").setResizable(true).setSortable(true);
+		Column<Customer> email = this.gridOfCustomer.addColumn(Customer::getEmail).setHeader("email").setResizable(true).setSortable(true);
+		this.gridOfCustomer.addColumn(Customer::getBirthday).setHeader("birthday").setResizable(true).setSortable(true);
 		this.gridOfCustomer.addClassName("data-grid");
+		this.gridOfCustomer.asSingleSelect().addValueChangeListener(listener -> {
+			this.customerForm.editCustomer(listener.getValue());
+		});
+		this.addressInformation = this.gridOfCustomer.prependHeaderRow();
+		this.addressInformation.join(name, surname, email).setComponent(new Label("address information"));
 	
 		this.filterField = new TextField();
+		this.filterField.setPlaceholder("filter by surname");
+		this.filterField.setClearButtonVisible(true);
+		this.filterField.setValueChangeMode(ValueChangeMode.LAZY);
+		this.filterField.addValueChangeListener(listener -> {
+			this.showCustomerList(listener.getValue());
+		});
 		this.addCustomer = new Button("add customer", VaadinIcon.PLUS.create());
+		this.addCustomer.addClickListener(listener -> {
+			this.gridOfCustomer.asSingleSelect().clear();
+			this.customerForm.editCustomer(new Customer());
+		});
 		this.tools = new HorizontalLayout(this.filterField, this.addCustomer);
 	
 		this.addClassName("main");
-		this.add(this.tools, this.gridOfCustomer);
+		this.add(this.tools, this.gridOfCustomer, this.customerForm);
 		this.setSizeFull();
+		
+		this.customerForm.setChangeHandler(() -> {
+			this.customerForm.setVisible(false);
+			this.showCustomerList(this.filterField.getValue());
+		});
+		
+		this.showCustomerList("");
+	}
+
+	private void showCustomerList(String surname) {
+		if (surname.isEmpty() || surname.isBlank()) {
+			this.gridOfCustomer.setItems(this.customerRepository.findAll());
+		} else {
+			this.gridOfCustomer.setItems(this.customerRepository.findBySurname(surname));
+		}
 	}
 }
