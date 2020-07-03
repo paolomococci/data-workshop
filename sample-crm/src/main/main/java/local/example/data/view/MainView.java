@@ -66,11 +66,16 @@ public class MainView
 		this.customerForm = customerForm;
 	
 		this.gridOfCustomer = new Grid<>();
-		this.gridOfCustomer.addColumn(Customer::getId).setHeader("id").setResizable(true).setSortable(true);
-		Column<Customer> name = this.gridOfCustomer.addColumn(Customer::getName).setHeader("name").setResizable(true).setSortable(true);
-		Column<Customer> surname = this.gridOfCustomer.addColumn(Customer::getSurname).setHeader("surname").setResizable(true).setSortable(true);
-		Column<Customer> email = this.gridOfCustomer.addColumn(Customer::getEmail).setHeader("email").setResizable(true).setSortable(true);
-		this.gridOfCustomer.addColumn(Customer::getBirthday).setHeader("birthday").setResizable(true).setSortable(true);
+		this.gridOfCustomer.addColumn(Customer::getId)
+				.setHeader("id").setResizable(true).setSortable(true);
+		Column<Customer> name = this.gridOfCustomer.addColumn(Customer::getName)
+				.setHeader("name").setResizable(true).setSortable(true);
+		Column<Customer> surname = this.gridOfCustomer.addColumn(Customer::getSurname)
+				.setHeader("surname").setResizable(true).setSortable(true);
+		Column<Customer> email = this.gridOfCustomer.addColumn(Customer::getEmail)
+				.setHeader("email").setResizable(true).setSortable(true);
+		this.gridOfCustomer.addColumn(Customer::getBirthday)
+				.setHeader("birthday").setResizable(true).setSortable(true);
 		this.gridOfCustomer.addClassName("data-grid");
 		this.gridOfCustomer.asSingleSelect().addValueChangeListener(listener -> {
 			this.customerForm.editCustomer(listener.getValue());
