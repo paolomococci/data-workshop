@@ -23,11 +23,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -53,43 +54,60 @@ public class CustomerForm
 	private final TextField surname;
 	private final DatePicker birthday;
 	private final TextField email;
-	@SuppressWarnings("unused")
-	private final ComboBox<CustomerStatus> status;
+	private final Select<CustomerStatus> status;
+	private final VerticalLayout personalData;
 	private final Button save;
 	private final Button delete;
 	private final Button cancel;
 	private final HorizontalLayout buttons;
+	private final VerticalLayout form;
 
 	@Autowired
 	public CustomerForm(CustomerRepository customerRepository) {
 		super();
 		this.customerRepository = customerRepository;
 		this.binder = new Binder<>(Customer.class);
+		
 		this.name = new TextField("name");
 		this.surname = new TextField("surname");
 		this.birthday = new DatePicker("birthday");
 		this.email = new TextField("email");
-		this.status = new ComboBox<CustomerStatus>("status");
+		this.status = new Select<>();
+		this.status.setLabel("status");
+		this.status.setItems(CustomerStatus.values());
+		this.personalData = new VerticalLayout(
+				this.name, 
+				this.surname, 
+				this.birthday, 
+				this.email, 
+				this.status
+		);
 		this.save = new Button("save", VaadinIcon.PLUS_CIRCLE.create());
 		this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		this.save.addClickListener(listener -> {
 			this.save();
 		});
 		this.save.addClickShortcut(Key.ENTER);
-		this.delete = new Button("delete", VaadinIcon.MINUS_CIRCLE.create());
+		this.delete = new Button("delete", VaadinIcon.TRASH.create());
 		this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
 		this.delete.addClickListener(listener -> {
 			this.delete();
 		});
 		this.delete.addClickShortcut(Key.DELETE);
-		this.cancel = new Button("cancel", VaadinIcon.CIRCLE_THIN.create());
+		this.cancel = new Button("cancel", VaadinIcon.CHECK_CIRCLE.create());
 		this.cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
 		this.cancel.addClickListener(listener -> {
 			this.editCustomer(customer);
+			this.setVisible(false);
 		});
 		this.cancel.addClickShortcut(Key.ESCAPE);
 		this.buttons = new HorizontalLayout(this.save, this.delete, this.cancel);
-		this.add(name, surname, birthday, email, buttons);
+		
+		this.form = new VerticalLayout(
+				this.personalData, 
+				this.buttons
+		);
+		this.add(this.form);
 		this.setSizeFull();
 		this.binder.bindInstanceFields(this);
 		this.setVisible(false);
