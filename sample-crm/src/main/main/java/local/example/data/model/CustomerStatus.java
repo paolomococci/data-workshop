@@ -20,5 +20,20 @@ package local.example.data.model;
 
 public enum CustomerStatus {
 
-	Imported, NotContacted, Contacted, Active, Lost
+	IMPORTED("Imported"), 
+	NOT_CONTACTED("NotContacted"), 
+	CONTACTED("Contacted"), 
+	ACTIVE("Active"), 
+	LOST("Lost");
+
+	private final String status;
+
+	private CustomerStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return this.status;
+	}
 }
