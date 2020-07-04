@@ -24,6 +24,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
+import com.vaadin.flow.component.grid.Grid.SelectionMode;
 import com.vaadin.flow.component.grid.HeaderRow;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -65,7 +66,8 @@ public class MainView
 
 		this.customerForm = customerForm;
 	
-		this.gridOfCustomer = new Grid<>();
+		this.gridOfCustomer = new Grid<>(Customer.class, false);
+		this.gridOfCustomer.setSelectionMode(SelectionMode.SINGLE);
 		this.gridOfCustomer.addColumn(Customer::getId)
 				.setHeader("id").setResizable(true).setSortable(true);
 		Column<Customer> name = this.gridOfCustomer.addColumn(Customer::getName)
@@ -76,6 +78,8 @@ public class MainView
 				.setHeader("email").setResizable(true).setSortable(true);
 		this.gridOfCustomer.addColumn(Customer::getBirthday)
 				.setHeader("birthday").setResizable(true).setSortable(true);
+		this.gridOfCustomer.addColumn(Customer::getCustomerStatusValue)
+				.setHeader("status").setResizable(true).setSortable(true);
 		this.gridOfCustomer.addClassName("data-grid");
 		this.gridOfCustomer.asSingleSelect().addValueChangeListener(listener -> {
 			this.customerForm.editCustomer(listener.getValue());
