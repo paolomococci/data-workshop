@@ -62,4 +62,12 @@ public class Customer {
 	@Getter
 	@Setter
 	private CustomerStatus customerStatus;
+
+	public String getCustomerStatusValue() {
+		if (this.customerStatus != null) {
+			return this.getCustomerStatus().toString();
+		} else {
+			return "";
+		}
+	}
 }
