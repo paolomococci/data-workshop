@@ -30,4 +30,5 @@ public interface CustomerRepository
 	List<Customer> findByName(String name);
 	List<Customer> findBySurname(String surname);
 	List<Customer> findByEmail(String email);
+	List<Customer> findByStatus(String status);
 }
