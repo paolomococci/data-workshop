@@ -78,7 +78,7 @@ public class MainView
 				.setHeader("email").setResizable(true).setSortable(true);
 		this.gridOfCustomer.addColumn(Customer::getBirthday)
 				.setHeader("birthday").setResizable(true).setSortable(true);
-		this.gridOfCustomer.addColumn(Customer::getCustomerStatusValue)
+		this.gridOfCustomer.addColumn(Customer::getStatus)
 				.setHeader("status").setResizable(true).setSortable(true);
 		this.gridOfCustomer.addClassName("data-grid");
 		this.gridOfCustomer.asSingleSelect().addValueChangeListener(listener -> {
