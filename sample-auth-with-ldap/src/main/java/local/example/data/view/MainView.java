@@ -18,6 +18,29 @@
 
 package local.example.data.view;
 
-public class MainView {
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.PWA;
+
+@Route
+@PWA(name = "sample authentication with LDAP", shortName = "auth", enableInstallPrompt = false)
+@CssImport(value = "style.css")
+public class MainView 
+		extends VerticalLayout {
+
+	private static final long serialVersionUID = 4241629279709817521L;
+
+	private final Label label;
+
+	@Autowired
+	public MainView() {
+		super();
+		this.label = new Label("welcome");
+		this.add(this.label);
+		this.addClassName("main-view");
+	}
 }
