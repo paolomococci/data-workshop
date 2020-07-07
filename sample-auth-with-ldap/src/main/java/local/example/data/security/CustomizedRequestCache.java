@@ -18,6 +18,18 @@
 
 package local.example.data.security;
 
-public class CustomizedRequestCache {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+
+public class CustomizedRequestCache 
+		extends HttpSessionRequestCache {
+
+	@Override
+	public void saveRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+		if (!SecurityUtil.isFrameworkInternalRequest(httpServletRequest)) {
+			super.saveRequest(httpServletRequest, httpServletResponse);
+		}
+	}
 }
