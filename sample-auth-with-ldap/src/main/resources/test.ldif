@@ -1,1 +1,5 @@
-
+dn: dc=example,dc=local
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: example
