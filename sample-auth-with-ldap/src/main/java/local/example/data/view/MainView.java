@@ -20,11 +20,17 @@ package local.example.data.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
+
+import local.example.data.service.WelcomeService;
 
 @Route
 @PWA(name = "sample authentication with LDAP", shortName = "auth", enableInstallPrompt = false)
@@ -34,13 +40,29 @@ public class MainView
 
 	private static final long serialVersionUID = 4241629279709817521L;
 
-	private final Label label;
+	private final TextField nameField;
+	private final Button welcomeButton;
 
 	@Autowired
 	public MainView() {
 		super();
-		this.label = new Label("welcome");
-		this.add(this.label);
+		this.nameField = new TextField("name: ");
+		this.nameField.setPlaceholder("your name, please");
+		this.welcomeButton = new Button("welcome", VaadinIcon.ALARM.create());
+		this.welcomeButton.setVisible(false);
+
+		this.nameField.addValueChangeListener(listener -> {
+			this.welcomeButton.setVisible(true);
+		});
+		this.welcomeButton.addClickListener(listener -> {
+			Notification.show(
+					WelcomeService.welcomeTo(this.nameField.getValue()), 
+					5000, 
+					Position.BOTTOM_CENTER
+			);
+		});
+		
+		this.add(this.nameField, this.welcomeButton);
 		this.addClassName("main-view");
 	}
 }
