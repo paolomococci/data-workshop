@@ -3,3 +3,30 @@ objectclass: top
 objectclass: domain
 objectclass: extensibleObject
 dc: example
+
+dn: ou=groups,dc=example,dc=local
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=example,dc=local
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: uid=jumper,ou=people,dc=example,dc=local
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: John Jumper
+sn: Jumper
+uid: jumper
+userPassword: 123jump
+
+dn: cn=operators,ou=groups,dc=example,dc=local
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: operators
+ou: operator
+uniqueMember: uid=jumper,ou=people,dc=example,dc=local
