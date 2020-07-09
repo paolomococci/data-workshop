@@ -46,6 +46,13 @@ public class WebSecurityConfiguration
 			"/images/**", 
 			"/styles/**", 
 			"/h2-console/**" };
+	private static final String USER_DN_PATTERNS = "uid={0},ou=people";
+	private static final String USER_SEARCH_BASE = "ou=people";
+	private static final String USER_SEARCH_FILTER = "uid={0}";
+	private static final String GROUP_SEARCH_BASE = "ou=groups";
+	private static final String GROUP_SEARCH_FILTER = "uniqueMember={0}";
+	private static final String LDAP_URL = "ldap://127.0.0.1:8091/dc=example,dc=local";
+	private static final String PASSWORD_ATTRIBUTE = "userPassword";
 
 	@Override
 	public void configure(WebSecurity webSecurity) 
@@ -64,8 +71,18 @@ public class WebSecurityConfiguration
 	@Override
 	protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) 
 			throws Exception {
-		// TODO
-		super.configure(authenticationManagerBuilder);
+		authenticationManagerBuilder.ldapAuthentication()
+			.userDnPatterns(USER_DN_PATTERNS)
+			.userSearchBase(USER_SEARCH_BASE)
+			.userSearchFilter(USER_SEARCH_FILTER)
+			.groupSearchBase(GROUP_SEARCH_BASE)
+			.groupSearchFilter(GROUP_SEARCH_FILTER)
+			.contextSource()
+			.url(LDAP_URL)
+			.and().passwordCompare()
+				.passwordEncoder(this.passwordEncoder())
+				.passwordAttribute(PASSWORD_ATTRIBUTE);
+			
 	}
 
 	@Bean
