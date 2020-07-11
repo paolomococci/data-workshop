@@ -18,6 +18,14 @@
 
 package local.example.data.model;
 
-public interface ItemRepository {
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import reactor.core.publisher.Flux;
+
+@RepositoryRestResource(collectionResourceRel = "items")
+public interface ItemRestRepository 
+	extends ReactiveCrudRepository<ItemEntity, Long> {
+
+	Flux<ItemEntity> findByCode(String code);
 }
