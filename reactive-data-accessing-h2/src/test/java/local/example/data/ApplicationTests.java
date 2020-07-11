@@ -18,13 +18,22 @@
 
 package local.example.data;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import local.example.data.model.ItemRestRepository;
 
 @SpringBootTest
 class ApplicationTests {
 
+	@Autowired
+	private ItemRestRepository itemRestRepository;
+
 	@Test
-	void voidTest() {
+	void repositoryIsNotNullTest() {
+		assertThat(this.itemRestRepository).isNotNull();
 	}
 }
