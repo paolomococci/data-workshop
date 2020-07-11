@@ -23,7 +23,7 @@ public enum Status {
 	AVAILABLE("available") {
 
 		@Override
-		public String description(String status) {
+		public String statusValue(String status) {
 			return status;
 		}
 	}, 
@@ -31,7 +31,7 @@ public enum Status {
 	TO_ORDER("to_order") {
 
 		@Override
-		public String description(String status) {
+		public String statusValue(String status) {
 			return status;
 		}
 	}, 
@@ -39,7 +39,7 @@ public enum Status {
 	OBSOLETE("obsolete") {
 
 		@Override
-		public String description(String status) {
+		public String statusValue(String status) {
 			return status;
 		}
 	};
@@ -55,7 +55,7 @@ public enum Status {
 		this.status = status;
 	}
 
-	public abstract String description(String status);
+	public abstract String statusValue(String status);
 
 	public String getStatus() {
 		return this.status;
