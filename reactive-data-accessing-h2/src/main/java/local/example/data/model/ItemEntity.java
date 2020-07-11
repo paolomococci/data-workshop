@@ -18,6 +18,41 @@
 
 package local.example.data.model;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.Id;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@Table
+@ToString
 public class ItemEntity {
 
+	@Id
+	@GeneratedValue
+	@Getter
+	private Long id;
+
+	@NotNull
+	@Getter
+	@Setter
+	private String code;
+
+	@NotNull
+	@Getter
+	@Setter
+	private String description;
+
+	@Getter
+	@Setter
+	@Enumerated(EnumType.STRING)
+	private Status status;
 }
