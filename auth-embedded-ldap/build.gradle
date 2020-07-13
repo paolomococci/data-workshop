@@ -1,0 +1,38 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'local.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.ldap:spring-ldap-core'
+	implementation 'org.springframework.security:spring-security-ldap'
+	compile 'org.apache.directory.server:apacheds-server-jndi:2.0.0.AM26'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testCompile 'org.springframework.security:spring-security-test'
+	testCompile 'org.junit.platform:junit-platform-engine:1.7.0-M1'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
