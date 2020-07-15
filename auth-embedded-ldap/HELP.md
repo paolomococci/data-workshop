@@ -1,1 +1,0 @@
-# Authentication with embedded LDAP
