@@ -16,7 +16,7 @@
  *
  */
 
-package local.example.data.retrieve;
+package local.example.data.retrieve.representation;
 
 public enum Status {
 
