@@ -18,6 +18,13 @@
 
 package local.example.data.view;
 
-public class MainView {
+import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.router.PageTitle;
+
+@PageTitle(value = "reactive data accessing")
+public class MainView 
+		extends Main {
+
+	private static final long serialVersionUID = 4241629279709817521L;
 
 }
