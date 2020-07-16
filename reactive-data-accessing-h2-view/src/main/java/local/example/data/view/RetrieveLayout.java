@@ -18,6 +18,11 @@
 
 package local.example.data.view;
 
-public class RetrieveLayout {
+import com.vaadin.flow.component.applayout.AppLayout;
+
+public class RetrieveLayout 
+		extends AppLayout {
+
+	private static final long serialVersionUID = 6447759746309346198L;
 
 }
