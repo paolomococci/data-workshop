@@ -20,11 +20,16 @@ package local.example.data.view;
 
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
+@Route(value = "", layout = RetrieveLayout.class)
 @PageTitle(value = "reactive data accessing")
 public class MainView 
 		extends Main {
 
 	private static final long serialVersionUID = 4241629279709817521L;
 
+	public MainView() {
+		// TODO
+	}
 }
