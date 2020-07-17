@@ -19,10 +19,23 @@
 package local.example.data.view;
 
 import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.page.Push;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
 
+@Push
 public class RetrieveLayout 
-		extends AppLayout {
+		extends AppLayout 
+		implements AfterNavigationObserver {
 
 	private static final long serialVersionUID = 6447759746309346198L;
 
+	public RetrieveLayout() {
+		// TODO
+	}
+
+	@Override
+	public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
+		// TODO
+	}
 }
