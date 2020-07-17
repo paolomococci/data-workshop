@@ -18,6 +18,33 @@
 
 package local.example.data.retrieve;
 
-public class RestDataRetriever {
+import java.io.Serializable;
+import java.util.List;
 
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+
+import local.example.data.retrieve.representation.ItemDataRepresentation;
+
+@Service
+public class RestDataRetriever 
+		implements Serializable {
+
+	private static final long serialVersionUID = 2315861607687624378L;
+	
+	private static final String RESTFUL_URI = "http://127.0.0.1:8091/items";
+
+	public List<ItemDataRepresentation> retrieveAllItems() {
+		final RequestHeadersSpec<?> requestHeadersSpec = WebClient
+				.create()
+				.get()
+				.uri(RESTFUL_URI);
+		final List<ItemDataRepresentation> itemsDataRepresentationList = requestHeadersSpec
+				.retrieve()
+				.toEntityList(ItemDataRepresentation.class)
+				.block()
+				.getBody();
+		return itemsDataRepresentationList;
+	}
 }
