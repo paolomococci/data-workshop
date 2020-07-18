@@ -25,6 +25,7 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -37,7 +38,7 @@ public class ItemsRestDataRetriever
 	private static final String RESTFUL_URI = "http://127.0.0.1:8091/items";
 
 	public List<JsonNode> recoversAllItemsExpressedAsJsonNodes() 
-			throws JSONException {
+			throws JSONException, ResponseStatusException {
 		final RequestHeadersSpec<?> requestHeadersSpec = WebClient
 				.create()
 				.get()
