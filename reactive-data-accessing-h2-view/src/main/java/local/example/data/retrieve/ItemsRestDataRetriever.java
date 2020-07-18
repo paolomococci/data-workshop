@@ -21,6 +21,7 @@ package local.example.data.retrieve;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
@@ -35,7 +36,8 @@ public class ItemsRestDataRetriever
 	
 	private static final String RESTFUL_URI = "http://127.0.0.1:8091/items";
 
-	public List<JsonNode> recoversAllItemsExpressedAsJsonNodes() {
+	public List<JsonNode> recoversAllItemsExpressedAsJsonNodes() 
+			throws JSONException {
 		final RequestHeadersSpec<?> requestHeadersSpec = WebClient
 				.create()
 				.get()
