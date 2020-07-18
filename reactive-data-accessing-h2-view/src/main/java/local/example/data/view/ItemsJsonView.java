@@ -19,6 +19,8 @@
 package local.example.data.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.vaadin.flow.component.button.Button;
@@ -30,7 +32,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import local.example.data.retrieve.RestDataRetriever;
+import local.example.data.retrieve.ItemsRestDataRetriever;
 
 @Route(value = "items", layout = RetrieveLayout.class)
 @PageTitle(value = "items")
@@ -39,7 +41,7 @@ public class ItemsJsonView
 
 	private static final long serialVersionUID = -3993561314677468608L;
 
-	@Autowired RestDataRetriever restDataRetriever;
+	@Autowired ItemsRestDataRetriever restDataRetriever;
 	
 	private final Grid<JsonNode> itemsGrid;
 	private final Button retrieveButton;
@@ -51,9 +53,15 @@ public class ItemsJsonView
 		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("description")).setHeader("description");
 		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("status")).setHeader("status");
 		this.retrieveButton = new Button(
-				"retrieve", 
-				VaadinIcon.ARROW_CIRCLE_DOWN_O.create());
-		// TODO
+				"recovers all items", 
+				VaadinIcon.ARROW_CIRCLE_DOWN_O.create(), 
+				listener -> {
+					try {
+						this.itemsGrid.setItems(this.restDataRetriever.recoversAllItemsExpressedAsJsonNodes());
+					} catch (ResponseStatusException | JSONException exception) {
+						exception.printStackTrace();
+					}
+				});
 		this.retrieveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		this.add(this.retrieveButton, this.itemsGrid);
 	}
