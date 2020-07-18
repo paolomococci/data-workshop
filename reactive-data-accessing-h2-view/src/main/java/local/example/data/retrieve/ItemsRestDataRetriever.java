@@ -25,26 +25,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 
-import local.example.data.retrieve.representation.ItemDataRepresentation;
+import com.fasterxml.jackson.databind.JsonNode;
 
 @Service
-public class RestDataRetriever 
+public class ItemsRestDataRetriever 
 		implements Serializable {
 
 	private static final long serialVersionUID = 2315861607687624378L;
 	
 	private static final String RESTFUL_URI = "http://127.0.0.1:8091/items";
 
-	public List<ItemDataRepresentation> retrieveAllItems() {
+	public List<JsonNode> recoversAllItemsExpressedAsJsonNodes() {
 		final RequestHeadersSpec<?> requestHeadersSpec = WebClient
 				.create()
 				.get()
 				.uri(RESTFUL_URI);
-		final List<ItemDataRepresentation> itemsDataRepresentationList = requestHeadersSpec
+		return requestHeadersSpec
 				.retrieve()
-				.toEntityList(ItemDataRepresentation.class)
+				.toEntityList(JsonNode.class)
 				.block()
 				.getBody();
-		return itemsDataRepresentationList;
 	}
 }
