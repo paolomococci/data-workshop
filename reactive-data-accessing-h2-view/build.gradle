@@ -19,12 +19,13 @@ repositories {
 }
 
 ext {
-	set('vaadinVersion', "14.3.0")
+	set('vaadinVersion', "14.3.1")
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'com.vaadin:vaadin-spring-boot-starter'
+	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testCompile 'org.junit.platform:junit-platform-engine:1.7.0-M1'
