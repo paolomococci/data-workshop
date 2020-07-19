@@ -26,7 +26,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "", layout = MainLayout.class)
-@PageTitle(value = "reactive data accessing")
+@PageTitle(value = "main view")
 public class MainView 
 		extends Main {
 
