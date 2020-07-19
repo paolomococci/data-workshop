@@ -19,23 +19,57 @@
 package local.example.data.view;
 
 import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.html.ListItem;
+import com.vaadin.flow.component.html.Nav;
+import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
+import com.vaadin.flow.router.RouterLink;
 
 @Push
-public class RetrieveLayout 
+public class MainLayout 
 		extends AppLayout 
 		implements AfterNavigationObserver {
 
 	private static final long serialVersionUID = 6447759746309346198L;
 
-	public RetrieveLayout() {
-		// TODO
+	private final H1 title;
+	private final RouterLink mainView;
+	private final RouterLink itemsJsonView;
+	private final UnorderedList unorderedList;
+	private final Header header;
+	private final Nav nav;
+
+	public MainLayout() {
+		this.title = new H1("reactive data accessing");
+		this.mainView = new RouterLink("main view", MainView.class);
+		this.itemsJsonView = new RouterLink("items view", ItemsJsonView.class);
+		this.unorderedList = new UnorderedList(
+				new ListItem(this.mainView), 
+				new ListItem(this.itemsJsonView)
+		);
+		this.header = new Header(new DrawerToggle(), this.title);
+		this.nav = new Nav(this.unorderedList);
+		this.addToNavbar(this.header);
+		this.addToDrawer(this.nav);
+		this.setPrimarySection(Section.DRAWER);
+		this.setDrawerOpened(false);
+	}
+
+	private RouterLink[] listLinks() {
+		return new RouterLink[] {this.mainView, this.itemsJsonView};
 	}
 
 	@Override
 	public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
-		// TODO
+		for (final RouterLink link : this.listLinks()) {
+			if (link.getHighlightCondition().shouldHighlight(link, afterNavigationEvent)) {
+				this.title.setText(link.getText());
+			}
+		}
 	}
 }
