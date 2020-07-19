@@ -20,6 +20,7 @@ package local.example.data.view;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.ListItem;
@@ -31,6 +32,7 @@ import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.RouterLink;
 
 @Push
+@CssImport(value = "style.css")
 public class MainLayout 
 		extends AppLayout 
 		implements AfterNavigationObserver {
