@@ -34,7 +34,7 @@ import com.vaadin.flow.router.Route;
 
 import local.example.data.retrieve.ItemsRestDataRetriever;
 
-@Route(value = "items", layout = RetrieveLayout.class)
+@Route(value = "items", layout = MainLayout.class)
 @PageTitle(value = "items")
 public class ItemsJsonView 
 		extends Main {
@@ -48,10 +48,10 @@ public class ItemsJsonView
 
 	public ItemsJsonView() {
 		this.itemsGrid = new Grid<>();
-		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("id")).setHeader("id").setTextAlign(ColumnTextAlign.START);
-		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("code")).setHeader("code");
+		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("id")).setHeader("id").setSortable(true).setTextAlign(ColumnTextAlign.START);
+		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("code")).setHeader("code").setSortable(true);
 		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("description")).setHeader("description");
-		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("status")).setHeader("status");
+		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("status")).setHeader("status").setSortable(true);
 		this.retrieveButton = new Button(
 				"recovers all items", 
 				VaadinIcon.ARROW_CIRCLE_DOWN_O.create(), 
