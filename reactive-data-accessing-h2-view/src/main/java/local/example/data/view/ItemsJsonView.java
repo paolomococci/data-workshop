@@ -34,8 +34,8 @@ import com.vaadin.flow.router.Route;
 
 import local.example.data.retrieve.ItemsRestDataRetriever;
 
-@Route(value = "items", layout = MainLayout.class)
-@PageTitle(value = "items")
+@Route(value = "read", layout = MainLayout.class)
+@PageTitle(value = "read")
 public class ItemsJsonView 
 		extends Main {
 
