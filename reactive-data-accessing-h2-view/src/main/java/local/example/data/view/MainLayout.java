@@ -52,7 +52,7 @@ public class MainLayout
 	public MainLayout() {
 		this.title = new H1("reactive data accessing");
 		this.mainView = new RouterLink("main view", MainView.class);
-		this.itemsJsonView = new RouterLink("items view", ItemsJsonView.class);
+		this.itemsJsonView = new RouterLink("items view", ItemReadView.class);
 		this.itemCreate = new RouterLink("item create", ItemCreateView.class);
 		this.itemUpdate = new RouterLink("item update", ItemUpdateView.class);
 		this.itemDelete = new RouterLink("item delete", ItemDeleteView.class);
