@@ -41,10 +41,10 @@ public class MainLayout
 
 	private final H1 title;
 	private final RouterLink mainView;
-	private final RouterLink itemsJsonView;
-	private final RouterLink itemCreate;
-	private final RouterLink itemUpdate;
-	private final RouterLink itemDelete;
+	private final RouterLink itemReadView;
+	private final RouterLink itemCreateView;
+	private final RouterLink itemUpdateView;
+	private final RouterLink itemDeleteView;
 	private final UnorderedList unorderedList;
 	private final Header header;
 	private final Nav nav;
@@ -52,16 +52,16 @@ public class MainLayout
 	public MainLayout() {
 		this.title = new H1("reactive data accessing");
 		this.mainView = new RouterLink("main view", MainView.class);
-		this.itemsJsonView = new RouterLink("items view", ItemReadView.class);
-		this.itemCreate = new RouterLink("item create", ItemCreateView.class);
-		this.itemUpdate = new RouterLink("item update", ItemUpdateView.class);
-		this.itemDelete = new RouterLink("item delete", ItemDeleteView.class);
+		this.itemReadView = new RouterLink("items view", ItemReadView.class);
+		this.itemCreateView = new RouterLink("item create", ItemCreateView.class);
+		this.itemUpdateView = new RouterLink("item update", ItemUpdateView.class);
+		this.itemDeleteView = new RouterLink("item delete", ItemDeleteView.class);
 		this.unorderedList = new UnorderedList(
 				new ListItem(this.mainView), 
-				new ListItem(this.itemsJsonView), 
-				new ListItem(this.itemCreate), 
-				new ListItem(this.itemUpdate), 
-				new ListItem(this.itemDelete)
+				new ListItem(this.itemReadView), 
+				new ListItem(this.itemCreateView), 
+				new ListItem(this.itemUpdateView), 
+				new ListItem(this.itemDeleteView)
 		);
 		this.header = new Header(new DrawerToggle(), this.title);
 		this.nav = new Nav(this.unorderedList);
@@ -74,10 +74,10 @@ public class MainLayout
 	private RouterLink[] listLinks() {
 		return new RouterLink[] {
 				this.mainView, 
-				this.itemsJsonView, 
-				this.itemCreate, 
-				this.itemUpdate, 
-				this.itemDelete
+				this.itemReadView, 
+				this.itemCreateView, 
+				this.itemUpdateView, 
+				this.itemDeleteView
 				};
 	}
 
