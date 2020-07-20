@@ -1,0 +1,6 @@
+
+__________________________________________________________
+Data accessing to H2 RDBMS RESTful Web Service application	
+													
+version 0.0.1-SNAPSHOT								
+__________________________________________________________
