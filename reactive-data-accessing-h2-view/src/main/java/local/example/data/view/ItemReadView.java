@@ -36,7 +36,7 @@ import local.example.data.retrieve.ItemsRestDataRetriever;
 
 @Route(value = "read", layout = MainLayout.class)
 @PageTitle(value = "read")
-public class ItemsJsonView 
+public class ItemReadView 
 		extends Main {
 
 	private static final long serialVersionUID = -3993561314677468608L;
@@ -46,7 +46,7 @@ public class ItemsJsonView
 	private final Grid<JsonNode> itemsGrid;
 	private final Button retrieveButton;
 
-	public ItemsJsonView() {
+	public ItemReadView() {
 		this.itemsGrid = new Grid<>();
 		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("id")).setHeader("id").setSortable(true).setTextAlign(ColumnTextAlign.START);
 		this.itemsGrid.addColumn(jsonNode -> jsonNode.get("code")).setHeader("code").setSortable(true);
