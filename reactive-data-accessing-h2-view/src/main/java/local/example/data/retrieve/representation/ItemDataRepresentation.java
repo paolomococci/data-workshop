@@ -18,17 +18,35 @@
 
 package local.example.data.retrieve.representation;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
 @ToString
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemDataRepresentation {
 
 	private Long id;
 	private String code;
 	private String description;
 	private Status status;
+
+	public String toJson() {
+		try {
+			return new ObjectMapper()
+					.writerWithDefaultPrettyPrinter()
+					.writeValueAsString(this);
+		} catch (JsonProcessingException jsonProcessingException) {
+			jsonProcessingException.printStackTrace();
+		}
+		return "";
+	}
 }
