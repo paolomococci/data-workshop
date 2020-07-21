@@ -32,7 +32,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDataRepresentation {
+public class Item {
 
 	private Long id;
 	private String code;
