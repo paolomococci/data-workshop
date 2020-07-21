@@ -30,7 +30,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 @Service
-public class ItemsRestDataRetriever 
+public class ItemRestRetriever 
 		implements Serializable {
 
 	private static final long serialVersionUID = 2315861607687624378L;
