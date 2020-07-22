@@ -19,6 +19,7 @@
 package local.example.data.retrieve;
 
 import java.io.Serializable;
+import java.net.ConnectException;
 import java.util.List;
 
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -38,7 +39,9 @@ public class ItemRestRetriever
 	private static final String RESTFUL_URI = "http://127.0.0.1:8091/items";
 
 	public List<JsonNode> recoversAllItemsExpressedAsJsonNodes() 
-			throws JSONException, ResponseStatusException {
+			throws JSONException, 
+			ResponseStatusException, 
+			ConnectException {
 		final RequestHeadersSpec<?> requestHeadersSpec = WebClient
 				.create()
 				.get()
