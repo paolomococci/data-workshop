@@ -18,6 +18,8 @@
 
 package local.example.data.view;
 
+import java.net.ConnectException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.web.server.ResponseStatusException;
@@ -41,7 +43,8 @@ public class ItemReadView
 
 	private static final long serialVersionUID = -3993561314677468608L;
 
-	@Autowired ItemRestRetriever itemRestRetriever;
+	@Autowired 
+	ItemRestRetriever itemRestRetriever;
 	
 	private final Grid<JsonNode> itemGrid;
 	private final Button retrieveButton;
@@ -58,7 +61,7 @@ public class ItemReadView
 				listener -> {
 					try {
 						this.itemGrid.setItems(this.itemRestRetriever.recoversAllItemsExpressedAsJsonNodes());
-					} catch (ResponseStatusException | JSONException exception) {
+					} catch (ResponseStatusException | JSONException | ConnectException exception) {
 						exception.printStackTrace();
 					}
 				});
