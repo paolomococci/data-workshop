@@ -19,9 +19,9 @@
 package local.example.data.view;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.vaadin.flow.component.button.Button;
@@ -33,7 +33,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import local.example.data.retrieve.ItemRestRetriever;
 import local.example.data.retrieve.mapper.ItemMapper;
 import local.example.data.retrieve.representation.Item;
 
@@ -42,9 +41,8 @@ import local.example.data.retrieve.representation.Item;
 public class ItemTestView 
 		extends Main {
 	private static final long serialVersionUID = -18184019387211095L;
-
-	@Autowired 
-	ItemRestRetriever itemRestRetriever;
+	
+	private static final String RESTFUL_URI = "http://127.0.0.1:8091/items";
 	
 	private final Grid<Item> itemGrid;
 	private final Button retrieveButton;
@@ -60,11 +58,9 @@ public class ItemTestView
 				VaadinIcon.ARROW_CIRCLE_DOWN_O.create(), 
 				listener -> {
 						try {
-							this.itemGrid.setItems(
-									ItemMapper
-									.toItemList(this.itemRestRetriever.recoversAllItemsExpressedAsJsonNodes()));
+							this.itemGrid.setItems(ItemMapper.getItems(new URI(RESTFUL_URI)));
 						} catch (
-								ResponseStatusException | IOException |	JSONException exception) {
+								ResponseStatusException | IOException | URISyntaxException exception) {
 							exception.printStackTrace();
 						}
 				});
