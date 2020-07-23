@@ -37,7 +37,7 @@ public class Item {
 	private Long id;
 	private String code;
 	private String description;
-	private Status status;
+	private String status;
 
 	public String toJson() {
 		try {
