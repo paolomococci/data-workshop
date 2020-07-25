@@ -60,23 +60,14 @@ public class ItemMapper {
 		return item;
 	}
 
+	@SuppressWarnings("unused")
 	public static List<Item> getItems(URI uri) 
 			throws JsonMappingException, JsonProcessingException {
-		List<Item> items = new ArrayList<Item>();
+		List<Item> items = new ArrayList<>();
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String[]> response = restTemplate.getForEntity(uri, String[].class);
-		List<String> entities = Arrays.asList(response.getBody());
-		ObjectMapper objectMapper = new ObjectMapper();
-		for (String entity : entities) {
-			JsonNode jsonNode = objectMapper.readTree(entity);
-			Item item = new Item(
-					Long.valueOf(jsonNode.path("id").toPrettyString()), 
-					jsonNode.path("code").toPrettyString(), 
-					jsonNode.path("description").toPrettyString(), 
-					jsonNode.path("status").toPrettyString()
-			);
-			items.add(item);
-		} 
+		ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+		ObjectMapper objectMapper = new ObjectMapper();	
+		// TODO parse response
 		return items;
 	}
 }
