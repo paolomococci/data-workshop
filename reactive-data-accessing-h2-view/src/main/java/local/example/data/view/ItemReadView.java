@@ -18,13 +18,12 @@
 
 package local.example.data.view;
 
-import java.net.ConnectException;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
@@ -34,36 +33,35 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import local.example.data.retrieve.ItemRestRetriever;
+import local.example.data.retrieve.model.Item;
+import local.example.data.retrieve.retriever.ItemRestfulRetriever;
 
 @Route(value = "read", layout = MainLayout.class)
 @PageTitle(value = "read")
 public class ItemReadView 
 		extends Main {
-
-	private static final long serialVersionUID = -3993561314677468608L;
-
-	@Autowired 
-	ItemRestRetriever itemRestRetriever;
+	private static final long serialVersionUID = -18184019387211095L;
 	
-	private final Grid<JsonNode> itemGrid;
+	private static final String RESTFUL_URI = "http://127.0.0.1:8091/";
+	
+	private final Grid<Item> itemGrid;
 	private final Button retrieveButton;
 
 	public ItemReadView() {
 		this.itemGrid = new Grid<>();
-		this.itemGrid.addColumn(jsonNode -> jsonNode.get("id")).setHeader("id").setSortable(true).setTextAlign(ColumnTextAlign.START);
-		this.itemGrid.addColumn(jsonNode -> jsonNode.get("code")).setHeader("code").setSortable(true);
-		this.itemGrid.addColumn(jsonNode -> jsonNode.get("description")).setHeader("description");
-		this.itemGrid.addColumn(jsonNode -> jsonNode.get("status")).setHeader("status").setSortable(true);
+		this.itemGrid.addColumn(item -> item.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
+		this.itemGrid.addColumn(item -> item.getDescription()).setHeader("description");
+		this.itemGrid.addColumn(item -> item.getStatus()).setHeader("status").setSortable(true);
 		this.retrieveButton = new Button(
 				"recovers all items", 
 				VaadinIcon.ARROW_CIRCLE_DOWN_O.create(), 
 				listener -> {
-					try {
-						this.itemGrid.setItems(this.itemRestRetriever.recoversAllItemsExpressedAsJsonNodes());
-					} catch (ResponseStatusException | JSONException | ConnectException exception) {
-						exception.printStackTrace();
-					}
+						try {
+							this.itemGrid.setItems(ItemRestfulRetriever.getListOfItems(new URI(RESTFUL_URI)));
+						} catch (
+								ResponseStatusException | IOException | URISyntaxException exception) {
+							exception.printStackTrace();
+						}
 				});
 		this.retrieveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		this.add(this.retrieveButton, this.itemGrid);
