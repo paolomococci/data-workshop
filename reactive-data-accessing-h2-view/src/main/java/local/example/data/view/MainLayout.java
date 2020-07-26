@@ -42,7 +42,6 @@ public class MainLayout
 	private final H1 title;
 	private final RouterLink mainView;
 	private final RouterLink itemReadView;
-	private final RouterLink itemTestView;
 	private final RouterLink itemCreateView;
 	private final RouterLink itemUpdateView;
 	private final RouterLink itemDeleteView;
@@ -54,14 +53,12 @@ public class MainLayout
 		this.title = new H1("reactive data accessing");
 		this.mainView = new RouterLink("main view", MainView.class);
 		this.itemReadView = new RouterLink("items read", ItemReadView.class);
-		this.itemTestView = new RouterLink("items test", ItemTestView.class);
 		this.itemCreateView = new RouterLink("item create", ItemCreateView.class);
 		this.itemUpdateView = new RouterLink("item update", ItemUpdateView.class);
 		this.itemDeleteView = new RouterLink("item delete", ItemDeleteView.class);
 		this.unorderedList = new UnorderedList(
 				new ListItem(this.mainView), 
-				new ListItem(this.itemReadView),
-				new ListItem(this.itemTestView),  
+				new ListItem(this.itemReadView),  
 				new ListItem(this.itemCreateView), 
 				new ListItem(this.itemUpdateView), 
 				new ListItem(this.itemDeleteView)
@@ -77,8 +74,7 @@ public class MainLayout
 	private RouterLink[] listLinks() {
 		return new RouterLink[] {
 				this.mainView, 
-				this.itemReadView,
-				this.itemTestView,  
+				this.itemReadView,  
 				this.itemCreateView, 
 				this.itemUpdateView, 
 				this.itemDeleteView
