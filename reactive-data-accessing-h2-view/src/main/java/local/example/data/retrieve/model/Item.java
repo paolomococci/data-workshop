@@ -16,27 +16,39 @@
  *
  */
 
-package local.example.data.retrieve.representation;
+package local.example.data.retrieve.model;
+
+import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data
 @ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class Item 
+		extends RepresentationModel<Item> {
 
+	@Getter
+	@Setter
 	private Long id;
+
+	@Getter
+	@Setter
 	private String code;
+
+	@Getter
+	@Setter
 	private String description;
+
+	@Getter
+	@Setter
 	private String status;
 
 	public String toJson() {
