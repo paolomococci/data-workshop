@@ -18,5 +18,30 @@
 
 package local.example.data.configuration;
 
+import local.example.data.model.Item;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
+import org.springframework.data.redis.core.ReactiveRedisOperations;
+import org.springframework.data.redis.core.ReactiveRedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+@Configuration
 public class ItemConfiguration {
+
+    @Bean
+    ReactiveRedisOperations<String, Item> reactiveRedisOperations(
+            ReactiveRedisConnectionFactory reactiveRedisConnectionFactory
+    ) {
+        Jackson2JsonRedisSerializer<Item> itemJackson2JsonRedisSerializer =
+                new Jackson2JsonRedisSerializer<>(Item.class);
+        RedisSerializationContext
+                .RedisSerializationContextBuilder<String, Item> itemRedisSerializationContextBuilder =
+                RedisSerializationContext.newSerializationContext(new StringRedisSerializer());
+        RedisSerializationContext<String, Item> itemRedisSerializationContext =
+                itemRedisSerializationContextBuilder.value(itemJackson2JsonRedisSerializer).build();
+        return new ReactiveRedisTemplate<>(reactiveRedisConnectionFactory, itemRedisSerializationContext);
+    }
 }
