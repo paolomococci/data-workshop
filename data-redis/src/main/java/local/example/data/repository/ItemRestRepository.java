@@ -18,5 +18,11 @@
 
 package local.example.data.repository;
 
-public interface ItemRestRepository {
+import local.example.data.model.Item;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+@RepositoryRestResource
+public interface ItemRestRepository
+        extends CrudRepository<Item, String> {
 }
