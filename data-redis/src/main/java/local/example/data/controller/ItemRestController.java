@@ -18,22 +18,26 @@
 
 package local.example.data.controller;
 
+import local.example.data.assembler.ItemRepresentationModelAssembler;
 import local.example.data.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ReactiveRedisOperations;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
-import java.net.URISyntaxException;
-
 @RestController
-@RequestMapping(value = "/api/restful/items", produces = "application/hal+json")
+@RequestMapping(value = "/api/reactive/items", produces = "application/hal+json")
 public class ItemRestController {
 
     @Autowired
     ReactiveRedisOperations<String, Item> itemReactiveRedisOperations;
+
+    @Autowired
+    ItemRepresentationModelAssembler itemRepresentationModelAssembler;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Item item) {
@@ -47,30 +51,31 @@ public class ItemRestController {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    @GetMapping(path = "/items")
-    public Flux<Item> readAll() {
-        return itemReactiveRedisOperations
+    @GetMapping
+    public ResponseEntity<?> readAll() {
+         Flux<Item> itemFlux =itemReactiveRedisOperations
                 .keys("*")
                 .flatMap(this.itemReactiveRedisOperations.opsForValue()::get);
+         Iterable<Item> items = itemFlux.toIterable();
+         CollectionModel<EntityModel<Item>> collectionModelOfItems;
+         collectionModelOfItems = this.itemRepresentationModelAssembler.toCollectionModel(items);
+         return new ResponseEntity<>(collectionModelOfItems, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> putUpdate(@RequestBody Item updated, @PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> putUpdate(@RequestBody Item updated, @PathVariable String id) {
         // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity<?> patchUpdate(@RequestBody Item item, @PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> patchUpdate(@RequestBody Item item, @PathVariable String id) {
         // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> delete(@PathVariable String id) {
         // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
