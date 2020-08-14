@@ -21,10 +21,12 @@ package local.example.data.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.springframework.data.redis.core.RedisHash;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@RedisHash("items")
 public class Item {
 
     private String id;
