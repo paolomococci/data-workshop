@@ -34,9 +34,11 @@ public class ItemRepresentationModelAssembler
 
     @Override
     public EntityModel<Item> toModel(Item item) {
-            return new EntityModel<>(item,
-                    linkTo(methodOn(ItemRestController.class).read(item.getId())).withSelfRel(),
-                    linkTo(methodOn(ItemRestController.class).readAll()).withRel("items"));
+        EntityModel<Item> itemEntityModel;
+        itemEntityModel = EntityModel.of(item,
+                linkTo(methodOn(ItemRestController.class).read(item.getId())).withSelfRel(),
+                linkTo(methodOn(ItemRestController.class).readAll()).withRel("items"));
+        return itemEntityModel;
     }
 
     @Override
