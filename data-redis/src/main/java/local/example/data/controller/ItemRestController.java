@@ -29,6 +29,7 @@ import reactor.core.publisher.Flux;
 import java.net.URISyntaxException;
 
 @RestController
+@RequestMapping(value = "/api/restful/items", produces = "application/hal+json")
 public class ItemRestController {
 
     @Autowired
