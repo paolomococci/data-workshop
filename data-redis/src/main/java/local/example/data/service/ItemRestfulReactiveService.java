@@ -46,8 +46,8 @@ public class ItemRestfulReactiveService {
 
     public void fluxCreate(Item item) {
         this.reactiveRedisConnectionFactory.getReactiveConnection().serverCommands().flushAll().thenMany(
-                Flux.just(item.getCode())
-                        .map(code -> new Item(UUID.randomUUID().toString(), code, item.getName(), item.getDescription()))
+                Flux.just(item.getId())
+                        .map(id -> new Item(id, item.getCode(), item.getName(), item.getDescription()))
                         .flatMap(temp -> this.itemReactiveRedisOperations.opsForValue().set(temp.getId(), temp)))
                     .thenMany(this.itemReactiveRedisOperations.keys("*")
                             .flatMap(this.itemReactiveRedisOperations.opsForValue()::get))
