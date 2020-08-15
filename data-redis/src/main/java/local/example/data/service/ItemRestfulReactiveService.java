@@ -52,5 +52,6 @@ public class ItemRestfulReactiveService {
                     .thenMany(this.itemReactiveRedisOperations.keys("*")
                             .flatMap(this.itemReactiveRedisOperations.opsForValue()::get))
                     .subscribe(System.out::println);
+        // TODO
     }
 }
