@@ -22,14 +22,19 @@ import local.example.data.assembler.ItemRepresentationModelAssembler;
 import local.example.data.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ReactiveRedisOperations;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-@RestController
+import java.net.URISyntaxException;
+import java.util.UUID;
+
+@RepositoryRestController
 @RequestMapping(value = "/api/reactive/items", produces = "application/hal+json")
 public class ItemRestController {
 
@@ -41,19 +46,29 @@ public class ItemRestController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Item item) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        String id = UUID.randomUUID().toString();
+        this.itemReactiveRedisOperations
+                .opsForSet()
+                .add(id, new Item(id, item.getCode(), item.getName(), item.getDescription()));
+        Mono<Item> itemMono = this.itemReactiveRedisOperations.opsForValue().get(id);
+        EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(itemMono.block());
+        return new ResponseEntity<>(entityModelOfItem, HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<?> read(@PathVariable String id) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<?> read(@PathVariable String id)
+            throws URISyntaxException {
+        Mono<Item> itemMono;
+        itemMono = this.itemReactiveRedisOperations.opsForValue().get(id);
+        Item item = itemMono.block();
+        EntityModel<Item> entityModelOfItem;
+        entityModelOfItem = this.itemRepresentationModelAssembler.toModel(item);
+        return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<?> readAll() {
-         Flux<Item> itemFlux =itemReactiveRedisOperations
+         Flux<Item> itemFlux = itemReactiveRedisOperations
                 .keys("*")
                 .flatMap(this.itemReactiveRedisOperations.opsForValue()::get);
          Iterable<Item> items = itemFlux.toIterable();
@@ -75,8 +90,12 @@ public class ItemRestController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<?> delete(@PathVariable String id)
+            throws URISyntaxException {
+        Mono<Item> itemMono = this.itemReactiveRedisOperations.opsForValue().get(id);
+        if (!itemMono.block().getCode().isEmpty()) {
+            this.itemReactiveRedisOperations.delete(id);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
