@@ -2,7 +2,29 @@
 
 ## create an item
 ```
+$ curl -v -i -H "Content-Type:application/json" -d '{"code":"15004578","name":"six","description":"some description"}' http://127.0.0.1:8080/api/reactive/items
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> POST /api/reactive/items HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 65
+> 
+* upload completely sent off: 65 out of 65 bytes
+< HTTP/1.1 501 
+HTTP/1.1 501 
+< Content-Length: 0
+Content-Length: 0
+< Date: Sat, 15 Aug 2020 17:59:13 GMT
+Date: Sat, 15 Aug 2020 17:59:13 GMT
+< Connection: close
+Connection: close
 
+< 
+* Closing connection 0
 ```
 
 ## fetching record from id
@@ -133,5 +155,78 @@ Date: Sat, 15 Aug 2020 05:51:29 GMT
 
 ## delete record from id
 ```
+$ curl -v -i -X DELETE http://127.0.0.1:8080/api/reactive/items/dca9a1da-22c6-4087-ba15-93ef7c543a25
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> DELETE /api/reactive/items/dca9a1da-22c6-4087-ba15-93ef7c543a25 HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> 
+< HTTP/1.1 501 
+HTTP/1.1 501 
+< Content-Length: 0
+Content-Length: 0
+< Date: Sat, 15 Aug 2020 17:59:28 GMT
+Date: Sat, 15 Aug 2020 17:59:28 GMT
+< Connection: close
+Connection: close
 
+< 
+* Closing connection 0
+```
+
+## update record from id
+```
+$ curl -v -i -H "Content-Type:application/json" -d '{"code":"15007845","name":"seven","description":"more description"}' -X PUT http://127.0.0.1:8080/api/reactive/items/dca9a1da-22c6-4087-ba15-93ef7c543a25
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> PUT /api/reactive/items/dca9a1da-22c6-4087-ba15-93ef7c543a25 HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 67
+> 
+* upload completely sent off: 67 out of 67 bytes
+< HTTP/1.1 501 
+HTTP/1.1 501 
+< Content-Length: 0
+Content-Length: 0
+< Date: Sat, 15 Aug 2020 18:01:30 GMT
+Date: Sat, 15 Aug 2020 18:01:30 GMT
+< Connection: close
+Connection: close
+
+< 
+* Closing connection 0
+```
+
+## partial record update from id
+```
+$ curl -v -i -H "Content-Type:application/json" -d '{"code":"15005687"}' -X PATCH http://127.0.0.1:8080/api/reactive/items/dca9a1da-22c6-4087-ba15-93ef7c543a25
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> PATCH /api/reactive/items/dca9a1da-22c6-4087-ba15-93ef7c543a25 HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 19
+> 
+* upload completely sent off: 19 out of 19 bytes
+< HTTP/1.1 501 
+HTTP/1.1 501 
+< Content-Length: 0
+Content-Length: 0
+< Date: Sat, 15 Aug 2020 18:02:31 GMT
+Date: Sat, 15 Aug 2020 18:02:31 GMT
+< Connection: close
+Connection: close
+
+< 
+* Closing connection 0
 ```
