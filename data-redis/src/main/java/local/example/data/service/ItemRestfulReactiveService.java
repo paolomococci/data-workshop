@@ -49,7 +49,8 @@ public class ItemRestfulReactiveService {
                 Flux.just(item.getCode())
                         .map(code -> new Item(UUID.randomUUID().toString(), code, item.getName(), item.getDescription()))
                         .flatMap(temp -> this.itemReactiveRedisOperations.opsForValue().set(temp.getId(), temp)))
-                .thenMany(this.itemReactiveRedisOperations.keys("*").flatMap(this.itemReactiveRedisOperations.opsForValue()::get))
-                .subscribe(System.out::println);
+                    .thenMany(this.itemReactiveRedisOperations.keys("*")
+                            .flatMap(this.itemReactiveRedisOperations.opsForValue()::get))
+                    .subscribe(System.out::println);
     }
 }
