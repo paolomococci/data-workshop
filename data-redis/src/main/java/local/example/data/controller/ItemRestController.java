@@ -50,8 +50,10 @@ public class ItemRestController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Item item) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        String id = UUID.randomUUID().toString();
+        item.setId(id);
+        this.itemRestfulReactiveService.fluxCreate(item);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")
