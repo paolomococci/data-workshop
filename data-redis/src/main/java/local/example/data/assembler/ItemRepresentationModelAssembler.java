@@ -25,6 +25,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import java.net.URISyntaxException;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -35,10 +37,15 @@ public class ItemRepresentationModelAssembler
     @Override
     public EntityModel<Item> toModel(Item item) {
         EntityModel<Item> itemEntityModel;
-        itemEntityModel = EntityModel.of(item,
-                linkTo(methodOn(ItemRestController.class).read(item.getId())).withSelfRel(),
-                linkTo(methodOn(ItemRestController.class).readAll()).withRel("items"));
-        return itemEntityModel;
+        try {
+            itemEntityModel = EntityModel.of(item,
+                    linkTo(methodOn(ItemRestController.class).read(item.getId())).withSelfRel(),
+                    linkTo(methodOn(ItemRestController.class).readAll()).withRel("items"));
+            return itemEntityModel;
+        } catch (URISyntaxException uriSyntaxException) {
+            uriSyntaxException.printStackTrace();
+        }
+        return EntityModel.of(new Item());
     }
 
     @Override
