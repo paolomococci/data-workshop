@@ -20,6 +20,7 @@ package local.example.data.controller;
 
 import local.example.data.assembler.ItemRepresentationModelAssembler;
 import local.example.data.model.Item;
+import local.example.data.service.ItemRestfulReactiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ReactiveRedisOperations;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
@@ -44,15 +45,13 @@ public class ItemRestController {
     @Autowired
     ItemRepresentationModelAssembler itemRepresentationModelAssembler;
 
+    @Autowired
+    ItemRestfulReactiveService itemRestfulReactiveService;
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Item item) {
-        String id = UUID.randomUUID().toString();
-        this.itemReactiveRedisOperations
-                .opsForSet()
-                .add(id, new Item(id, item.getCode(), item.getName(), item.getDescription()));
-        Mono<Item> itemMono = this.itemReactiveRedisOperations.opsForValue().get(id);
-        EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(itemMono.block());
-        return new ResponseEntity<>(entityModelOfItem, HttpStatus.CREATED);
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @GetMapping(path = "/{id}")
@@ -92,10 +91,7 @@ public class ItemRestController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id)
             throws URISyntaxException {
-        Mono<Item> itemMono = this.itemReactiveRedisOperations.opsForValue().get(id);
-        if (!itemMono.block().getCode().isEmpty()) {
-            this.itemReactiveRedisOperations.delete(id);
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }
