@@ -20,7 +20,6 @@ package local.example.data.controller;
 
 import local.example.data.assembler.ItemRepresentationModelAssembler;
 import local.example.data.model.Item;
-import local.example.data.service.ItemRestfulReactiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ReactiveRedisOperations;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
@@ -45,27 +44,30 @@ public class ItemRestController {
     @Autowired
     ItemRepresentationModelAssembler itemRepresentationModelAssembler;
 
-    @Autowired
-    ItemRestfulReactiveService itemRestfulReactiveService;
-
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Item item) {
-        String id = UUID.randomUUID().toString();
-        item.setId(id);
-        this.itemRestfulReactiveService.fluxCreate(item);
-        // TODO
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<?> create(@RequestBody Item item)
+            throws Exception {
+        item.setId(UUID.randomUUID().toString());
+        Mono<Boolean> result = this.itemReactiveRedisOperations.opsForValue().set(item.getId(), item);
+        if (result.single().block()) {
+            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(item);
+            return new ResponseEntity<>(entityModelOfItem, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> read(@PathVariable String id)
             throws URISyntaxException {
-        Mono<Item> itemMono;
-        itemMono = this.itemReactiveRedisOperations.opsForValue().get(id);
+        Mono<Item> itemMono = this.itemReactiveRedisOperations.opsForValue().get(id);
         Item item = itemMono.block();
-        EntityModel<Item> entityModelOfItem;
-        entityModelOfItem = this.itemRepresentationModelAssembler.toModel(item);
-        return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
+        if (item != null) {
+            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(item);
+            return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping
@@ -94,7 +96,7 @@ public class ItemRestController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id)
             throws URISyntaxException {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        this.itemReactiveRedisOperations.opsForValue().delete(id).subscribe();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
