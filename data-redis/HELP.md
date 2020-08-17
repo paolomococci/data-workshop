@@ -327,3 +327,123 @@ Date: Sun, 16 Aug 2020 16:45:33 GMT
 < 
 * Connection #0 to host 127.0.0.1 left intact
 ```
+
+## I try fetch the id 985af903-8e86-4255-b40d-a7353ef2b232
+```
+$ curl -v -i http://127.0.0.1:8080/api/reactive/items/985af903-8e86-4255-b40d-a7353ef2b232
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> GET /api/reactive/items/985af903-8e86-4255-b40d-a7353ef2b232 HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> 
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Content-Type: application/hal+json
+Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Mon, 17 Aug 2020 13:35:00 GMT
+Date: Mon, 17 Aug 2020 13:35:00 GMT
+
+< 
+{
+  "id" : "985af903-8e86-4255-b40d-a7353ef2b232",
+  "code" : "15000012",
+  "name" : "one",
+  "description" : "some description",
+  "_links" : {
+    "self" : {
+      "href" : "http://127.0.0.1:8080/api/reactive/items/985af903-8e86-4255-b40d-a7353ef2b232"
+    },
+    "items" : {
+      "href" : "http://127.0.0.1:8080/api/reactive/items"
+    }
+  }
+* Connection #0 to host 127.0.0.1 left intact
+}
+```
+
+## I try a partial update the id 985af903-8e86-4255-b40d-a7353ef2b232
+```
+$ curl -v -i -H "Content-Type:application/json" -d '{"code":"15005687"}' -X PATCH http://127.0.0.1:8080/api/reactive/items/985af903-8e86-4255-b40d-a7353ef2b232
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> PATCH /api/reactive/items/985af903-8e86-4255-b40d-a7353ef2b232 HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 19
+> 
+* upload completely sent off: 19 out of 19 bytes
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Content-Type: application/hal+json
+Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Mon, 17 Aug 2020 13:38:31 GMT
+Date: Mon, 17 Aug 2020 13:38:31 GMT
+
+< 
+{
+  "id" : "985af903-8e86-4255-b40d-a7353ef2b232",
+  "code" : "15005687",
+  "name" : "one",
+  "description" : "some description",
+  "_links" : {
+    "self" : {
+      "href" : "http://127.0.0.1:8080/api/reactive/items/985af903-8e86-4255-b40d-a7353ef2b232"
+    },
+    "items" : {
+      "href" : "http://127.0.0.1:8080/api/reactive/items"
+    }
+  }
+* Connection #0 to host 127.0.0.1 left intact
+}
+```
+
+## I try a complete update the id 985af903-8e86-4255-b40d-a7353ef2b232
+```
+$ curl -v -i -H "Content-Type:application/json" -d '{"code":"15001200","name":"ten","description":"some description of ten"}' -X PUT http://127.0.0.1:8080/api/reactive/items/985af903-8e86-4255-b40d-a7353ef2b232
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> PUT /api/reactive/items/985af903-8e86-4255-b40d-a7353ef2b232 HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 72
+> 
+* upload completely sent off: 72 out of 72 bytes
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Content-Type: application/hal+json
+Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Mon, 17 Aug 2020 13:51:17 GMT
+Date: Mon, 17 Aug 2020 13:51:17 GMT
+
+< 
+{
+  "id" : "985af903-8e86-4255-b40d-a7353ef2b232",
+  "code" : "15001200",
+  "name" : "ten",
+  "description" : "some description of ten",
+  "_links" : {
+    "self" : {
+      "href" : "http://127.0.0.1:8080/api/reactive/items/985af903-8e86-4255-b40d-a7353ef2b232"
+    },
+    "items" : {
+      "href" : "http://127.0.0.1:8080/api/reactive/items"
+    }
+  }
+* Connection #0 to host 127.0.0.1 left intact
+}
+```
