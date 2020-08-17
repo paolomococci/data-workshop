@@ -82,15 +82,35 @@ public class ItemRestController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> putUpdate(@RequestBody Item updated, @PathVariable String id) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<?> putUpdate(@RequestBody Item updated, @PathVariable String id)
+            throws URISyntaxException {
+        Item item = this.itemReactiveRedisOperations.opsForValue().get(id).block();
+        if (item != null) {
+            if (updated.getCode() != null) item.setCode(updated.getCode());
+            if (updated.getName() != null) item.setName(updated.getName());
+            if (updated.getDescription() != null) item.setDescription(updated.getDescription());
+            this.itemReactiveRedisOperations.opsForValue().set(item.getId(), item).subscribe();
+            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(item);
+            return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity<?> patchUpdate(@RequestBody Item item, @PathVariable String id) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<?> patchUpdate(@RequestBody Item updated, @PathVariable String id)
+            throws URISyntaxException {
+        Item item = this.itemReactiveRedisOperations.opsForValue().get(id).block();
+        if (item != null) {
+            if (updated.getCode() != null) item.setCode(updated.getCode());
+            if (updated.getName() != null) item.setName(updated.getName());
+            if (updated.getDescription() != null) item.setDescription(updated.getDescription());
+            this.itemReactiveRedisOperations.opsForValue().set(item.getId(), item).subscribe();
+            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(item);
+            return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping(path = "/{id}")
