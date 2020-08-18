@@ -78,7 +78,10 @@ public class ItemRestController {
          Iterable<Item> items = itemFlux.toIterable();
          CollectionModel<EntityModel<Item>> collectionModelOfItems;
          collectionModelOfItems = this.itemRepresentationModelAssembler.toCollectionModel(items);
-         return new ResponseEntity<>(collectionModelOfItems, HttpStatus.OK);
+         if (!collectionModelOfItems.getContent().isEmpty()) {
+             return new ResponseEntity<>(collectionModelOfItems, HttpStatus.OK);
+         }
+         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping(path = "/{id}")
@@ -116,7 +119,11 @@ public class ItemRestController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id)
             throws URISyntaxException {
-        this.itemReactiveRedisOperations.opsForValue().delete(id).subscribe();
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Item item = this.itemReactiveRedisOperations.opsForValue().get(id).block();
+        if (item != null) {
+            this.itemReactiveRedisOperations.opsForValue().delete(id).subscribe();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
