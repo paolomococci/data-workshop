@@ -44,7 +44,7 @@ public class MainLayout
 		super();
 		this.title = new H1("reactive RESTful web service data accessing");
 		this.mainView = new RouterLink("main view", MainView.class);
-		this.itemView = new RouterLink("address view", ItemView.class);
+		this.itemView = new RouterLink("item view", ItemView.class);
 
 		UnorderedList unorderedList = new UnorderedList(
 				new ListItem(this.mainView),
