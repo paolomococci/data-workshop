@@ -23,7 +23,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.client.Traverson;
-import org.springframework.hateoas.client.Traverson.TraversalBuilder;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -36,15 +35,12 @@ public class ItemRestfulRetrieverService {
 
 	public static List<Item> getListOfItems(URI uri) {
 		Traverson traverson = new Traverson(uri, MediaTypes.HAL_JSON);
-		TraversalBuilder traversalBuilder = traverson.follow("items");
+		Traverson.TraversalBuilder traversalBuilder = traverson.follow("items");
 		ParameterizedTypeReference<CollectionModel<Item>> parameterizedTypeReference;
 		parameterizedTypeReference = new ParameterizedTypeReference<>() {};
 		CollectionModel<Item> collectionModelOfItems;
 		collectionModelOfItems = traversalBuilder.toObject(parameterizedTypeReference);
-		Collection<Item> collectionOfItems = null;
-		if (collectionModelOfItems != null) {
-			collectionOfItems = collectionModelOfItems.getContent();
-		}
+		Collection<Item> collectionOfItems = collectionModelOfItems.getContent();
 		return new ArrayList<>(collectionOfItems);
 	}
 }
