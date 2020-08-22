@@ -1,5 +1,6 @@
 # CouchDB containerized
 
+## from within the directory where the Dockerfile is, you can run the following commands:
 
 ```
 $ sudo docker build --tag couchdb_image .
