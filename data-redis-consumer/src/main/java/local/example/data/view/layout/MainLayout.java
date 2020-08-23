@@ -37,7 +37,6 @@ public class MainLayout
 	
 	private final H1 title;
 	private final RouterLink mainView;
-	
 	private final RouterLink itemView;
 
 	public MainLayout() {
