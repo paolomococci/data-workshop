@@ -44,8 +44,6 @@ import local.example.data.model.CustomerRepository;
 public class MainView 
 		extends VerticalLayout {
 
-	private static final long serialVersionUID = 4241629279709817521L;
-
 	private final CustomerRepository customerRepository;
 
 	private final CustomerForm customerForm;
