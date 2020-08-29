@@ -43,8 +43,6 @@ import local.example.data.model.CustomerStatus;
 public class CustomerForm 
 		extends FormLayout {
 
-	private static final long serialVersionUID = 8460707291910308110L;
-
 	private final CustomerRepository customerRepository;
 	private Customer customer;
 	private Binder<Customer> binder;
