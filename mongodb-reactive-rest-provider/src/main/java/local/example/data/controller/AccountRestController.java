@@ -47,6 +47,17 @@ public class AccountRestController {
         return this.accountRestRepository.findAll();
     }
 
+    @PutMapping(value = "/{id}")
+    public Mono<Account> putUpdate(@RequestBody Account updated, @PathVariable String id) {
+        Account account = this.accountRestRepository.findById(id).block();
+        if (account != null) {
+            if (updated.getName() != null) account.setName(updated.getName());
+            if (updated.getPassword() != null) account.setPassword(updated.getPassword());
+            return this.accountRestRepository.save(account);
+        }
+        return Mono.empty();
+    }
+
     @PatchMapping(value = "/{id}")
     public Mono<Account> patchUpdate(@RequestBody Account updated, @PathVariable String id) {
         Account account = this.accountRestRepository.findById(id).block();
@@ -54,7 +65,7 @@ public class AccountRestController {
             if (updated.getPassword() != null) account.setPassword(updated.getPassword());
             return this.accountRestRepository.save(account);
         }
-        return this.create(updated);
+        return Mono.empty();
     }
 
     @DeleteMapping(value = "/{id}")
