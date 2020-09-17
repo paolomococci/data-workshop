@@ -1,6 +1,6 @@
 # kotlin-spring-vaadin-template
 
-## error:
+## unfortunately, I am presented with the following error:
 ```
 Failed to determine project directory for dev mode. 
 Directory 'kotlin-consumer-template' does not look like a Maven or Gradle project. 
