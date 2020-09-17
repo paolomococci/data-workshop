@@ -36,8 +36,8 @@ import local.example.data.view.MainView
 @Viewport(value = "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")
 class MainLayout : AppLayout(), AfterNavigationObserver {
 
-    private var title: H1? = null
-    private var mainView: RouterLink? = null
+    internal var title: H1? = null
+    internal var mainView: RouterLink? = null
 
     private fun listLinks(): Array<RouterLink?> {
         return arrayOf(
@@ -56,19 +56,18 @@ class MainLayout : AppLayout(), AfterNavigationObserver {
         }
     }
 
-    companion object {
-        fun mainLayout(mainLayout: MainLayout) {
-            mainLayout.title = H1("reactive RESTful web service data accessing")
-            mainLayout.mainView = RouterLink("main view", MainView::class.java)
-            val orderedList = OrderedList(
-                    ListItem(mainLayout.mainView)
-            )
-            val header = Header(DrawerToggle(), mainLayout.title)
-            val nav = Nav(orderedList)
-            mainLayout.addToNavbar(header)
-            mainLayout.addToDrawer(nav)
-            mainLayout.primarySection = Section.DRAWER
-            mainLayout.isDrawerOpened = true
-        }
-    }
+}
+
+fun mainLayout(mainLayout: MainLayout) {
+    mainLayout.title = H1("reactive RESTful web service data accessing")
+    mainLayout.mainView = RouterLink("main view", MainView::class.java)
+    val orderedList = OrderedList(
+            ListItem(mainLayout.mainView)
+    )
+    val header = Header(DrawerToggle(), mainLayout.title)
+    val nav = Nav(orderedList)
+    mainLayout.addToNavbar(header)
+    mainLayout.addToDrawer(nav)
+    mainLayout.primarySection = AppLayout.Section.DRAWER
+    mainLayout.isDrawerOpened = true
 }
