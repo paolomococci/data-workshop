@@ -22,23 +22,18 @@ import com.vaadin.flow.component.html.H2
 import com.vaadin.flow.component.html.Main
 import com.vaadin.flow.component.html.Paragraph
 import com.vaadin.flow.component.html.Section
-import com.vaadin.flow.router.PageTitle
-import com.vaadin.flow.router.Route
-import com.vaadin.flow.router.RouteAlias
+import com.vaadin.flow.router.*
 import local.example.data.layout.MainLayout
 
 @PageTitle(value = "main view")
 @RouteAlias(value = "", layout = MainLayout::class)
 @Route(value = "", absolute = false, registerAtStartup = true, layout = MainLayout::class)
-class MainView : Main() {
+class MainView : Main() 
 
-    companion object {
-        fun mainView(mainView: MainView) {
-            val paragraph = Paragraph()
-            val subtitle = H2("access through a RESTful web service")
-            paragraph.add("open the navigation bar and click on the links")
-            val mainSection = Section(subtitle, paragraph)
-            mainView.add(mainSection)
-        }
-    }
+fun mainView(mainView: MainView) {
+    val paragraph = Paragraph()
+    val subtitle = H2("access through a RESTful web service")
+    paragraph.add("open the navigation bar and click on the links")
+    val mainSection = Section(subtitle, paragraph)
+    mainView.add(mainSection)
 }
