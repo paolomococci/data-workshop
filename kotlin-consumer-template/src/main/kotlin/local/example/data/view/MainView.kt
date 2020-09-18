@@ -28,9 +28,9 @@ import local.example.data.layout.MainLayout
 @PageTitle(value = "main view")
 @RouteAlias(value = "", layout = MainLayout::class)
 @Route(value = "", absolute = false, registerAtStartup = true, layout = MainLayout::class)
-class MainView : Main() 
+class MainView : Main()
 
-fun mainView(mainView: MainView) {
+fun MainView(mainView: MainView) {
     val paragraph = Paragraph()
     val subtitle = H2("access through a RESTful web service")
     paragraph.add("open the navigation bar and click on the links")
