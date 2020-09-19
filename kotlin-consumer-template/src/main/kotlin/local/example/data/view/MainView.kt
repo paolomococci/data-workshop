@@ -18,22 +18,39 @@
 
 package local.example.data.view
 
-import com.vaadin.flow.component.html.H2
-import com.vaadin.flow.component.html.Main
-import com.vaadin.flow.component.html.Paragraph
-import com.vaadin.flow.component.html.Section
-import com.vaadin.flow.router.*
-import local.example.data.layout.MainLayout
+import com.github.mvysny.karibudsl.v10.*
+import com.vaadin.flow.component.Key
+import com.vaadin.flow.component.button.Button
+import com.vaadin.flow.component.dependency.CssImport
+import com.vaadin.flow.component.notification.Notification
+import com.vaadin.flow.component.page.Viewport
+import com.vaadin.flow.component.textfield.TextField
+import com.vaadin.flow.router.Route
+import com.vaadin.flow.server.PWA
 
-@PageTitle(value = "main view")
-@RouteAlias(value = "", layout = MainLayout::class)
-@Route(value = "", absolute = false, registerAtStartup = true, layout = MainLayout::class)
-class MainView : Main()
+@Route(value = "")
+@CssImport(value = "style.css")
+@PWA(name = "consumer template", shortName = "consumer", enableInstallPrompt = false)
+@Viewport(value = "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")
+class MainView : KComposite() {
 
-fun MainView(mainView: MainView) {
-    val paragraph = Paragraph()
-    val subtitle = H2("access through a RESTful web service")
-    paragraph.add("open the navigation bar and click on the links")
-    val mainSection = Section(subtitle, paragraph)
-    mainView.add(mainSection)
+    private lateinit var nameField: TextField
+    private lateinit var welcomeButton: Button
+
+    private val mainView = ui {
+        verticalLayout {
+            addClassName("centered-content")
+            nameField = textField("name")
+            welcomeButton = button("welcome") {
+                setPrimary()
+                addClickShortcut(Key.ENTER)
+            }
+        }
+    }
+
+    init {
+        welcomeButton.onLeftClick {
+            Notification.show("Welcome, ${nameField.value}")
+        }
+    }
 }
