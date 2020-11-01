@@ -47,7 +47,7 @@ class CustomerController {
 
     @GetMapping("/update/{id}")
     def updateForm(@PathVariable("id") Long id) {
-        new ModelAndView('customer-update', [customer: customerRepository.findById(id)])
+        new ModelAndView('customer-update', [updated: customerRepository.findById(id).get()])
     }
 
     @PostMapping("/update")
