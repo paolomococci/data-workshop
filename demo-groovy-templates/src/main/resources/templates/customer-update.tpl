@@ -14,15 +14,15 @@ html(lang:'en') {
             form(action: '/update', method: 'post'){
                 div(class: 'row'){
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', value: '$customer.name', name: 'name')
+                        input(type: 'text', class: 'form-control', value: "$updated.name", name: 'name')
                     }
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', value: '$customer.surname', name: 'surname')
+                        input(type: 'text', class: 'form-control', value: "$updated.surname", name: 'surname')
                     }
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', value: '$customer.email', name: 'email')
+                        input(type: 'text', class: 'form-control', value: "$updated.email", name: 'email')
                     }
-                    input(type: 'hidden',  value: '$customer.id', name: 'id')
+                    input(type: 'hidden',  value: "$updated.id", name: 'id')
                     div(class: 'col'){
                         input(type: 'submit', class: 'btn btn-primary', value: 'update')
                     }
