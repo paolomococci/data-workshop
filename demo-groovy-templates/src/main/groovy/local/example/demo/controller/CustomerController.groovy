@@ -52,7 +52,14 @@ class CustomerController {
 
     @PostMapping("/update")
     def update(@ModelAttribute("customer") Customer customer) {
-        // TODO
+        Customer temp = customerRepository.findById(customer.id).ifPresent(
+                updated -> {
+                    updated.name = customer.name
+                    updated.surname = customer.surname
+                    updated.email = customer.email
+                    customerRepository.save(updated)
+                }
+        )
         "redirect:/customer"
     }
 
