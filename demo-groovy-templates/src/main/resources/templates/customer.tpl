@@ -34,7 +34,7 @@ html(lang:'en') {
                         th('name')
                         th('surname')
                         th('email')
-                        th('actions')
+                        th()
                     }
                 }
                 tbody(){
