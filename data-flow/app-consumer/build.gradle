@@ -26,9 +26,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	compile 'org.jgrapht:jgrapht-core:1.4.0'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testCompile 'org.junit.platform:junit-platform-engine:1.7.0-M1'
 }
