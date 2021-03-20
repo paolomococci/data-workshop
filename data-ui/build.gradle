@@ -6,7 +6,7 @@ plugins {
 
 group = 'local.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -42,7 +42,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	//testImplementation 'org.springframework.security:spring-security-test'
-	testCompile 'org.junit.platform:junit-platform-engine:1.7.0-M1'
 }
 
 dependencyManagement {
