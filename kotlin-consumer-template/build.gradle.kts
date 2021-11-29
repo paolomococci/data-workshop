@@ -21,7 +21,7 @@ repositories {
 	mavenCentral()
 }
 
-extra["vaadinVersion"] = "14.7.4"
+extra["vaadinVersion"] = "14.7.5"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-hateoas")
