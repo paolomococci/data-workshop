@@ -34,7 +34,7 @@ dependencies {
 	compile 'org.hibernate.orm:hibernate-core:6.0.0.Beta3'
 	compile 'org.hibernate.validator:hibernate-validator:7.0.2.Final'
 	compile 'org.hibernate:hibernate-annotations:3.5.6-Final'
-	compile 'org.hibernate.common:hibernate-commons-annotations:5.1.0.Final'
+	compile 'org.hibernate.common:hibernate-commons-annotations:5.1.2.Final'
 	runtimeOnly 'com.h2database:h2'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
