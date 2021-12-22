@@ -29,7 +29,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
-	testCompile 'org.junit.platform:junit-platform-engine:1.7.0-M1'
+	testCompile 'org.junit.platform:junit-platform-engine:1.8.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
