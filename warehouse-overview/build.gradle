@@ -36,7 +36,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testCompile 'org.slf4j:slf4j-simple:2.0.0-alpha5'
 	testCompile 'org.junit.platform:junit-platform-engine:1.8.2'
-	testCompile 'com.vaadin:vaadin-testbench:14.2.1'
+	testCompile 'com.vaadin:vaadin-testbench:14.8.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
