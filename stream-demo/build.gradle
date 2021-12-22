@@ -29,7 +29,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	compileOnly 'org.apache.storm:storm-core:2.3.0'
 	compileOnly 'com.twitter:carbonite:1.5.0'
-	compile 'com.esotericsoftware:kryo:5.0.0-RC4'
+	compile 'com.esotericsoftware:kryo:5.2.1'
 	compile 'javax.servlet:javax.servlet-api:4.0.1'	
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
