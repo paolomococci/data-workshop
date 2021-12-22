@@ -46,8 +46,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.orm</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>6.0.0.Alpha2</version>
+    			<artifactId>hibernate-core</artifactId>
+    			<version>6.0.0.Beta3</version>
 		</dependency>
 		<!-- test -->
 		<dependency>
