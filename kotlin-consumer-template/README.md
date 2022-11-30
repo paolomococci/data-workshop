@@ -9,5 +9,5 @@ Ensure that you have run the prepare-frontend Maven goal, which generates 'flow-
 ## Resolved!
 The aforementioned error message is completely misleading, actually the problem is with npm. Just add the following line to file build.gradle.kts, to the list of plugins:
 ```
-	id("com.vaadin") version "0.17.0.0"
+	id("com.vaadin") version "0.17.0.1"
 ```
